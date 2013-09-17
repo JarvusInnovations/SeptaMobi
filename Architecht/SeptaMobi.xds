@@ -1,6 +1,15 @@
 {
     "name": "SeptaMobi",
-    "settings": {},
+    "settings": {
+        "spacesToIndent": 4,
+        "lineEnding": "LF",
+        "genTimestamps": false,
+        "cacheBust": false,
+        "urlPrefix": "",
+        "exportPath": "",
+        "buildShouldOverwriteIndex": true,
+        "sdkPath": "/Users/kevinclough/touch-2.2.1"
+    },
     "xdsVersion": "2.2.2",
     "xdsBuild": 991,
     "schemaVersion": 1,

@@ -1,0 +1,39 @@
+{
+    "name": "SeptaMobi",
+    "settings": {},
+    "xdsVersion": "2.2.2",
+    "xdsBuild": 991,
+    "schemaVersion": 1,
+    "upgradeVersion": 210000000503,
+    "framework": "touch22",
+    "topInstanceFileMap": {
+        "8c32fd87-1bb3-4ab9-a087-bfd69479aa1e": {
+            "paths": [
+                "metadata/view/MyTabPanel",
+                "app/view/override/MyTabPanel.js",
+                "app/view/MyTabPanel.js"
+            ],
+            "className": "MyTabPanel"
+        },
+        "e2cfd33b-e3f8-4bd3-a56e-32205a8c9366": {
+            "paths": [
+                "metadata/resource/Library"
+            ],
+            "className": "Library"
+        }
+    },
+    "viewOrderMap": {
+        "view": [
+            "8c32fd87-1bb3-4ab9-a087-bfd69479aa1e"
+        ],
+        "store": [],
+        "controller": [],
+        "model": [],
+        "resource": [
+            "e2cfd33b-e3f8-4bd3-a56e-32205a8c9366"
+        ],
+        "app": [
+            "application"
+        ]
+    }
+}

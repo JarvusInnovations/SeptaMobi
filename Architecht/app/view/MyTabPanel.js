@@ -17,7 +17,34 @@ Ext.define('MyApp.view.MyTabPanel', {
     extend: 'Ext.tab.Panel',
 
     config: {
+        activeItem: 1,
         items: [
+            {
+                xtype: 'container',
+                title: 'Dashboard',
+                iconCls: 'info',
+                layout: {
+                    type: 'vbox'
+                },
+                items: [
+                    {
+                        xtype: 'container',
+                        flex: 1,
+                        html: 'logo?'
+                    },
+                    {
+                        xtype: 'button',
+                        text: 'MyButton1'
+                    },
+                    {
+                        xtype: 'list',
+                        flex: 1,
+                        itemTpl: [
+                            '<div>List Item {string}</div>'
+                        ]
+                    }
+                ]
+            },
             {
                 xtype: 'tabpanel',
                 title: 'Schedule',
@@ -171,22 +198,6 @@ Ext.define('MyApp.view.MyTabPanel', {
                                     '<div>List Item {string}</div>'
                                 ]
                             }
-                        ]
-                    }
-                ]
-            },
-            {
-                xtype: 'container',
-                title: 'Alerts',
-                iconCls: 'info',
-                layout: {
-                    type: 'fit'
-                },
-                items: [
-                    {
-                        xtype: 'list',
-                        itemTpl: [
-                            '<div>List Item {string}</div>'
                         ]
                     }
                 ]

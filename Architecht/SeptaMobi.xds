@@ -29,6 +29,14 @@
                 "metadata/resource/Library"
             ],
             "className": "Library"
+        },
+        "45e1f5e4-c9be-4cd8-8fa5-a9c2c5ccfb18": {
+            "paths": [
+                "metadata/resource/packager",
+                "",
+                "packager.json"
+            ],
+            "className": "packager"
         }
     },
     "viewOrderMap": {
@@ -39,7 +47,8 @@
         "controller": [],
         "model": [],
         "resource": [
-            "e2cfd33b-e3f8-4bd3-a56e-32205a8c9366"
+            "e2cfd33b-e3f8-4bd3-a56e-32205a8c9366",
+            "45e1f5e4-c9be-4cd8-8fa5-a9c2c5ccfb18"
         ],
         "app": [
             "application"

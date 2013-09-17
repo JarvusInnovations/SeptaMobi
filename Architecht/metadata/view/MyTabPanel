@@ -6,11 +6,82 @@
     },
     "codeClass": null,
     "userConfig": {
+        "activeItem": 1,
         "designer|userClassName": "MyTabPanel",
         "designer|initialView": true
     },
     "designerId": "8c32fd87-1bb3-4ab9-a087-bfd69479aa1e",
     "cn": [
+        {
+            "type": "Ext.Container",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "title": "Dashboard",
+                "iconCls": "info",
+                "layout": "vbox"
+            },
+            "designerId": "5b26c453-9819-4643-966e-c43783204986",
+            "cn": [
+                {
+                    "type": "Ext.Container",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "layout|flex": 1,
+                        "html": "logo?"
+                    },
+                    "designerId": "4713085b-b4e6-41de-8f5b-8a886866c8b6"
+                },
+                {
+                    "type": "Ext.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "text": "MyButton1"
+                    },
+                    "designerId": "b08e00d8-c538-4324-b4f4-075824718a8c"
+                },
+                {
+                    "type": "Ext.dataview.List",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "layout|flex": 1
+                    },
+                    "designerId": "142ff70f-8e29-4222-b3f7-19b4a688feef",
+                    "cn": [
+                        {
+                            "type": "Ext.XTemplate",
+                            "reference": {
+                                "name": "itemTpl",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "implHandler": [
+                                    "<div>List Item {string}</div>"
+                                ],
+                                "designer|displayName": "itemTpl"
+                            },
+                            "designerId": "01f62603-6429-430c-a1bd-ea1a250e0b65"
+                        }
+                    ]
+                }
+            ]
+        },
         {
             "type": "Ext.tab.Panel",
             "reference": {
@@ -433,48 +504,6 @@
                                     "designerId": "6003afff-9359-40d4-9a15-ec2982fe6414"
                                 }
                             ]
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "type": "Ext.Container",
-            "reference": {
-                "name": "items",
-                "type": "array"
-            },
-            "codeClass": null,
-            "userConfig": {
-                "title": "Alerts",
-                "iconCls": "info",
-                "layout": "fit"
-            },
-            "designerId": "5b26c453-9819-4643-966e-c43783204986",
-            "cn": [
-                {
-                    "type": "Ext.dataview.List",
-                    "reference": {
-                        "name": "items",
-                        "type": "array"
-                    },
-                    "codeClass": null,
-                    "designerId": "9300e780-38aa-4d4e-bb96-fd38dce33e7e",
-                    "cn": [
-                        {
-                            "type": "Ext.XTemplate",
-                            "reference": {
-                                "name": "itemTpl",
-                                "type": "object"
-                            },
-                            "codeClass": null,
-                            "userConfig": {
-                                "implHandler": [
-                                    "<div>List Item {string}</div>"
-                                ],
-                                "designer|displayName": "itemTpl"
-                            },
-                            "designerId": "dc7888d0-bbae-433d-964e-092b1bce8279"
                         }
                     ]
                 }

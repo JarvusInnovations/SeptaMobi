@@ -16,18 +16,20 @@ Ext.define('SeptaMobi.view.TripPlanner.Form', {
                 xtype: 'fieldset',
                 items: [{
                     xtype: 'textfield',
-                    label: 'From'
+                    label: 'From',
+                    itemId: 'fromField'
                 }, {
-                    xtype: 'button',
-                    text: 'Use Current Location',
-                    action: 'from-current-location'
+                    xtype: 'checkboxfield',
+                    label: 'Current Location',
+                    itemId: 'fromUseCurrent'
                 }, {
                     xtype: 'textfield',
-                    label: 'To'
+                    label: 'To',
+                    itemId: 'toField'
                 }, {
-                    xtype: 'button',
-                    text: 'Use Current Location',
-                    action: 'to-current-location'
+                    xtype: 'checkboxfield',
+                    label: 'Current Location',
+                    itemId: 'toUseCurrent'
                 }, {
                     xtype: 'button',
                     text: 'Swap To/From',

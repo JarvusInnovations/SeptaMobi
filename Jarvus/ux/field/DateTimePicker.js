@@ -205,7 +205,6 @@ Ext.define('Jarvus.ux.field.DateTimePicker', {
 
         // Ext.Date.format expects a Date
         if (newValue !== null) {
-            debugger
             this.getComponent().setValue(Ext.Date.format(newValue, this.getDateTimeFormat() || Ext.util.Format.defaultDateFormat));
         } else {
             this.getComponent().setValue('');
@@ -233,7 +232,6 @@ Ext.define('Jarvus.ux.field.DateTimePicker', {
      * @return {Date} The date selected
      */
     getValue: function() {
-        debugger
         if (this._picker && this._picker instanceof Jarvus.ux.picker.DateTime) {
             return this._picker.getValue();
         }
@@ -249,8 +247,7 @@ Ext.define('Jarvus.ux.field.DateTimePicker', {
      */
     getFormattedValue: function(format) {
         var value = this.getValue();
-        console.log(this.getDateTimeFormat(),"format");
-        debugger
+
         return (Ext.isDate(value)) ? Ext.Date.format(value, format || this.getDateTimeFormat() || Ext.util.Format.defaultDateFormat) : value;
     },
 

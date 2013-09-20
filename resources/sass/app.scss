@@ -1,10 +1,20 @@
-// The following two lines import the default Sencha Touch theme. If you are building
-// a new theme, remove them and the add your own CSS on top of the base CSS (which
-// is already included in your app.json file).
-@import 'sencha-touch/default';
-@import 'sencha-touch/default/all';
+$headline-face: Antonio, HelveticaNeue-CondensedBold, sans-serif;
 
-// Custom code goes here..
+$accent-color: #007cbe;
+$muted-color: #777;
 
-// Examples of using the icon mixin:
-// @include icon('user');
+@import 'sencha-touch/base';
+@import 'sencha-touch/base/all';
+
+@include font-face(
+    'Antonio',
+    font-files(
+        'antonio-bold-webfont.woff', woff,
+        'antonio-bold-webfont.ttf', truetype,
+        'antonio-bold-webfont.svg', svg
+    ),
+    'antonio-bold-webfont.eot',
+    bold
+);
+
+@import 'view/TripTplTemp';

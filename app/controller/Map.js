@@ -31,7 +31,7 @@ Ext.define('SeptaMobi.controller.Map', {
 		var me = this,
 			leafletDemo = me.getLeafletMap(),
 			map = leafletDemo.getMap(),
-			devCoords = me.getDevCoords);
+			devCoords = me.getDevCoords();
 
 		leafletDemo.setCurrentMarkers([(L.marker(devCoords).addTo(map))]);
 		leafletDemo.getCurrentMarkers()[0].bindPopup('<a href="#">this is devnuts</a>').openPopup();

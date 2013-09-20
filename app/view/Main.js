@@ -3,6 +3,7 @@ Ext.define('SeptaMobi.view.Main', {
     xtype: 'main',
     requires: [
         'SeptaMobi.view.TripPlanner.Form',
+        'SeptaMobi.view.Schedule.Index',
         'Ext.TitleBar'
     ],
     config: {
@@ -26,13 +27,7 @@ Ext.define('SeptaMobi.view.Main', {
                 title: 'Schedule',
                 iconCls: 'action',
 
-                items: [
-                    {
-                        docked: 'top',
-                        xtype: 'titlebar',
-                        title: 'Schedule'
-                    }
-                ]
+                xtype: 'scheduleindex'
             }, {
                 title: 'Trip Planner',
                 iconCls: 'action',

@@ -74,7 +74,6 @@ Ext.define('SeptaMobi.controller.Schedule', {
 
 		routeDetailStore.load({
 			callback: function(records, operation, success) {
-				debugger
 				// routeDetailList.setData(routeDetailStore.getAt(0).get('directions'));
 			}
 		});

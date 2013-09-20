@@ -4,7 +4,8 @@ Ext.define('SeptaMobi.view.Main', {
     requires: [
         'SeptaMobi.view.TripPlanner.Form',
         'SeptaMobi.view.TripTplTemp',
-        'Ext.TitleBar'
+        'Ext.TitleBar',
+        'SeptaMobi.view.LeafletMap'
     ],
     config: {
         tabBarPosition: 'bottom',
@@ -49,6 +50,26 @@ Ext.define('SeptaMobi.view.Main', {
                 title: 'Trip TPL (Temp)'
             },{
                 xtype: 'triptpltemp'
+            }]
+        },{
+            title: 'Leaflet Demo',
+            iconCls: 'map',
+
+            scrollable: true,
+            layout: 'fit',
+
+            items: [{
+                docked: 'top',
+                xtype: 'titlebar',
+                title: 'SeptaMobi.ux.Leaflet (Demo)'
+            },{
+                xtype: 'leaflet-demo',
+                useCurrentLocation: true,
+                autoMapCenter: false,
+                enableOwnPositionMarker: true,
+                mapOptions: {
+                    zoom: 15
+                }
             }]
         }]
     }

@@ -4,36 +4,60 @@ Ext.define('SeptaMobi.view.Main', {
     requires: [
         'SeptaMobi.view.TripPlanner.Form',
         'SeptaMobi.view.Schedule.Index',
+        'SeptaMobi.view.TripTplTemp',
         'Ext.TitleBar'
     ],
     config: {
         tabBarPosition: 'bottom',
 
-        items: [
-            {
-                title: 'Dashboard',
-                iconCls: 'home',
+        activeItem: 3,
 
-                styleHtmlContent: true,
-                scrollable: true,
+        items: [{
+            title: 'Dashboard',
+            iconCls: 'home',
 
-                items: {
-                    docked: 'top',
-                    xtype: 'titlebar',
-                    title: 'SeptaMobi'
-                }
-            },
-            {
-                title: 'Schedule',
-                iconCls: 'action',
+            styleHtmlContent: true,
+            scrollable: true,
 
-                xtype: 'scheduleindex'
-            }, {
-                title: 'Trip Planner',
-                iconCls: 'action',
+        }, {
+            title: 'Trip Planner',
+            iconCls: 'action',
 
-                xtype: 'tripplanner'
+            xtype: 'tripplanner',
+
+            items: {
+                docked: 'top',
+                xtype: 'titlebar',
+                title: 'SeptaMobi'
+
             }
-        ]
+        }, {
+            title: 'Schedule',
+            iconCls: 'action',
+
+            items: [{
+                docked: 'top',
+                xtype: 'titlebar',
+                title: 'Schedule'
+            }]
+        }, {
+            title: 'Trip Planner',
+            iconCls: 'action',
+
+            xtype: 'tripplanner'
+        }, {
+            title: 'Trip TPL',
+            iconCls: 'action',
+
+            scrollable: true,
+
+            items: [{
+                docked: 'top',
+                xtype: 'titlebar',
+                title: 'Trip TPL (Temp)'
+            }, {
+                xtype: 'triptpltemp'
+            }]
+        }]
     }
 });

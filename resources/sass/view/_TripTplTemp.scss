@@ -1,0 +1,74 @@
+.trip-details {
+    border-bottom: 1px solid #ccc;
+    padding: 1.2em;
+
+    h1 {
+        font-family: $headline-face;
+        font-size: large;
+        font-weight: bold;
+        text-align: center;
+        text-transform: uppercase;
+    }
+    
+    .dli {
+        display: table-row;
+    }
+    
+    dt, dd {
+        display: table-cell;
+    }
+    
+    dt {
+        font-family: $headline-face;
+        letter-spacing: 1px;
+        padding-right: 1em;
+        text-align: right;
+        text-transform: uppercase;
+        
+        &::after {
+            content: ':';
+        }
+    }
+}
+
+.trip-leg {
+    border-bottom: 1px solid #ccc;
+    padding: .8em 1.2em;
+    padding-left: 2.8em;
+}
+
+.leg-description {
+    font-weight: bold;
+}
+
+.leg-instruction {
+    color: $accent-color;
+}
+
+.leg-length {
+    color: $muted-color;
+    font-size: smaller;
+}
+
+.leg-steps {
+    border-top: 1px dashed #ccc;
+    margin-top: .6em;
+    padding-top: .6em;
+}
+
+.leg-step {
+    font-size: small;
+    line-height: 1.5;
+    list-style: inside decimal;
+}
+
+.step-rel-direction,
+.step-street-name {
+    font-weight: bold;
+}
+
+.step-distance {
+    color: $muted-color;
+    font-size: smaller;
+    margin-left: 1em;
+}

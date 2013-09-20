@@ -51,7 +51,7 @@ Ext.define('SeptaMobi.API', {
 				city: address.get('city'),
 				state: address.get('state'),
 				candidates: 1
-			}
+			},
 			callback: function(options, success, response) {
 				debugger
 				if ((response.getResponseHeader('content-type') || '').indexOf('application/json') == 0 && response.responseText) {

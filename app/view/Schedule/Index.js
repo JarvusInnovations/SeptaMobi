@@ -35,7 +35,7 @@ Ext.define('SeptaMobi.view.Schedule.Index', {
 				flex: 1,
 				itemTpl: [
 					'<div>',
-					'<span>{displayName}</span>',					
+						'<span>{displayName}</span>',
 					'</div>'
 				]
 			}]

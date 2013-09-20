@@ -35,11 +35,7 @@ Ext.define('SeptaMobi.view.Main', {
             title: 'Schedule',
             iconCls: 'action',
 
-            items: [{
-                docked: 'top',
-                xtype: 'titlebar',
-                title: 'Schedule'
-            }]
+            xtype: 'scheduleindex'
         }, {
             title: 'Trip Planner',
             iconCls: 'action',

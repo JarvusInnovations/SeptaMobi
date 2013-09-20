@@ -4,15 +4,15 @@ Ext.define('SeptaMobi.view.TripPlanner.SelectAddress', {
 
 	xtype: 'selectaddresspanel',
 
-	height: 200,
-	width: '95%',	
-
 	config: {
 		field: null,
 
+		height: 200,
+		width: '95%',
+
 		modal: true,
 		hideOnMaskTap: true,
-		
+
 		layout: {
 			type: 'vbox'
 		},

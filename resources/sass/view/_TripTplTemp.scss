@@ -40,6 +40,7 @@
 
 .leg-description {
     font-weight: bold;
+    font: -apple-system-short-headline;
 }
 
 .leg-instruction {
@@ -49,6 +50,8 @@
 .leg-length {
     color: $muted-color;
     font-size: smaller;
+    font: -apple-system-short-subheadline;
+    font-weight: normal;
 }
 
 .leg-steps {
@@ -62,6 +65,7 @@
     font-size: small;
     line-height: 1.5;
     list-style: inside decimal;
+    font: -apple-system-footnote;
 }
 
 .step-rel-direction,

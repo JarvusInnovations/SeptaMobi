@@ -1,4 +1,4 @@
-$tabs-bottom-icon-size: 20px;
+$tabs-bottom-icon-size: 22px;
 
 .x-tabbar {
     &.x-docked-bottom {
@@ -9,17 +9,18 @@ $tabs-bottom-icon-size: 20px;
                 @include box-pack(center);
                 background: none;
                 border: none;
-                padding: .2em;
+                padding: .1em .2em;
                 
                 & > .x-button-icon {
                     font-size: $tabs-bottom-icon-size;
                     height: $tabs-bottom-icon-size;
+                    margin: .2em 0;
                     width: $tabs-bottom-icon-size;
                 }
                 
                 & > .x-button-label {
                     font-size: x-small;
-                    margin: .2em 0 -.2em;
+                    margin: .2em 0;
                 }
             }
         }

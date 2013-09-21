@@ -11,6 +11,12 @@ Ext.define('SeptaMobi.view.Main', {
     config: {
         tabBarPosition: 'bottom',
 
+        tabBar: {
+            defaults: {
+                flex: 1
+            }
+        },
+
         items: [{
             title: 'Dashboard',
             iconCls: 'tab-dashboard',

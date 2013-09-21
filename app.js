@@ -29,6 +29,7 @@ Ext.application({
     controllers: [
         'Schedule',
         'TripPlanner'
+        'Map'
     ],
 
     views: [

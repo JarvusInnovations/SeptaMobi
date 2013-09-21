@@ -1,25 +1,25 @@
 
-.bookmarks{
+.bookmarks {
 	
-	&.x-list .x-list-item.x-list-item-tpl .x-innerhtml{
+	&.x-list .x-list-item.x-list-item-tpl .x-innerhtml {
 		border-bottom: 1px solid $trans-black;
 		overflow: hidden;
 		margin-right: .8em;
-		padding: 0 1.6em 0 0;
+		padding: 0 1em 0 0;
 		
-		&:after{
+		&:after {
 			content: '>';
 			font-family: SeptaMobi;
 			position: absolute;
 			top: 33%;
-			right: 1.6em;
+			right: 1em;
 		}
 	}
-	&.x-list .x-list-item.x-item-selected, &.x-list .x-list-item.x-item-pressed{
+	&.x-list .x-list-item.x-item-selected, &.x-list .x-list-item.x-item-pressed {
 		background-color: rgba($base-color, .2);
 	}
 	
-	.line{
+	.line {
 		color: #fff;
 		background-color: $base-color;
 		display: block;
@@ -32,23 +32,23 @@
 		text-align: center;
 		width: 60px;
 		
-		&.MFL{
+		&.MFL {
 			background-color: $mfl;
 		}
-		&.BSL{
+		&.BSL {
 			background-color: $bsl;
 		}
 	}
 	
-	h4{
+	h4 {
 		font-weight: bold;
 		margin: 0;
-		padding-top: .6em;
+		padding-top: .5em;
 	}
-	p{
-		margin-bottom: .6em;
+	p {
+		margin-bottom: .5em;
 	}
-	.arrow{
+	.arrow {
 		background-image: url(../images/bookmarks-arrow.png);
 		background-size: 18px;
 		background-repeat: no-repeat;

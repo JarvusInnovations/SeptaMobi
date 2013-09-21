@@ -25,7 +25,8 @@ $regionalrail: #5186a0;
 @import 'view/Mixins',
 		'view/TripTplTemp',
 		'view/Dashboard',
-		'view/Bookmarks';	
+		'view/Bookmarks',
+		'view/TripPlanner';	
 		
 .x-html{
 	padding: 0;
@@ -35,7 +36,7 @@ $regionalrail: #5186a0;
 	background-image: url(../images/map-bg.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
-	background-position: 70% -225px;
+	background-position: 58% -50px;
 	font: -apple-system-body;
 }
 

@@ -1,29 +1,21 @@
 
-.septamobi-logo{
-//	background: url(../images/septamobi-logo-big.png);
-//	background-size: 100%;
-//	background-repeat: no-repeat;
-//	height: auto;
-//	width: 100%;
-}
-
-.newroute-btn{
+.newroute-btn {
 	@include red-btn;
 	font-size: 2em;
-	margin: .8em;
+	margin: .5em;
 	padding: .1em;
 }
 
-.x-tabbar{
+.x-tabbar {
 	background: transparent;
 	border-bottom: 1px solid $trans-black;
 }
 
-.dashboard{
+.dashboard {
 	
-	.x-dataview-item{
+	.x-dataview-item {
 		border-bottom: 1px solid $trans-black;
 		color: #000;
-		padding: .8em 1.6em;
+		padding: .8em 1em;
 	}
 }

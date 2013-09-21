@@ -6,14 +6,15 @@ $muted-color: #777;
 @import 'sencha-touch/base';
 @import 'sencha-touch/base/all';
 
+@include icon('home', 'H');
 @include font-face(
     'Antonio',
     font-files(
-        'antonio-bold-webfont.woff', woff,
-        'antonio-bold-webfont.ttf', truetype,
-        'antonio-bold-webfont.svg', svg
+        'antonio/antonio-bold-webfont.woff', woff,
+        'antonio/antonio-bold-webfont.ttf', truetype,
+        'antonio/antonio-bold-webfont.svg', svg
     ),
-    'antonio-bold-webfont.eot',
+    'antonio/antonio-bold-webfont.eot',
     bold
 );
 

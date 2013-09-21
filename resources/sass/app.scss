@@ -1,5 +1,6 @@
 $headline-face: Antonio, HelveticaNeue-CondensedBold, sans-serif;
 
+$base-color: #ee3946;
 $accent-color: #007cbe;
 $muted-color: #777;
 
@@ -18,4 +19,35 @@ $muted-color: #777;
     bold
 );
 
-@import 'view/TripTplTemp';
+@import 'view/TripTplTemp',
+		'view/Dashboard';
+		
+		
+
+.x-toolbar{
+	min-height: 44px;
+}
+		
+.x-toolbar.x-docked-top{
+	background: $base-color;
+	@include background-image(linear-gradient($base-color, rgba($base-color, .8) ));
+	border: none;
+	color: #fff;
+	font-family: $headline-face;
+	font-size: 24px;
+	text-transform: uppercase;
+}		
+.x-segmentedbutton{
+	
+	.x-button{
+		background: transparent;
+		border: 1px solid $base-color;
+	
+		&:first-child{
+			@include border-radius(2px 0 0 2px);
+		}
+		&:last-child{
+			@include border-radius(0 2px 2px 0);
+		}
+	}
+}

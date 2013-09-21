@@ -1,0 +1,26 @@
+@include icon-font('SeptaMobi',
+    font-files(
+        'septamobi/SeptaMobi.woff', woff,
+        'septamobi/SeptaMobi.ttf', truetype,
+        'septamobi/SeptaMobi.svg', svg
+    )
+);
+
+@include icon('bus',     'b', 'SeptaMobi');
+@include icon('train',   't', 'SeptaMobi');
+@include icon('trolley', 'c', 'SeptaMobi');
+@include icon('walk',    'w', 'SeptaMobi');
+
+@include icon('reverse',  'r', 'SeptaMobi');
+@include icon('pinpoint', 'p', 'SeptaMobi');
+@include icon('schedule', 's', 'SeptaMobi');
+@include icon('location', 'l', 'SeptaMobi');
+@include icon('back',     '<', 'SeptaMobi');
+@include icon('chevron',  '>', 'SeptaMobi');
+
+@include icon('tab-location',     'L', 'SeptaMobi');
+@include icon('tab-bookmarks',    'B', 'SeptaMobi');
+@include icon('tab-trip-planner', 'I', 'SeptaMobi');
+@include icon('tab-alerts',       'A', 'SeptaMobi');
+@include icon('tab-dashboard',    'D', 'SeptaMobi');
+@include icon('tab-schedule',     'S', 'SeptaMobi');

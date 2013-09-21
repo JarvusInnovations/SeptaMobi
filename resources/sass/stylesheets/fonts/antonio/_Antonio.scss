@@ -1,0 +1,9 @@
+@include font-face('Antonio',
+    font-files(
+        'antonio/antonio-bold-webfont.woff', woff,
+        'antonio/antonio-bold-webfont.ttf', truetype,
+        'antonio/antonio-bold-webfont.svg', svg
+    ),
+    'antonio/antonio-bold-webfont.eot',
+    bold
+);

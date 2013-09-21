@@ -3,22 +3,18 @@ $headline-face: Antonio, HelveticaNeue-CondensedBold, sans-serif;
 $base-color: #ee3946;
 $accent-color: #007cbe;
 $muted-color: #777;
-$trans-black: rgba(00,00,00,.2);
+$trans-black: rgba(black, .2);
 
 @import 'sencha-touch/base';
 @import 'sencha-touch/base/all';
 
-@include icon('home', 'H');
-@include font-face(
-    'Antonio',
-    font-files(
-        'antonio/antonio-bold-webfont.woff', woff,
-        'antonio/antonio-bold-webfont.ttf', truetype,
-        'antonio/antonio-bold-webfont.svg', svg
-    ),
-    'antonio/antonio-bold-webfont.eot',
-    bold
-);
+@import 'stylesheets/fonts/antonio/Antonio';
+@import 'stylesheets/fonts/septamobi/SeptaMobi';
+
+
+@import 'button/SegmentedButton',
+		'tab/Bar',
+		'tab/Tab';
 
 @import 'view/Mixins',
 		'view/TripTplTemp',

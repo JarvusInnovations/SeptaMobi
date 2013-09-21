@@ -4,7 +4,7 @@ Ext.define('SeptaMobi.view.Main', {
     requires: [
         'SeptaMobi.view.Dashboard',
         'SeptaMobi.view.TripPlanner.NavView',
-        'SeptaMobi.view.Schedule.Index',
+        'SeptaMobi.view.schedule.Index',
         'SeptaMobi.view.TripTplTemp',
         'Ext.TitleBar'
     ],
@@ -13,22 +13,19 @@ Ext.define('SeptaMobi.view.Main', {
 
         items: [{
             title: 'Dashboard',
-            iconCls: 'home',
-
+            iconCls: 'tab-dashboard',
             xtype: 'dashboard'
         }, {
             title: 'Schedule',
-            iconCls: 'action',
-
+            iconCls: 'tab-schedule',
             xtype: 'scheduleindex'
         }, {
             title: 'Trip Planner',
-            iconCls: 'action',
-
+            iconCls: 'tab-trip-planner',
             xtype: 'tripplanner'
         }, {
             title: 'Trip TPL',
-            iconCls: 'action',
+            iconCls: 'tab-trip-planner',
 
             scrollable: true,
 

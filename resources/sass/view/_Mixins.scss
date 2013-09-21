@@ -1,4 +1,4 @@
-@mixin red-btn{
+@mixin red-btn {
 	background: rgba($base-color, .2);
 	border: 1px solid $base-color;
 	@include border-radius(2px);
@@ -6,4 +6,11 @@
 	font-family: $headline-face;
 	text-transform: uppercase;
 }		
+
+@mixin hairline {
+	background: repeat-x bottom left url(../images/hairline.png);
+	background-size: 100% 1px;
+}
+
+
 	

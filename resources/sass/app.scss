@@ -5,6 +5,15 @@ $accent-color: #007cbe;
 $muted-color: #777;
 $trans-black: rgba(black, .2);
 
+$departure-color: #439451;
+$arrival-color: #f33649;
+
+$mfl: #1687c3;
+$bsl: #fe8f44;
+$trolley: #5b9e59;
+$bus: #52636b;
+$regionalrail: #5186a0;
+
 @import 'sencha-touch/base';
 @import 'sencha-touch/base/all';
 
@@ -13,36 +22,32 @@ $trans-black: rgba(black, .2);
 
 
 @import 'button/SegmentedButton',
+		'button/Button',
 		'tab/Bar',
-		'tab/Tab';
+		'tab/Tab',
+		'toolbar/Toolbar';
 
 @import 'view/Mixins',
 		'view/TripTplTemp',
-		'view/Dashboard';	
+		'view/Dashboard',
+		'view/Bookmarks',
+		'view/TripPlanner',
+		'view/Schedule';	
 		
-.x-html{
+@include st-loading-spinner;
+
+.x-html {
 	padding: 0;
 }	
 
-#ext-viewport > .x-body{
+#ext-viewport > .x-body {
 	background-image: url(../images/map-bg.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
-	background-position: 70% -225px;
-	
+	background-position: 58% -50px;
+	font: -apple-system-body;
 }
 
-.x-toolbar{
-	min-height: 44px;
-}
-		
-.x-toolbar.x-docked-top{
-	background: $base-color;
-	@include background-image(linear-gradient($base-color, rgba($base-color, .8) ));
-	border: none;
-	color: #fff;
-	font-family: $headline-face;
-	font-size: 24px;
-	text-transform: uppercase;
-}	
+
+
 	

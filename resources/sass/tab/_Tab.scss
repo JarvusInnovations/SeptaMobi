@@ -1,4 +1,4 @@
-$tabs-bottom-icon-size: 20px;
+$tabs-bottom-icon-size: 22px;
 
 .x-tabbar {
     &.x-docked-bottom {
@@ -9,17 +9,18 @@ $tabs-bottom-icon-size: 20px;
                 @include box-pack(center);
                 background: none;
                 border: none;
-                padding: .2em;
+                padding: .1em .2em;
                 
                 & > .x-button-icon {
                     font-size: $tabs-bottom-icon-size;
                     height: $tabs-bottom-icon-size;
+                    margin: .2em 0;
                     width: $tabs-bottom-icon-size;
                 }
                 
                 & > .x-button-label {
                     font-size: x-small;
-                    margin: .2em 0 -.2em;
+                    margin: .2em 0;
                 }
             }
         }
@@ -27,36 +28,40 @@ $tabs-bottom-icon-size: 20px;
 }
 
 
-.dashboard-tabs{
+.dashboard {
 
-	.x-tabbar{
+	.x-tabbar {
 		background: transparent;
 		border-bottom: 1px solid $trans-black;
 		
-		.x-tabbar-inner{
-			padding: 0 1.6em;
+		.x-tabbar-inner {
+			padding: 0 1em;
 		}
 		
-		.x-tab{
+		.x-tab {
 			background: transparent;
 			border: solid $trans-black;
 			border-width: 1px 1px 0 1px;
+			color: #000;
 			font-family: $headline-face;
 			font-size: 1.3em;
-			letter-spacing: .1em;
+			letter-spacing: 1px;
 			text-transform: uppercase;
 			padding: .2em;
 			width: 50%;
 			
-			&:first-child{
+			&:first-child {
 				@include border-radius(2px 0 0 0);
 				border-right: none;
 			}
-			&:last-child{
+			
+			&:last-child {
 				@include border-radius(0 2px 0 0);
 			}
-			&.x-tab-pressed{
+		
+			&.x-tab-pressed, &.x-tab-active {
 				background: $trans-black;
+				border-color: transparent;
 			}
 		}
 	}

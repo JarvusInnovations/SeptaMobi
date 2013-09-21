@@ -1,6 +1,7 @@
 .x-tabbar {
     &.x-docked-bottom.x-tabbar-dark {
         background: rgba(black, .75);
+        border: none;
         color: $muted-color;
         
         & > .x-tabbar-inner > .x-tab-active {

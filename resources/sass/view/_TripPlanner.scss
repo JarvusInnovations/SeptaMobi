@@ -1,0 +1,29 @@
+.trip-planner {
+	
+	.x-field-text {
+		@include hairline;
+		padding: .5em 1em;
+	}
+	.x-form-label{
+		font-family: $headline-face;
+		letter-spacing: 1px;
+		margin-right: .5em;
+		text-align: right;
+		
+		span {
+			font-weight: normal;
+			text-transform: uppercase;
+		}
+	}
+	input {
+		background: transparent;
+		border: none;
+		line-height: 1.5em;
+		font: -apple-system-short-subheadline;
+	}
+	.pinpoint{
+		content: 'l';
+		font-family: SeptaMobi;
+		height: 20px;
+	}
+}

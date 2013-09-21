@@ -12,25 +12,30 @@ Ext.define('SeptaMobi.view.TripPlanner.NavView', {
         items: [{
             xtype: 'formpanel',
             title: 'Trip Planner',
+            cls: 'trip-planner',
             items: [{
                 xtype: 'fieldset',
+                defaults: {
+					labelWidth: '100px'
+				},
                 items: [{
                     xtype: 'textfield',
-                    label: 'From',
+                    label: 'Start:',
                     itemId: 'fromField',
                     clearIcon: false
                 }, {
                     xtype: 'checkboxfield',
-                    label: 'Current Location',
-                    itemId: 'fromUseCurrent'
+                 //   label: 'Current Location',
+                    itemId: 'fromUseCurrent',
+                    iconCls: 'pinpoint'
                 }, {
                     xtype: 'textfield',
-                    label: 'To',
+                    label: 'Destination:',
                     itemId: 'toField',
                     clearIcon: false
                 }, {
                     xtype: 'checkboxfield',
-                    label: 'Current Location',
+               //     label: 'Current Location',
                     itemId: 'toUseCurrent'
                 }, {
                     xtype: 'button',
@@ -38,7 +43,7 @@ Ext.define('SeptaMobi.view.TripPlanner.NavView', {
                     action: 'reverse'
                 }, {
                     xtype: 'datetimepickerfield',
-                    label: 'Time',
+                    label: 'Depart:',
                     value: (new Date()),
                     picker: {
                         yearFrom: (new Date()).getFullYear(),

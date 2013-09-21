@@ -1,4 +1,3 @@
-
 .trip-details {
     border-bottom: 1px solid #ccc;
     padding: 1.2em;
@@ -36,19 +35,54 @@
     border-bottom: 1px solid #ccc;
     padding: .8em 1.2em;
     padding-left: 2.8em;
+    
+    &::before {
+        font-family: SeptaMobi;
+        font-size: 20px;
+        left: .8em;
+        position: absolute;
+        text-align: center;
+        width: 20px;
+    }
+    
+    &.departure::before {
+        color: $departure-color;
+        content: 'l';
+    }
+    
+    &.arrival::before {
+        color: $arrival-color;
+        content: 'l';
+    }
+    
+        &.bus::before { content: 'b'; }
+      &.train::before { content: 't'; }
+    &.trolley::before { content: 'c'; }
+       &.walk::before { content: 'w'; }
 }
 
 .leg-description {
     font-weight: bold;
+    font: -apple-system-short-headline;
 }
 
 .leg-instruction {
     color: $accent-color;
+    
+    .departure & {
+        color: $departure-color;
+    }
+    
+    .arrival & {
+        color: $arrival-color;
+    }
 }
 
 .leg-length {
     color: $muted-color;
     font-size: smaller;
+    font: -apple-system-short-subheadline;
+    font-weight: normal;
 }
 
 .leg-steps {
@@ -62,6 +96,7 @@
     font-size: small;
     line-height: 1.5;
     list-style: inside decimal;
+    font: -apple-system-footnote;
 }
 
 .step-rel-direction,

@@ -1,15 +1,29 @@
-.x-segmentedbutton{
+.x-segmentedbutton {
 	margin: 10px;
 		
-	.x-button{
+	.x-button {
 		background: transparent;
 		border: 1px solid $base-color;
 	
-		&:first-child{
+		&:first-child {
 			@include border-radius(2px 0 0 2px);
 		}
-		&:last-child{
+
+		&:last-child {
 			@include border-radius(0 2px 2px 0);
 		}
+		
+		& + .x-button {
+    		border-left: 0;
+		}
+	}
+	
+	.x-button-pressed {
+    	background: rgba($base-color, .2);
+	}
+	
+	.x-button-label {
+    	font-size: smaller;
+    	padding: .2em;
 	}
 }

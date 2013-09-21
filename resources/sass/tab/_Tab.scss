@@ -28,17 +28,16 @@ $tabs-bottom-icon-size: 22px;
 }
 
 
-.dashboard{
-
-	.x-tabbar{
+.dashboard {
+	.x-tabbar {
 		background: transparent;
 		border-bottom: 1px solid $trans-black;
 		
-		.x-tabbar-inner{
+		.x-tabbar-inner {
 			padding: 0 1.6em;
 		}
 		
-		.x-tab{
+		.x-tab {
 			background: transparent;
 			border: solid $trans-black;
 			border-width: 1px 1px 0 1px;
@@ -49,15 +48,18 @@ $tabs-bottom-icon-size: 22px;
 			padding: .2em;
 			width: 50%;
 			
-			&:first-child{
+			&:first-child {
 				@include border-radius(2px 0 0 0);
 				border-right: none;
 			}
-			&:last-child{
+			
+			&:last-child {
 				@include border-radius(0 2px 0 0);
 			}
+			
 			&.x-tab-pressed, &.x-tab-active{
 				background: $trans-black;
+				border-color: transparent;
 			}
 		}
 	}

@@ -27,6 +27,8 @@ $regionalrail: #5186a0;
 		'view/Dashboard',
 		'view/Bookmarks';	
 		
+@include st-loading-spinner;
+
 .x-html{
 	padding: 0;
 }	

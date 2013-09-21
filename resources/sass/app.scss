@@ -28,6 +28,8 @@ $regionalrail: #5186a0;
 		'view/Bookmarks',
 		'view/TripPlanner';	
 		
+@include st-loading-spinner;
+
 .x-html{
 	padding: 0;
 }	

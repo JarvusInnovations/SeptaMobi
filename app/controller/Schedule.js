@@ -3,59 +3,63 @@ Ext.define('SeptaMobi.controller.Schedule', {
 
 	config: {
 		views: [
-			'schedule.RouteDetail'
+			'schedule.RouteDetails'
 		],
 		stores: [
-			'Routes',
+			'Routes'
+		],
+		models: [
 			'RouteDetails'
 		],
 		refs: {
-			scheduleIndex: 'scheduleindex',
-			routeDetailList: {
-				selector: 'routedetail',
+			navView: 'schedule-navview',
+			routesList: 'schedule-routeslist',
+			routeDetails: {
+				selector: 'schedule-routedetails',
 				autoCreate: true,
 
-				xtype: 'routedetail'
+				xtype: 'schedule-routedetails'
 			}
 		},
 		control: {
-			'scheduleindex': {
-				activate: 'onScheduleIndexActivate'
+			navView: {
+				show: 'onScheduleShow'
 			},
-			'scheduleindex segmentedbutton': {
-				toggle: 'onScheduleIndexSegmentedButtonToggle'
+			'schedule-routeslist segmentedbutton': {
+				toggle: 'onRoutesListSegmentedButtonToggle'
 			},
-			'scheduleindex list': {
-				select: 'onScheduleIndexListSelect'
+			routesList: {
+				select: 'onRoutesListSelect'
 			}
 		}
 	},
 
-	onScheduleIndexActivate: function(item, scheduleIndex) {
+	onScheduleShow: function(navView, scheduleIndex) {
 		var routeStore = Ext.getStore('Routes');
 
-		scheduleIndex.setMasked({
-			xtype: 'loadmask',
-			message: 'Loading Routes&hellip;'
-		});
-
 		if (!routeStore.isLoaded()) {
+			navView.setMasked({
+				xtype: 'loadmask',
+				message: 'Loading Routes&hellip;'
+			});
+			
 			routeStore.load({
 				callback: function(records, operation, success) {
-					scheduleIndex.setMasked(false);
+					navView.setMasked(false);
 				}
 			});
 		}
 	},
 
-	onScheduleIndexSegmentedButtonToggle: function(segmentedButton, button, isPressed) {
-		var routeStore = Ext.getStore('Routes'),
+	onRoutesListSegmentedButtonToggle: function(segmentedButton, button, isPressed) {
+		var navView = this.getNavView(),
+			routeStore = Ext.getStore('Routes'),
 			routeType;
 
 		if (isPressed) {
 			routeType = button.routeType;
 			
-			routeStore.clearFilter(true);
+			routeStore.clearFilter(!!routeType); // pass true to suppress update if we're going to apply a routeType filter next
 			
 			if (routeType) {
 				routeStore.filter('routeType', routeType);
@@ -63,20 +67,24 @@ Ext.define('SeptaMobi.controller.Schedule', {
 		}
 	},
 
-	onScheduleIndexListSelect: function(list, record) {
+	onRoutesListSelect: function(list, record) {
 		var me = this,
-			routeDetailStore = Ext.getStore('RouteDetails'),
-			routeDetailList = me.getRouteDetailList(),
-			scheduleIndex = me.getScheduleIndex();
+			routeDetails = me.getRouteDetails(),
+			navView = me.getNavView();
+		
+		routeDetails.setMasked({
+			xtype: 'loadmask',
+			message: 'Loading Details&hellip;'
+		});
+		
+		navView.push(routeDetails);
 
-		routeDetailStore.getProxy().setExtraParam('id', record.get('id'));
-
-		routeDetailStore.load({
-			callback: function(records, operation, success) {
-				// routeDetailList.setData(routeDetailStore.getAt(0).get('directions'));
+		SeptaMobi.model.RouteDetails.load(record.getId(), {
+			callback: function(detailsRecord) {
+				routeDetails.setDetailsRecord(detailsRecord);
+				routeDetails.setMasked(false);
 			}
 		});
 
-		scheduleIndex.push(routeDetailList);
 	}
 });

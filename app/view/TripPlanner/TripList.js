@@ -36,6 +36,7 @@ Ext.define('SeptaMobi.view.TripPlanner.TripList', {
 			store: 'Itineraries',
 			itemTpl: [
 				'<div>',
+					'<span class="departure-time">{startTime:date("g:i A")}</span>',
 					'D <span class="duration">{duration}</span>',
 					'WD <span class="walkDistance">{walkDistance}</span>',
 					'T <span class="transfers">{transfers}</span>',

@@ -9,10 +9,12 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 	config: {
 		toAddress: null,
 		fromAddress: null,
+		tripData: null,
 
 		views: [
 			'TripPlanner.NavView',
 			'TripPlanner.SelectAddress',
+			'TripPlanner.TripDetail',
 			'TripPlanner.TripList'
 		],
 		stores: [
@@ -37,6 +39,12 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 				autoCreate: true,
 
 				xtype: 'triplist'
+			},
+			tripDetail: {
+				selector: 'tripdetail',
+				autoCreate: true,
+
+				xtype: 'tripdetail'
 			}
 		},
 		control: {
@@ -65,6 +73,9 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 			},
 			'selectaddresspanel dataview': {
 				select: 'onSelectAddressPanelAddressSelect'
+			},
+			'triplist list': {
+				select: 'onTripSelect'
 			}
 		}
 	},
@@ -165,8 +176,10 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 		toField.setValue(originalFromValue);
 		toUseCurrent.setChecked(originalFromUseCurrentValue);
 
+		debugger
 		me.setFromAddress(me.getToAddress());
 		me.setToAddress(originalFromAddress);
+		debugger
 	},
 
 	onRouteTap: function() {
@@ -178,7 +191,7 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 			departTime = tripPlannerDatetimeField.getValue(),
 			tripList = me.getTripList(),
 			itinerariesStore = Ext.getStore('Itineraries'),
-			lat, lon;
+			tripPlan, lat, lon;
 
 		//Validate
 		if (!fromAddress) {
@@ -206,12 +219,16 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 
 		SeptaMobi.API.getDirections(fromAddress, toAddress, departTime, function(options, success, response) {
 			if (success) {
-				tripList.setTripPlan({
+				tripPlan = {
 					toName: toAddress.get('text'),
 					fromName: fromAddress.get('text'),
 					departTime: departTime
-				});		
+				};
 				
+				tripList.setTripPlan(tripPlan);		
+				
+				me.setTripData(tripPlan);
+
 				itinerariesStore.setData(response.data.plan.itineraries);
 				
 				tripPlannerView.push(tripList);
@@ -279,5 +296,20 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 		}
 
 		me.getSelectAddressPanel().hide();
+	},
+
+	onTripSelect: function(list, record, eOpts) {
+		var me = this,
+			tripPlannerView = me.getTripPlannerView(),
+			tripDetail = me.getTripDetail(),
+			tripData = me.getTripData();
+
+		tripData.duration = record.get('duration');
+
+		record.set('fromName', tripData.fromName);
+		record.set('toName', tripData.toName);
+		
+		tripDetail.setTripData(tripData, record);
+		tripPlannerView.push(tripDetail);
 	}
 });

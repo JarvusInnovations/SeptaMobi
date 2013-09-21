@@ -1,4 +1,4 @@
-Ext.define('SeptaMobi.view.TripPlanner.Form', {
+Ext.define('SeptaMobi.view.TripPlanner.NavView', {
     extend: 'Ext.navigation.View',
     requires: [
         'Ext.form.Panel',

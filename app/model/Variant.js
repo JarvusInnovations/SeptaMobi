@@ -1,20 +1,26 @@
 Ext.define('SeptaMobi.model.Variant', {
-	extend: 'Ext.data.Model',	
+	extend: 'Ext.data.Model',
+	requires: ['SeptaMobi.model.Stop', 'SeptaMobi.model.Trip'],
 
 	config: {
-		fields:[{
+		fields: [{
 			name: 'name',
 			type: 'string'
+		}, {
+			name: 'direction',
+			type: 'int'
 		}],
 
-		hasMany: {
-			model: 'Trip',
+		associations: [{
+			type: 'hasMany',
+			model: 'SeptaMobi.model.Stop',
+			name: 'stops'
+		}, {
+			type: 'hasMany',
+			model: 'SeptaMobi.model.Trip',
 			name: 'trips'
-		},
+		}],
 
-		hasMany: {
-			model: 'Stop',
-			name: 'Stops'
-		}
+		belongsTo: 'RouteDetail'
 	}
 });

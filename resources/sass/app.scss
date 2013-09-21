@@ -45,6 +45,9 @@ $trans-black: rgba(00,00,00,.2);
     bold
 );
 
+@import 'tab/Tab',
+		'button/SegmentedButton';
+
 @import 'view/Mixins',
 		'view/TripTplTemp',
 		'view/Dashboard';	

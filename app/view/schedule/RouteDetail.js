@@ -1,4 +1,4 @@
-Ext.define('SeptaMobi.view.Schedule.RouteDetail', {
+Ext.define('SeptaMobi.view.schedule.RouteDetail', {
 	extend: 'Ext.dataview.List',
 
 	xtype: 'routedetail',

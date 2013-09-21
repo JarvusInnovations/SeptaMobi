@@ -1,4 +1,4 @@
-Ext.define('SeptaMobi.view.Schedule.Index', {
+Ext.define('SeptaMobi.view.schedule.Index', {
 	extend: 'Ext.navigation.View',
 
 	requires: ['Ext.SegmentedButton', 'Ext.dataview.List'],

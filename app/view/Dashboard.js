@@ -9,6 +9,7 @@ Ext.define('SeptaMobi.view.Dashboard', {
 		items: [{
 			xtype: 'container',
 			cls: 'septamobi-logo',
+			text: '<img src="/images/septamobi-logo-big.png" alt="septa mobi logo" height="auto" width="100%" />',
 			flex: 1
 		}, {
 			xtype: 'button',

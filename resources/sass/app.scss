@@ -19,10 +19,21 @@ $muted-color: #777;
     bold
 );
 
-@import 'view/TripTplTemp',
-		'view/Dashboard';
+@import 'view/Mixins',
+		'view/TripTplTemp',
+		'view/Dashboard';	
 		
-		
+.x-html{
+	padding: 0;
+}	
+
+#ext-viewport > .x-body{
+	background-image: url(../images/map-bg.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 70% -225px;
+	
+}
 
 .x-toolbar{
 	min-height: 44px;
@@ -36,9 +47,11 @@ $muted-color: #777;
 	font-family: $headline-face;
 	font-size: 24px;
 	text-transform: uppercase;
-}		
-.x-segmentedbutton{
+}	
 	
+.x-segmentedbutton{
+	margin: 10px;
+		
 	.x-button{
 		background: transparent;
 		border: 1px solid $base-color;

@@ -1,3 +1,4 @@
 build/
+archive/
 .sass-cache
 resources/css/app.css

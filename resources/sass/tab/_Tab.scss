@@ -4,6 +4,7 @@
             & > .x-tab-icon {
                 @include box-align(center);
                 @include box-orient(vertical);
+                @include box-pack(center);
             }
         }
     }

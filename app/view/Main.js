@@ -13,22 +13,19 @@ Ext.define('SeptaMobi.view.Main', {
 
         items: [{
             title: 'Dashboard',
-            iconCls: 'home',
-
+            iconCls: 'tab-dashboard',
             xtype: 'dashboard'
         }, {
             title: 'Schedule',
-            iconCls: 'action',
-
+            iconCls: 'tab-schedule',
             xtype: 'scheduleindex'
         }, {
             title: 'Trip Planner',
-            iconCls: 'action',
-
+            iconCls: 'tab-trip-planner',
             xtype: 'tripplanner'
         }, {
             title: 'Trip TPL',
-            iconCls: 'action',
+            iconCls: 'tab-trip-planner',
 
             scrollable: true,
 

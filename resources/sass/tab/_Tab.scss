@@ -28,7 +28,7 @@ $tabs-bottom-icon-size: 22px;
 }
 
 
-.dashboard-tabs{
+.dashboard{
 
 	.x-tabbar{
 		background: transparent;
@@ -42,9 +42,9 @@ $tabs-bottom-icon-size: 22px;
 			background: transparent;
 			border: solid $trans-black;
 			border-width: 1px 1px 0 1px;
+			color: #000;
 			font-family: $headline-face;
 			font-size: 1.3em;
-			letter-spacing: .1em;
 			text-transform: uppercase;
 			padding: .2em;
 			width: 50%;
@@ -56,7 +56,7 @@ $tabs-bottom-icon-size: 22px;
 			&:last-child{
 				@include border-radius(0 2px 0 0);
 			}
-			&.x-tab-pressed{
+			&.x-tab-pressed, &.x-tab-active{
 				background: $trans-black;
 			}
 		}

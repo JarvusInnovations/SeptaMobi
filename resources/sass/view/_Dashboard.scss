@@ -18,3 +18,12 @@
 	background: transparent;
 	border-bottom: 1px solid $trans-black;
 }
+
+.dashboard{
+	
+	.x-dataview-item{
+		border-bottom: 1px solid $trans-black;
+		color: #000;
+		padding: .8em 1.6em;
+	}
+}

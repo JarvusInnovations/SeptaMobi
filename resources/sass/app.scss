@@ -5,6 +5,12 @@ $accent-color: #007cbe;
 $muted-color: #777;
 $trans-black: rgba(black, .2);
 
+$mfl: #1687c3;
+$bsl: #fe8f44;
+$trolley: #5b9e59;
+$bus: #52636b;
+$regionalrail: #5186a0;
+
 @import 'sencha-touch/base';
 @import 'sencha-touch/base/all';
 
@@ -18,7 +24,8 @@ $trans-black: rgba(black, .2);
 
 @import 'view/Mixins',
 		'view/TripTplTemp',
-		'view/Dashboard';	
+		'view/Dashboard',
+		'view/Bookmarks';	
 		
 .x-html{
 	padding: 0;

@@ -18,7 +18,7 @@ Ext.define('SeptaMobi.view.Dashboard', {
 		}, {
 			xtype: 'tabpanel',
 			flex: 1,
-			cls: 'dashboard-tabs',
+			cls: 'dashboard',
 			items: [{
 				xtype: 'dataview',
 				title: 'Alerts',
@@ -48,7 +48,7 @@ Ext.define('SeptaMobi.view.Dashboard', {
 					'<div>',
 						'<span class="line {lineName}">{lineName}</span>',
 						'<h4>{name}</h4>',
-						'<p>{to} <span class="arrow"/> {from}</p>',
+						'<p>{to} <span class="arrow"></span> {from}</p>',
 						'<span class="disclosure"/>',
 					'</div>'
 				],

@@ -31,16 +31,16 @@ Ext.define('SeptaMobi.view.TripPlanner.TripList', {
             	'</dl>'
         	]
 		}, {
-			xtype: 'list',
+			xtype: 'dataview',
 			flex: 1,
 			store: 'Itineraries',
+			cls: 'itineraries-list',
+			itemCls: 'itinerary-list-item',
 			itemTpl: [
-				'<div>',
-					'<span class="departure-time">{startTime:date("g:i A")}</span>',
-					'D <span class="duration">{duration}</span>',
-					'WD <span class="walkDistance">{walkDistance}</span>',
-					'T <span class="transfers">{transfers}</span>',
-				'</div>'
+			    '<div class="itinerary-detail departure">Depart {startTime:date("g:i A")}</div>',
+			    '<div class="itinerary-detail duration">{[ (values.duration/1000/60).toFixed(1) ]}&nbsp;min</div>',
+				'<div class="itinerary-detail walk-distance">Includes {[ (values.walkDistance/3.28084).toFixed(1) ]}&nbsp;ft of walking</div>',
+				'<div class="itinerary-detail transfers">{transfers}&nbsp;transfer<tpl if="transfers!=1">s</tpl></div>',
 			]
 		}]
 	},

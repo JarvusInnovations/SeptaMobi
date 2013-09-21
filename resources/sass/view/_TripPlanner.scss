@@ -1,5 +1,4 @@
 .trip-planner {
-	
 	.x-field-text {
 		@include hairline;
 		padding: .5em 1em;
@@ -26,4 +25,12 @@
 		font-family: SeptaMobi;
 		height: 20px;
 	}
+}
+
+.itineraries-list {
+}
+
+.itinerary-list-item {
+    @include hairline;
+    padding: .6em 1.2em;
 }

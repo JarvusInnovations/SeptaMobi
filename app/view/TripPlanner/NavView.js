@@ -15,16 +15,19 @@ Ext.define('SeptaMobi.view.TripPlanner.NavView', {
             cls: 'trip-planner',
             items: [{
                 xtype: 'fieldset',
+                defaults: {
+					labelWidth: '90px'
+				},
                 items: [{
                     xtype: 'textfield',
                     label: 'Start:',
                     itemId: 'fromField',
                     clearIcon: false
                 }, {
-                    xtype: 'button',
+                    xtype: 'checkboxfield',
                  //   label: 'Current Location',
                     itemId: 'fromUseCurrent',
-                    iconCls: 'location'
+                    iconCls: 'pinpoint'
                 }, {
                     xtype: 'textfield',
                     label: 'Destination:',

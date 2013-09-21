@@ -28,22 +28,14 @@ $tabs-bottom-icon-size: 22px;
 }
 
 
-<<<<<<< HEAD
-.dashboard{
-
-=======
 .dashboard {
->>>>>>> 070f381293ac647a07e9ffb58c3703fb2b85f3bd
+
 	.x-tabbar {
 		background: transparent;
 		border-bottom: 1px solid $trans-black;
 		
 		.x-tabbar-inner {
-<<<<<<< HEAD
 			padding: 0 1em;
-=======
-			padding: 0 1.6em;
->>>>>>> 070f381293ac647a07e9ffb58c3703fb2b85f3bd
 		}
 		
 		.x-tab {
@@ -66,12 +58,8 @@ $tabs-bottom-icon-size: 22px;
 			&:last-child {
 				@include border-radius(0 2px 0 0);
 			}
-			
-<<<<<<< HEAD
+		
 			&.x-tab-pressed, &.x-tab-active {
-=======
-			&.x-tab-pressed, &.x-tab-active{
->>>>>>> 070f381293ac647a07e9ffb58c3703fb2b85f3bd
 				background: $trans-black;
 				border-color: transparent;
 			}

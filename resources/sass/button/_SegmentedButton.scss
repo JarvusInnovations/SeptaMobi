@@ -8,10 +8,7 @@
 		&:first-child {
 			@include border-radius(2px 0 0 2px);
 		}
-<<<<<<< HEAD
-=======
-		
->>>>>>> 070f381293ac647a07e9ffb58c3703fb2b85f3bd
+
 		&:last-child {
 			@include border-radius(0 2px 2px 0);
 		}

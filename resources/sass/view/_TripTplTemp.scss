@@ -54,6 +54,7 @@
 .leg-steps {
     border-top: 1px dashed #ccc;
     margin-top: .6em;
+    margin-right: -1.2em;
     padding-top: .6em;
 }
 
@@ -68,8 +69,11 @@
     font-weight: bold;
 }
 
+.step-street-name {
+    margin-right: .5em; // instead of margin-left on the distance, in case distance wraps to next line
+}
+
 .step-distance {
     color: $muted-color;
     font-size: smaller;
-    margin-left: 1em;
 }

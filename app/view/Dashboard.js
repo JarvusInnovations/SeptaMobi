@@ -5,24 +5,22 @@ Ext.define('SeptaMobi.view.Dashboard', {
 	
 	config: {
 		styleHtmlContent: true,
+		layout: 'vbox',
 
 		items: [{
-			xtype: 'container',
+			xtype: 'component',
 			cls: 'septamobi-logo',
-			text: '<img src="resources/images/septamobi-logo-big.png" alt="septa mobi logo" height="auto" width="100%" />',
-			flex: 1
+			html: '<img src="resources/images/septamobi-logo-big.png" alt="septa mobi logo" height="auto" width="100%" />'
 		}, {
 			xtype: 'button',
 			text: 'New Route',
 			cls: 'newroute-btn'
 		}, {
 			xtype: 'tabpanel',
-			activeItem: 1,
 			flex: 1,
 			cls: 'dashboard-tabs',
-			layout: 'vbox',
 			items: [{
-				xtype: 'list',
+				xtype: 'dataview',
 				title: 'Alerts',
 				itemTpl: [
 					'<div>{message}</div>'

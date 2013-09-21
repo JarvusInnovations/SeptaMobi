@@ -9,7 +9,7 @@ Ext.define('SeptaMobi.store.AutocompleteAddress', {
 			pageParam: false,
 			limitParam: false,
 			startParam: false,
-			url: location.protocol == 'http:' ? '/autocomplete' : 'https://autocomplete-api.smartystreets.com/suggest',
+			url: location.protocol == 'http:' ? './api/autocomplete' : 'https://autocomplete-api.smartystreets.com/suggest',
 			reader: {
 				type: 'json',
 				rootProperty: 'suggestions'

@@ -1,20 +1,66 @@
 $headline-face: Antonio, HelveticaNeue-CondensedBold, sans-serif;
 
+$base-color: #ee3946;
 $accent-color: #007cbe;
 $muted-color: #777;
 
 @import 'sencha-touch/base';
 @import 'sencha-touch/base/all';
 
+@include icon('home', 'H');
 @include font-face(
     'Antonio',
     font-files(
-        'antonio-bold-webfont.woff', woff,
-        'antonio-bold-webfont.ttf', truetype,
-        'antonio-bold-webfont.svg', svg
+        'antonio/antonio-bold-webfont.woff', woff,
+        'antonio/antonio-bold-webfont.ttf', truetype,
+        'antonio/antonio-bold-webfont.svg', svg
     ),
-    'antonio-bold-webfont.eot',
+    'antonio/antonio-bold-webfont.eot',
     bold
 );
 
-@import 'view/TripTplTemp';
+@import 'view/Mixins',
+		'view/TripTplTemp',
+		'view/Dashboard';	
+		
+.x-html{
+	padding: 0;
+}	
+
+#ext-viewport > .x-body{
+	background-image: url(../images/map-bg.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 70% -225px;
+	
+}
+
+.x-toolbar{
+	min-height: 44px;
+}
+		
+.x-toolbar.x-docked-top{
+	background: $base-color;
+	@include background-image(linear-gradient($base-color, rgba($base-color, .8) ));
+	border: none;
+	color: #fff;
+	font-family: $headline-face;
+	font-size: 24px;
+	text-transform: uppercase;
+}	
+	
+.x-segmentedbutton{
+	margin: 10px;
+		
+	.x-button{
+		background: transparent;
+		border: 1px solid $base-color;
+	
+		&:first-child{
+			@include border-radius(2px 0 0 2px);
+		}
+		&:last-child{
+			@include border-radius(0 2px 2px 0);
+		}
+	}
+}

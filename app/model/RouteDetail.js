@@ -1,5 +1,6 @@
 Ext.define('SeptaMobi.model.RouteDetail', {
 	extend: 'Ext.data.Model',
+	requires: ['SeptaMobi.model.Variant'],
 
 	config: {
 		idProperty: 'id',
@@ -26,8 +27,6 @@ Ext.define('SeptaMobi.model.RouteDetail', {
 
 		associations: [{
 			type: 'hasMany',
-			associatedName: 'variants',
-			associationKey: 'variants',
 			model: 'SeptaMobi.model.Variant',
 			name: 'variants'
 		}]

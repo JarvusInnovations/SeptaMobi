@@ -1,0 +1,16 @@
+.x-toolbar {
+	min-height: 44px;
+}
+		
+.x-toolbar.x-docked-top {
+	background: $base-color;
+	@include background-image(linear-gradient($base-color, rgba($base-color, .8) ));
+	border: none;
+	color: #fff;
+
+	.x-center {
+		font-family: $headline-face;
+		font-size: 24px;
+		text-transform: uppercase;
+	}
+}	

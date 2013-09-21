@@ -2,7 +2,7 @@
 .bookmarks {
 	
 	&.x-list .x-list-item.x-list-item-tpl .x-innerhtml {
-		border-bottom: 1px solid $trans-black;
+		@include hairline;
 		overflow: hidden;
 		margin-right: .8em;
 		padding: 0 1em 0 0;

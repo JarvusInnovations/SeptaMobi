@@ -16,7 +16,7 @@ Ext.define('SeptaMobi.view.TripPlanner.NavView', {
             items: [{
                 xtype: 'fieldset',
                 defaults: {
-					labelWidth: '90px'
+					labelWidth: '100px'
 				},
                 items: [{
                     xtype: 'textfield',

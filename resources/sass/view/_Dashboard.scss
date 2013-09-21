@@ -2,6 +2,7 @@
 .newroute-btn {
 	@include red-btn;
 	font-size: 2em;
+	font-weight: normal;
 	margin: .5em;
 	padding: .1em;
 }
@@ -14,7 +15,7 @@
 .dashboard {
 	
 	.x-dataview-item {
-		border-bottom: 1px solid $trans-black;
+		@include hairline;
 		color: #000;
 		padding: .8em 1em;
 	}

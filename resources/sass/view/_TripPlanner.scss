@@ -1,7 +1,7 @@
 .trip-planner {
 	
 	.x-field-text {
-		border-bottom: 1px solid $trans-black;
+		@include hairline;
 		padding: .5em 1em;
 	}
 	.x-form-label{

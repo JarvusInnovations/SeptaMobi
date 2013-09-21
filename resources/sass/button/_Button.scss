@@ -1,0 +1,22 @@
+.x-button {
+	
+	&.x-button-back {
+		background: transparent;
+		border: none;
+		font-size: 1.2em;
+		line-height: 1em;
+		margin-left: .5em;
+
+		.x-button-label{
+			font: -apple-system-short-subheadline;
+			font-weight: normal;
+			padding-left: .35em;
+		}
+			
+		&:before{
+			content: '<';
+			font-family: SeptaMobi;
+			
+		}
+	}
+}

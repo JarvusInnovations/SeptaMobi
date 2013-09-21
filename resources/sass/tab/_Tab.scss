@@ -25,3 +25,39 @@ $tabs-bottom-icon-size: 20px;
         }
     }
 }
+
+
+.dashboard-tabs{
+
+	.x-tabbar{
+		background: transparent;
+		border-bottom: 1px solid $trans-black;
+		
+		.x-tabbar-inner{
+			padding: 0 1.6em;
+		}
+		
+		.x-tab{
+			background: transparent;
+			border: solid $trans-black;
+			border-width: 1px 1px 0 1px;
+			font-family: $headline-face;
+			font-size: 1.3em;
+			letter-spacing: .1em;
+			text-transform: uppercase;
+			padding: .2em;
+			width: 50%;
+			
+			&:first-child{
+				@include border-radius(2px 0 0 0);
+				border-right: none;
+			}
+			&:last-child{
+				@include border-radius(0 2px 0 0);
+			}
+			&.x-tab-pressed{
+				background: $trans-black;
+			}
+		}
+	}
+}

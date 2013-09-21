@@ -11,8 +11,10 @@ $trans-black: rgba(black, .2);
 @import 'stylesheets/fonts/antonio/Antonio';
 @import 'stylesheets/fonts/septamobi/SeptaMobi';
 
-@import 'tab/Bar';
-@import 'tab/Tab';
+
+@import 'button/SegmentedButton',
+		'tab/Bar',
+		'tab/Tab';
 
 @import 'view/Mixins',
 		'view/TripTplTemp',

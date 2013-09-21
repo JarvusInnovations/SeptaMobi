@@ -1,3 +1,5 @@
+$tabs-bottom-icon-size: 20px;
+
 .x-tabbar {
     &.x-docked-bottom {
         & > .x-tabbar-inner {
@@ -5,6 +7,20 @@
                 @include box-align(center);
                 @include box-orient(vertical);
                 @include box-pack(center);
+                background: none;
+                border: none;
+                padding: .2em;
+                
+                & > .x-button-icon {
+                    font-size: $tabs-bottom-icon-size;
+                    height: $tabs-bottom-icon-size;
+                    width: $tabs-bottom-icon-size;
+                }
+                
+                & > .x-button-label {
+                    font-size: x-small;
+                    margin: .2em 0 -.2em;
+                }
             }
         }
     }

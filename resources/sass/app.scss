@@ -3,7 +3,7 @@ $headline-face: Antonio, HelveticaNeue-CondensedBold, sans-serif;
 $base-color: #ee3946;
 $accent-color: #007cbe;
 $muted-color: #777;
-$trans-black: rgba(00,00,00,.2);
+$trans-black: rgba(black, .2);
 
 @import 'sencha-touch/base';
 @import 'sencha-touch/base/all';
@@ -44,6 +44,9 @@ $trans-black: rgba(00,00,00,.2);
     'antonio/antonio-bold-webfont.eot',
     bold
 );
+
+@import 'tab/Bar';
+@import 'tab/Tab';
 
 @import 'view/Mixins',
 		'view/TripTplTemp',

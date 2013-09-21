@@ -3,6 +3,7 @@ $headline-face: Antonio, HelveticaNeue-CondensedBold, sans-serif;
 $base-color: #ee3946;
 $accent-color: #007cbe;
 $muted-color: #777;
+$trans-black: rgba(00,00,00,.2);
 
 @import 'sencha-touch/base';
 @import 'sencha-touch/base/all';
@@ -49,18 +50,3 @@ $muted-color: #777;
 	text-transform: uppercase;
 }	
 	
-.x-segmentedbutton{
-	margin: 10px;
-		
-	.x-button{
-		background: transparent;
-		border: 1px solid $base-color;
-	
-		&:first-child{
-			@include border-radius(2px 0 0 2px);
-		}
-		&:last-child{
-			@include border-radius(0 2px 2px 0);
-		}
-	}
-}

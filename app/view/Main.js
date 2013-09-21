@@ -11,8 +11,6 @@ Ext.define('SeptaMobi.view.Main', {
     config: {
         tabBarPosition: 'bottom',
 
-        activeItem: 3,
-
         items: [{
             title: 'Dashboard',
             iconCls: 'home',

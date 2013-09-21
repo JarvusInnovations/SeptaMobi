@@ -42,7 +42,7 @@ Ext.define('SeptaMobi.API', {
 		var me = this;
 		
 		Ext.Ajax.request({
-			url: location.protocol == 'http:' ? '/geocode' : 'https://api.smartystreets.com/street-address',
+			url: location.protocol == 'http:' ? './api/geocode' : 'https://api.smartystreets.com/street-address',
 			method: 'GET',
 			params: {
 				'auth-id': '828707b0-f9b3-4b92-860c-d0fa73e00b21',
@@ -64,7 +64,7 @@ Ext.define('SeptaMobi.API', {
 
 	getDirections: function(fromAddress, toAddress, departTime, callback, scope) {		
 		Ext.Ajax.request({
-			url: location.protocol == 'http:' ? '/plan' : 'http://opentrips.codeforphilly.org/opentripplanner-api-webapp/ws/plan',
+			url: location.protocol == 'http:' ? './api/plan' : 'http://opentrips.codeforphilly.org/opentripplanner-api-webapp/ws/plan',
 			method: 'GET',
 			params: {
 				fromPlace: fromAddress.get('lat') + ',' + fromAddress.get('lon'),

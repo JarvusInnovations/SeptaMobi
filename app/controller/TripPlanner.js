@@ -11,14 +11,16 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 		fromAddress: null,
 
 		views: [
-			'TripPlanner.Form',
-			'TripPlanner.SelectAddress'
+			'TripPlanner.NavView',
+			'TripPlanner.SelectAddress',
+			'TripPlanner.TripList'
 		],
 		stores: [
-			'AutocompleteAddress'
+			'AutocompleteAddress',
+			'Itineraries'
 		],
 		refs: {
-			tripPlannerForm: 'tripplanner',
+			tripPlannerView: 'tripplanner',
 			fromField: 'tripplanner #fromField',
 			toField: 'tripplanner #toField',
 			fromUseCurrent: 'tripplanner #fromUseCurrent',
@@ -29,6 +31,12 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 				autoCreate: true,
 
 				xtype: 'selectaddresspanel'
+			},
+			tripList: {
+				selector: 'triplist',
+				autoCreate: true,
+
+				xtype: 'triplist'
 			}
 		},
 		control: {
@@ -105,12 +113,14 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 						if (field == fromCheckField) {
 							me.setFromAddress(Ext.create('SeptaMobi.model.Address', {
 								lat: geo.getLatitude(),
-								lon: geo.getLongitude()
+								lon: geo.getLongitude(),
+								text: 'Current Location'
 							}));
 						} else if (field == toCheckField) {
 							me.setToAddress(Ext.create('SeptaMobi.model.Address', {
 								lat: geo.getLatitude(),
-								lon: geo.getLongitude()
+								lon: geo.getLongitude(),
+								text: 'Current Location'
 							}));
 						}
 					},
@@ -156,15 +166,18 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 		toUseCurrent.setChecked(originalFromUseCurrentValue);
 
 		me.setFromAddress(me.getToAddress());
-		me.setToAddress(originalFromValue);
+		me.setToAddress(originalFromAddress);
 	},
 
 	onRouteTap: function() {
 		var me = this,
 			fromAddress = me.getFromAddress(),
 			toAddress = me.getToAddress(),
-			tripPlannerForm = me.getTripPlannerForm(),
+			tripPlannerView = me.getTripPlannerView(),
 			tripPlannerDatetimeField = me.getTripPlannerDatetimeField(),
+			departTime = tripPlannerDatetimeField.getValue(),
+			tripList = me.getTripList(),
+			itinerariesStore = Ext.getStore('Itineraries'),
 			lat, lon;
 
 		//Validate
@@ -177,55 +190,65 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 			return;
 		}
 
-		if(!me.validateAddress(fromAddress)) {
+		if (!me.validateAddress(fromAddress)) {
+			tripPlannerView.setMasked(false);
 			return;
 		}
-		if(!me.validateAddress(toAddress)) {
+		if (!me.validateAddress(toAddress)) {
+			tripPlannerView.setMasked(false);
 			return;
 		}
 
-		tripPlannerForm.setMasked({
+		tripPlannerView.setMasked({
 			xtype: 'loadmask',
 			message: 'Loading Routes&hellip;'
 		});
 
-		SeptaMobi.API.getDirections(fromAddress, toAddress, tripPlannerDatetimeField.getValue(), function(options, success, response) {
-			if(success) {
-				alert(response.data.plan);
-			}
-			else {
+		SeptaMobi.API.getDirections(fromAddress, toAddress, departTime, function(options, success, response) {
+			if (success) {
+				tripList.setTripPlan({
+					toName: toAddress.get('text'),
+					fromName: fromAddress.get('text'),
+					departTime: departTime
+				});		
+				
+				itinerariesStore.setData(response.data.plan.itineraries);
+				
+				tripPlannerView.push(tripList);
+			} else {
 				Ext.Msg.alert('Could not load directions, please try again later');
 				//TODO Deal with error
 			}
-			tripPlannerForm.setMasked(false);
+			tripPlannerView.setMasked(false);
 		});
 	},
 
 	validateAddress: function(address) {
 		var me = this,
-			tripPlannerForm = me.getTripPlannerForm();
+			tripPlannerView = me.getTripPlannerView(),
+			data;
 
 		if (!address.get('lat') || !address.get('lon')) {
-			tripPlannerForm.setMasked({
+			tripPlannerView.setMasked({
 				xtype: 'loadmask',
 				message: 'Geocoding Address&hellip;'
 			});
 
 			SeptaMobi.API.getGeocode(address, function(options, success, response) {
-				if(success && response.data && response.data.length > 0) {
-					lat = response.data[0].metadata.latitude;
-					lon = response.data[0].metadata.longitude;
+				if (success && response.data && response.data.length > 0 && response.data[0].metadata.latitude &&
+					response.data[0].metadata.longitude) {
+					data = response.data[0]; 
 
-					if (lat && lon) {
-						address.set('lon', lon);
-						address.set('lat', lat);
-						me.onRouteTap();
-					} else {
-						Ext.Msg.alert('Could not geocode from address: ' + address.get('text'));
-					}
-				}
-				else {
-					//TODO deal with error
+					lat = data.metadata.latitude;
+					lon = data.metadata.longitude;
+
+					address.set('lon', lon);
+					address.set('lat', lat);
+					address.set('text', data.delivery_line_1 + ", " + data.last_line);
+
+					me.onRouteTap();
+				} else {
+					Ext.Msg.alert('Could not geocode from address: ' + address.get('text'));
 				}
 			}, me);
 

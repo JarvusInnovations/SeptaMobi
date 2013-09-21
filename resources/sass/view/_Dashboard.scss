@@ -1,0 +1,20 @@
+
+.septamobi-logo{
+//	background: url(../images/septamobi-logo-big.png);
+//	background-size: 100%;
+//	background-repeat: no-repeat;
+//	height: auto;
+//	width: 100%;
+}
+
+.newroute-btn{
+	@include red-btn;
+	font-size: 2em;
+	margin: .8em;
+	padding: .1em;
+}
+
+.x-tabbar{
+	background: transparent;
+	border-bottom: 1px solid $trans-black;
+}

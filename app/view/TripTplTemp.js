@@ -74,7 +74,7 @@ Ext.define('SeptaMobi.view.TripTplTemp', {
         ]
     },
     
-    initComponent: function() {
+    initialize: function() {
         var me = this,
             url = 'TripTemp.json';
             

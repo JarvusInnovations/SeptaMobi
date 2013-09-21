@@ -17,6 +17,8 @@ Ext.define('SeptaMobi.model.Stop', {
         }, {
             name: 'lon',
             type: 'float'
-        }]
+        }],
+
+        belongsTo: 'Variant'
     }
 });

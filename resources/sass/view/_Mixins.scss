@@ -1,0 +1,9 @@
+@mixin red-btn{
+	background: rgba($base-color, .2);
+	border: 1px solid $base-color;
+	@include border-radius(2px);
+	color: #000;
+	font-family: $headline-face;
+	text-transform: uppercase;
+}		
+	

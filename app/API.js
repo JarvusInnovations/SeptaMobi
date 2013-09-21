@@ -42,18 +42,17 @@ Ext.define('SeptaMobi.API', {
 		var me = this;
 		
 		Ext.Ajax.request({
-			url: 'https://api.smartystreets.com/street-address',
+			url: location.protocol == 'http:' ? '/geocode' : 'https://api.smartystreets.com/street-address',
 			method: 'GET',
-			extraParams: {
+			params: {
 				'auth-id': '828707b0-f9b3-4b92-860c-d0fa73e00b21',
-				'auth-token': 'H2Nyq%2BIJMvt9QwSDdZolSEQilBHI899RDTWZ4vkv95UN0Uek3jgX79%2FcfUQbIWhR4NU5mFwiijidds48xij6sg%3D%3D',
+				'auth-token': 'H2Nyq+IJMvt9QwSDdZolSEQilBHI899RDTWZ4vkv95UN0Uek3jgX79/cfUQbIWhR4NU5mFwiijidds48xij6sg==',
 				street: address.get('street_line'),
 				city: address.get('city'),
 				state: address.get('state'),
 				candidates: 1
 			},
 			callback: function(options, success, response) {
-				debugger
 				if ((response.getResponseHeader('content-type') || '').indexOf('application/json') == 0 && response.responseText) {
 					response.data = Ext.decode(response.responseText, true);
 				}
@@ -63,7 +62,22 @@ Ext.define('SeptaMobi.API', {
 		});
 	},
 
-	getDirections: function(fromLat, fromLon, toLat, toLon, departTime, callback, scope) {
+	getDirections: function(fromAddress, toAddress, departTime, callback, scope) {		
+		Ext.Ajax.request({
+			url: location.protocol == 'http:' ? '/plan' : 'http://opentrips.codeforphilly.org/opentripplanner-api-webapp/ws/plan',
+			method: 'GET',
+			params: {
+				fromPlace: fromAddress.get('lat') + ',' + fromAddress.get('lon'),
+				toPlace: toAddress.get('lat') + ',' + toAddress.get('lon')
+				//TODO Add depart time
+			},
+			callback: function(options, success, response) {
+				if ((response.getResponseHeader('content-type') || '').indexOf('application/json') == 0 && response.responseText) {
+					response.data = Ext.decode(response.responseText, true);
+				}
 
+				Ext.callback(callback, scope, [options, success, response]);
+			}
+		});
 	}
 });

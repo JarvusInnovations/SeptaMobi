@@ -26,9 +26,9 @@ Ext.application({
         'Ext.MessageBox'
     ],
 
-    controllers: [        
-        'TripPlanner',
-        'Map'
+    controllers: [
+        'Schedule',
+        'TripPlanner'
     ],
 
     views: [

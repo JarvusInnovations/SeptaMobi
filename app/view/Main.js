@@ -2,7 +2,9 @@ Ext.define('SeptaMobi.view.Main', {
     extend: 'Ext.tab.Panel',
     xtype: 'main',
     requires: [
+        'SeptaMobi.view.Dashboard',
         'SeptaMobi.view.TripPlanner.Form',
+        'SeptaMobi.view.Schedule.Index',
         'SeptaMobi.view.TripTplTemp',
         'Ext.TitleBar',
         'SeptaMobi.view.LeafletMap'
@@ -16,39 +18,40 @@ Ext.define('SeptaMobi.view.Main', {
             title: 'Dashboard',
             iconCls: 'home',
 
-            styleHtmlContent: true,
-            scrollable: true,
+            xtype: 'dashboard'
+        }, {
+            title: 'Trip Planner',
+            iconCls: 'action',
+
+            xtype: 'tripplanner',
 
             items: {
                 docked: 'top',
                 xtype: 'titlebar',
                 title: 'SeptaMobi'
+
             }
-        },{
+        }, {
             title: 'Schedule',
             iconCls: 'action',
 
-            items: [{
-                docked: 'top',
-                xtype: 'titlebar',
-                title: 'Schedule'
-            }]
-        },{
+            xtype: 'scheduleindex'
+        }, {
             title: 'Trip Planner',
             iconCls: 'action',
 
             xtype: 'tripplanner'
-        },{
+        }, {
             title: 'Trip TPL',
             iconCls: 'action',
 
             scrollable: true,
-            
+
             items: [{
                 docked: 'top',
                 xtype: 'titlebar',
                 title: 'Trip TPL (Temp)'
-            },{
+            }, {
                 xtype: 'triptpltemp'
             }]
         },{

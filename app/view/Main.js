@@ -4,7 +4,7 @@ Ext.define('SeptaMobi.view.Main', {
     requires: [
         'SeptaMobi.view.Dashboard',
         'SeptaMobi.view.TripPlanner.NavView',
-        'SeptaMobi.view.Schedule.Index',
+        'SeptaMobi.view.schedule.Index',
         'SeptaMobi.view.TripTplTemp',
         'Ext.TitleBar'
     ],

@@ -3,8 +3,7 @@ Ext.define('SeptaMobi.controller.Schedule', {
 
 	config: {
 		views: [
-			'Schedule.Index',
-			'Schedule.RouteDetail'
+			'schedule.RouteDetail'
 		],
 		stores: [
 			'Routes',

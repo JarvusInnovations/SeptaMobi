@@ -28,7 +28,7 @@ Ext.define('SeptaMobi.view.TripPlanner.TripList', {
 	                    '<dt>Departure</dt>',		                    
 	                    '<dd>{departTime:date("m/d/Y g:i A")}</dd>',
 	                '</div>',
-            	'</dl>',
+            	'</dl>'
         	]
 		}, {
 			xtype: 'list',

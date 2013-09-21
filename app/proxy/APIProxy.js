@@ -9,10 +9,8 @@ Ext.define('SeptaMobi.proxy.APIProxy', {
 		pageParam: false,
 		limitParam: false,
 		startParam: false,
-		//actionMethods: { read: 'GET' },
 		reader: {
-			type: 'json',
-			//rootProperty: 'data'
+			type: 'json'
 		}
 	},
 

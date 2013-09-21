@@ -176,10 +176,8 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 		toField.setValue(originalFromValue);
 		toUseCurrent.setChecked(originalFromUseCurrentValue);
 
-		debugger
 		me.setFromAddress(me.getToAddress());
 		me.setToAddress(originalFromAddress);
-		debugger
 	},
 
 	onRouteTap: function() {

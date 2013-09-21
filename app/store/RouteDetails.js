@@ -3,17 +3,6 @@ Ext.define('SeptaMobi.store.RouteDetails', {
 	requires: ['SeptaMobi.model.RouteDetail'],
 
 	config: {
-		model: 'SeptaMobi.model.RouteDetail',
-		proxy: {
-			type: 'ajax',
-			pageParam: false,
-			limitParam: false,
-			startParam: false,
-			url: location.protocol == 'http:' ? './api/routedetails' : 'http://opentrips.codeforphilly.org/opentripplanner-api-webapp/ws/transit/routeData',
-			reader: {
-				type: 'json',
-				rootProperty: 'routeData'
-			}
-		}
+		model: 'SeptaMobi.model.RouteDetail'
 	}
 });

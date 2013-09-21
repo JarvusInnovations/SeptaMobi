@@ -1,10 +1,8 @@
-Ext.define('SeptaMobi.model.RouteDetail', {
+Ext.define('SeptaMobi.model.RouteDetails', {
 	extend: 'Ext.data.Model',
 	requires: ['SeptaMobi.model.Variant'],
 
 	config: {
-		idProperty: 'id',
-
 		fields: [{
 			name: 'id',
 			mapping: 'id.id',
@@ -29,6 +27,18 @@ Ext.define('SeptaMobi.model.RouteDetail', {
 			type: 'hasMany',
 			model: 'SeptaMobi.model.Variant',
 			name: 'variants'
-		}]
+		}],
+		
+		proxy: {
+			type: 'ajax',
+			pageParam: false,
+			limitParam: false,
+			startParam: false,
+			url: location.protocol == 'http:' ? './api/routedetails' : 'http://opentrips.codeforphilly.org/opentripplanner-api-webapp/ws/transit/routeData',
+			reader: {
+				type: 'json',
+				rootProperty: 'routeData'
+			}
+		}
 	}
 });

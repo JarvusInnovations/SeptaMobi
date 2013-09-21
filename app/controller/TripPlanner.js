@@ -45,7 +45,8 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 				autoCreate: true,
 
 				xtype: 'tripdetail'
-			}
+			},
+			tripDetailMap: 'tripdetail leafletmap'
 		},
 		control: {
 			'tripplanner #fromField': {
@@ -76,6 +77,9 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 			},
 			'triplist list': {
 				select: 'onTripSelect'
+			},
+			'tripdetail leafletmap': {
+				maprender: 'onTripDetailMapRender'
 			}
 		}
 	},
@@ -309,5 +313,29 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 		
 		tripDetail.setTripData(tripData, record);
 		tripPlannerView.push(tripDetail);
+	},
+
+	onTripDetailMapRender: function() {
+		var me = this,
+			mapCmp = me.getTripDetailMap(),
+			map = mapCmp.getMap(),
+			tripDetail = me.getTripDetail(),
+			itenerary = tripDetail.getItenerary(),
+			legsLength = itenerary.legs.length,
+			i = 0, startPoint, markers = [], decodedPoints;
+
+		for(; i < legsLength; i++) {
+			decodedPoints = mapCmp.decode(itenerary.legs[i].legGeometry.points);
+			markers.push(L.polyline(decodedPoints).addTo(map));
+			if(i == 0) {
+				startPoint = decodedPoints[0]
+			}
+		}
+
+		tripDetail.setCurrentMarkers(markers);
+
+		Ext.defer(function() {
+			map.panTo(startPoint);
+		}, 1000, me);
 	}
 });

@@ -76,7 +76,7 @@ Ext.define('Jarvus.ux.picker.DateTime', {
          * @cfg {Boolean} ampm
          * @accessor
          */
-        ampm : false,
+        ampm : false
 
 
         /**

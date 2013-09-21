@@ -2,6 +2,7 @@ Ext.define('SeptaMobi.view.Main', {
     extend: 'Ext.tab.Panel',
     xtype: 'main',
     requires: [
+        'SeptaMobi.view.Dashboard',
         'SeptaMobi.view.TripPlanner.Form',
         'SeptaMobi.view.Schedule.Index',
         'SeptaMobi.view.TripTplTemp',
@@ -16,9 +17,7 @@ Ext.define('SeptaMobi.view.Main', {
             title: 'Dashboard',
             iconCls: 'home',
 
-            styleHtmlContent: true,
-            scrollable: true,
-
+            xtype: 'dashboard'
         }, {
             title: 'Trip Planner',
             iconCls: 'action',

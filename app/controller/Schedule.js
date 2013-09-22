@@ -205,7 +205,10 @@ Ext.define('SeptaMobi.controller.Schedule', {
 
 			marker = L.marker(latLng, {
 				icon: L.icon({
-					iconUrl: 'http://septa.mobi/app/SeptaMobi/build/production/resources/images/markers/bus_blue.png'
+				    iconUrl: 'resources/images/bus-marker.png',
+					iconRetinaUrl: 'resources/images/bus-marker-2x.png',
+					iconSize: [28, 31],
+					iconAnchor: [14, 30]
 				})
 			}).addTo(map);
 

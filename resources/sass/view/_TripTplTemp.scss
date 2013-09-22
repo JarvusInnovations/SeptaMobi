@@ -1,7 +1,6 @@
 .trip-details {
-   // @include hairline;
-   	background: rgba(00,00,00,.1);
- //  	color: #fff;
+    @include hairline;
+   	background-color: rgba(00,00,00,.1);
     font-size: small;
     padding: .75em 1.2em;
     font: -apple-system-short-footnote;

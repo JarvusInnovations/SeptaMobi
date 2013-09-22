@@ -7,9 +7,11 @@ Ext.define('SeptaMobi.model.Itinerary', {
 			type: 'int'
 		},{
 			name: 'toName',
+			useNull: true,
 			type: 'string'
 		},{
 			name: 'fromName',
+			useNull: true,
 			type: 'string'
 		},{
 			name: 'walkDistance',

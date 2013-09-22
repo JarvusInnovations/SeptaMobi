@@ -5,6 +5,6 @@ Ext.define('SeptaMobi.store.Itineraries', {
 	config: {
 		model: 'SeptaMobi.model.Itinerary',
 
-		sorters: 'distance'
+		sorters: 'startTime'
 	}
 });

@@ -1,6 +1,8 @@
 .trip-details {
-    border-bottom: 1px solid #ccc;
+    @include hairline;
+    font-size: small;
     padding: 1.2em;
+    font: -apple-system-short-footnote;
 
     h1 {
         font-family: $headline-face;
@@ -32,7 +34,7 @@
 }
 
 .trip-leg {
-    border-bottom: 1px solid #ccc;
+    @include hairline;
     padding: .8em 1.2em;
     padding-left: 2.8em;
     
@@ -86,10 +88,6 @@
 }
 
 .leg-steps {
-    border-top: 1px dashed #ccc;
-    margin-top: .6em;
-    margin-right: -1.2em;
-    padding-top: .6em;
 }
 
 .leg-step {

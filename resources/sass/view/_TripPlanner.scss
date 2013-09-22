@@ -34,3 +34,26 @@
     @include hairline;
     padding: .6em 1.2em;
 }
+
+.itinerary-times {
+    font: -apple-system-short-headline;
+
+    time {
+        font-weight: bold;
+    }
+
+    .arrival {
+        float: right;
+    }
+}
+
+.itinerary-details {
+    color: $muted-color;
+    font-size: smaller;
+    font: -apple-system-short-subheadline;
+    font-weight: normal;
+    clear: both;
+}
+
+.itinerary-detail {
+}

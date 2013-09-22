@@ -9,6 +9,7 @@ Ext.define('SeptaMobi.view.schedule.RoutesList', {
 		loadingText: false,
 		cls: 'schedule',
 		store: 'Routes',
+		itemHeight: 30,
 		itemTpl: [
 			'<div>',
 				'<span>{displayName}</span>',

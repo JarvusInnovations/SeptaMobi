@@ -1,6 +1,8 @@
 .x-dataview.list-style { // dataviews that should look like lists
     .x-dataview-item {
         @include hairline;
+        font-size: smaller;
+        padding: 1em 2.4em 1em 1em;
         padding-right: 2.4em;
         position: relative;
 

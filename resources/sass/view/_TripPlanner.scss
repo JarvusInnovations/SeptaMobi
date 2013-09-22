@@ -1,30 +1,102 @@
 .trip-planner {
-	.x-field-text {
+    .x-form-fieldset-inner {
+        border: none;
+    }
+
+	.x-field {
 		@include hairline;
-		padding: .5em 1em;
+		padding: .6em 0;
 	}
+
 	.x-form-label{
 		font-family: $headline-face;
+		font-weight: normal;
 		letter-spacing: 1px;
-		margin-right: .5em;
+		margin-right: .6em;
 		text-align: right;
-		
-		span {
-			font-weight: normal;
-			text-transform: uppercase;
-		}
+		text-transform: uppercase;
 	}
-	input {
-		background: transparent;
+
+	.x-input-el {
+		background: none;
 		border: none;
-		line-height: 1.5em;
-		font: -apple-system-short-subheadline;
+		padding: .2em 0;
 	}
-	.pinpoint{
+
+	.pinpoint {
 		content: 'l';
 		font-family: SeptaMobi;
-		height: 20px;
 	}
+}
+
+.x-panel.address-autocomplete-panel {
+    margin-top: -.6em;
+    padding: 0;
+    
+    .x-button {
+        background: none;
+        border: none;
+        color: $base-color;
+        padding: .6em;
+    }
+    
+    .x-dataview-emptytext {
+        color: $muted-color;
+        padding: 3.6em;
+        text-align: center;
+    }
+    
+    .autocomplete-option {
+        font-size: small;
+        padding: .8em;
+        
+        &::after {
+            content: none;
+        }
+    }
+}
+
+.field-button {
+    @include hairline;
+    background-color: transparent;
+    border: none;
+    padding: 0 .6em;
+
+    .x-button-icon {
+        height: 1em;
+        width: 1em;
+    }
+    
+    &.x-button-pressing,
+    &.x-button-pressed {
+        .x-button-icon {
+            color: $base-color;
+        }
+    }
+}
+
+.form-button-ct {
+    padding: .6em;
+    
+    .x-button {
+        background: rgba($base-color, .2);
+        border: 1px solid $base-color;
+        border-radius: 2px;
+        font-family: $headline-face;
+        padding: .2em .6em;
+        text-transform: uppercase;
+        
+        &.x-button-pressing,
+        &.x-button-pressed {
+            background: rgba($base-color, .4);
+        }
+    }
+    
+    .x-button-icon {
+        height: 1em;
+        text-transform: none;
+        width: 1em;
+    }
 }
 
 .itineraries-list {

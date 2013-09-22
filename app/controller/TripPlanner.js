@@ -58,10 +58,10 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 				keyup: 'onAddressFieldKeyUp'
 			},
 			'tripplanner #fromUseCurrent': {
-				change: 'onUseCurrentChange'
+				tap: 'onUseCurrentTap'
 			},
 			'tripplanner #toUseCurrent': {
-				change: 'onUseCurrentChange'
+				tap: 'onUseCurrentTap'
 			},
 			'tripplanner button[action=reverse]': {
 				tap: 'onReverseTap'
@@ -104,40 +104,51 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 		autocompleteAddressStore.load();
 	},
 
-	onUseCurrentChange: function(field, newValue) {
+	onUseCurrentTap: function(checkButton) {
 		var me = this,
-			fromCheckField = me.getFromUseCurrent(),
-			toCheckField = me.getToUseCurrent(),
-			otherCheckField, textField;
+			newValue = checkButton.getCls().indexOf('x-pressed') == -1,
+			fromCheckButton = me.getFromUseCurrent(),
+			fromTextField = me.getFromField(),
+			toCheckButton = me.getToUseCurrent(),
+			toTextField = me.getToField(),
+			otherCheckButton, textField, otherTextField;
 
-		if (field == fromCheckField) {
-			otherCheckField = toCheckField,
-			textField = me.getFromField();
-		} else if (field == toCheckField) {
-			otherCheckField = fromCheckField;
-			textField = me.getToField();
+		if (checkButton == fromCheckButton) {
+			otherCheckButton = toCheckButton;
+			textField = fromTextField;
+			otherTextField = toTextField;
+		} else if (checkButton == toCheckButton) {
+			otherCheckButton = fromCheckButton;
+			textField = toTextField;
+			otherTextField = fromTextField;
 		}
-
-		this.setUseCurrent(newValue, otherCheckField, textField);
+		
+		if (newValue) {
+			checkButton.addCls('x-pressed');
+			otherCheckButton.removeCls('x-pressed');
+			textField.setValue('Current Location');
+			textField.disable();
+			
+			if (otherTextField.isDisabled()) {
+				otherTextField.enable();
+				otherTextField.setValue('');
+			}
+		} else {
+			checkButton.removeCls('x-pressed');
+			textField.setValue('');
+			textField.enable();
+		}
 
 		if (!me.geo) {
 			me.geo = Ext.create('Ext.util.Geolocation', {
 				autoUpdate: false,
 				listeners: {
 					locationupdate: function(geo) {
-						if (field == fromCheckField) {
-							me.setFromAddress(Ext.create('SeptaMobi.model.Address', {
-								lat: geo.getLatitude(),
-								lon: geo.getLongitude(),
-								text: 'Current Location'
-							}));
-						} else if (field == toCheckField) {
-							me.setToAddress(Ext.create('SeptaMobi.model.Address', {
-								lat: geo.getLatitude(),
-								lon: geo.getLongitude(),
-								text: 'Current Location'
-							}));
-						}
+						me[checkButton == fromCheckButton ? 'setFromAddress' : 'setToAddress'](Ext.create('SeptaMobi.model.Address', {
+							lat: geo.getLatitude(),
+							lon: geo.getLongitude(),
+							text: 'Current Location'
+						}));
 					},
 					locationerror: function(geo, bTimeout, bPermissionDenied, bLocationUnavailable, message) {
 						if (bTimeout) {
@@ -151,17 +162,6 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 		}
 
 		me.geo.updateLocation();
-	},
-
-	setUseCurrent: function(value, otherCheckField, textField) {
-		var me = this;
-
-		if (value) {
-			otherCheckField.setChecked(false);
-			textField.setValue('Current Location');
-		} else if (textField.getValue() == 'Current Location') {
-			textField.setValue('');
-		}
 	},
 
 	onReverseTap: function() {

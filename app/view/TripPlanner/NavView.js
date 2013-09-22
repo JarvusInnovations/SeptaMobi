@@ -15,35 +15,47 @@ Ext.define('SeptaMobi.view.TripPlanner.NavView', {
             cls: 'trip-planner',
             items: [{
                 xtype: 'fieldset',
-                defaults: {
-					labelWidth: '100px'
-				},
                 items: [{
-                    xtype: 'textfield',
-                    label: 'Start:',
-                    itemId: 'fromField',
-                    clearIcon: false
-                }, {
-                    xtype: 'checkboxfield',
-                 //   label: 'Current Location',
-                    itemId: 'fromUseCurrent',
-                    iconCls: 'pinpoint'
-                }, {
-                    xtype: 'textfield',
-                    label: 'Destination:',
-                    itemId: 'toField',
-                    clearIcon: false
-                }, {
-                    xtype: 'checkboxfield',
-               //     label: 'Current Location',
-                    itemId: 'toUseCurrent'
-                }, {
-                    xtype: 'button',
-                    text: 'Swap To/From',
-                    action: 'reverse'
-                }, {
+                    xtype: 'container',
+                    cls: 'field-button-ct',
+                    layout: 'hbox',
+                    items: [{
+                        xtype: 'textfield',
+                        flex: 1,
+                        label: 'From:',
+                        labelWidth: 70,
+                        itemId: 'fromField',
+                        placeHolder: 'Origin',
+                        clearIcon: false
+                    },{
+                        xtype: 'button',
+                        cls: 'field-button',
+                        itemId: 'fromUseCurrent',
+                        iconCls: 'pinpoint'                        
+                        
+                    }]
+                },{
+                    xtype: 'container',
+                    cls: 'field-button-ct',
+                    layout: 'hbox',
+                    items: [{
+                        xtype: 'textfield',
+                        flex: 1,
+                        label: 'To:',
+                        itemId: 'toField',
+                        labelWidth: 70,
+                        placeHolder: 'Destination',
+                        clearIcon: false
+                    },{
+                        xtype: 'button',
+                        cls: 'field-button',
+                        itemId: 'toUseCurrent',
+                        iconCls: 'pinpoint'                        
+                    }]
+                },{
                     xtype: 'datetimepickerfield',
                     label: 'Depart:',
+                    labelWidth: 70,
                     value: (new Date()),
                     picker: {
                         yearFrom: (new Date()).getFullYear(),
@@ -52,10 +64,22 @@ Ext.define('SeptaMobi.view.TripPlanner.NavView', {
                         ampm: true,
                         slotOrder: ['month', 'day', 'year', 'hour', 'minute', 'ampm']
                     }
-                }, {
-                    xtype: 'button',
-                    text: 'Route',
-                    action: 'route'
+                },{
+                    xtype: 'container',
+                    cls: 'form-button-ct',
+                    layout: 'hbox',
+                    items: [{
+                        xtype: 'button',
+                        iconCls: 'reverse',
+                        action: 'reverse'
+                    },{
+                        xtype: 'component',
+                        flex: 1
+                    },{
+                        xtype: 'button',
+                        text: 'Find a Route',
+                        action: 'route'
+                    }]
                 }]
             }]
         }]

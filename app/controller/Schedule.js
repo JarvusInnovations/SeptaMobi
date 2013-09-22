@@ -192,7 +192,7 @@ Ext.define('SeptaMobi.controller.Schedule', {
 		routeDetails.setStopMarkers(stopMarkers);
 		routeDetails.setRoutePolyLine(polyLine);
 
-		// routeDetails.removeBusMarkers();
+		routeDetails.removeBusMarkers();
 
 		//TODO move template to view cfg?
 		infoTemplate = Ext.create('Ext.XTemplate', [

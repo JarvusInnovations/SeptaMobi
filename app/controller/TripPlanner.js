@@ -322,20 +322,19 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 			tripDetail = me.getTripDetail(),
 			itenerary = tripDetail.getItenerary(),
 			legsLength = itenerary.legs.length,
-			i = 0, startPoint, markers = [], decodedPoints;
+			i = 0, lines = [], decodedPoints, bounds, multiPolyLine;
 
 		for(; i < legsLength; i++) {
 			decodedPoints = mapCmp.decode(itenerary.legs[i].legGeometry.points);
-			markers.push(L.polyline(decodedPoints).addTo(map));
-			if(i == 0) {
-				startPoint = decodedPoints[0]
-			}
+			lines.push(decodedPoints);
 		}
 
-		tripDetail.setCurrentMarkers(markers);
+		multiPolyLine = L.multiPolyline(lines).addTo(map);
+
+		tripDetail.setTripLine(multiPolyLine);
 
 		Ext.defer(function() {
-			map.panTo(startPoint);
+			map.fitBounds(multiPolyLine.getBounds());
 		}, 1000, me);
 	}
 });

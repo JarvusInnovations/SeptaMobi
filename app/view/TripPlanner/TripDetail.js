@@ -7,7 +7,7 @@ Ext.define('SeptaMobi.view.TripPlanner.TripDetail', {
 		title: 'Route Details',
 		tripDetail: null,
 		itenerary: null,
-		currentMarkers: [],
+		tripLine: null,
 
 		layout: {
 			type: 'vbox'

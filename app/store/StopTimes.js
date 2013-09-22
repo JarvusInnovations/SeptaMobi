@@ -9,7 +9,7 @@ Ext.define('SeptaMobi.store.StopTimes', {
 			pageParam: false,
 			limitParam: false,
 			startParam: false,
-			url: location.protocol == 'http:' ? './api/stoptimes' : 'http://opentrips.codeforphilly.org/opentripplanner-api-webapp/ws/transit/stopTimesForStop',
+			url: (window.SeptaMobi_API && SeptaMobi_API.stopTimes) || (location.protocol == 'http:' ? './api/stoptimes' : 'http://opentrips.codeforphilly.org/opentripplanner-api-webapp/ws/transit/stopTimesForStop'),
 			reader: {
 				type: 'json',
 				rootProperty: 'stopTimes'

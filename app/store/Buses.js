@@ -8,7 +8,7 @@ Ext.define('SeptaMobi.store.Buses', {
 		model: 'SeptaMobi.model.Bus'
 		,proxy: {
 			type: 'ajax'
-			,url: (window.location.protocol == 'http:' ? './api/bus-positions.json' : 'http://septa.mobi/api/bus-positions.json')
+			,url: (window.SeptaMobi_API && SeptaMobi_API.busPositions) || ((window.location.protocol == 'http:' ? './api/bus-positions.json' : 'http://septa.mobi/api/bus-positions.json'))
 			,reader: {
 				type: 'json'
 				,rootProperty: 'bus'

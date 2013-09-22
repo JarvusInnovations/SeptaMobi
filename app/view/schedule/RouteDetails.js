@@ -23,6 +23,7 @@ Ext.define('SeptaMobi.view.schedule.RouteDetails', {
 		}, {
 			xtype: 'leafletmap',
 			title: 'Map',
+	        tileLayerOptions: { detectRetina: true},
 			useCurrentLocation: true,
 			autoMapCenter: false,
 			enableOwnPositionMarker: true,

@@ -105,6 +105,7 @@ Ext.define('SeptaMobi.view.TripPlanner.TripDetail', {
                 xtype: 'leafletmap',
 
                 title: 'Map',
+                tileLayerOptions: { detectRetina: true},
                 useCurrentLocation: true,
                 autoMapCenter: false,
                 enableOwnPositionMarker: true,

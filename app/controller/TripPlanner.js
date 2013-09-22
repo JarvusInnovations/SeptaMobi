@@ -122,13 +122,13 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 			textField = toTextField;
 			otherTextField = fromTextField;
 		}
-		
+
 		if (newValue) {
 			checkButton.addCls('x-button-pressed');
 			otherCheckButton.removeCls('x-button-pressed');
 			textField.setValue('Current Location');
 			textField.disable();
-			
+
 			if (otherTextField.isDisabled()) {
 				otherTextField.enable();
 				otherTextField.setValue('');
@@ -175,13 +175,12 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 			originalFromUseCurrentValue = fromUseCurrent.getCls().indexOf('x-button-pressed') != -1;
 
 		fromField.setValue(toField.getValue());
-		if(toUseCurrent.getCls().indexOf('x-button-pressed') != -1) {
+		if (toUseCurrent.getCls().indexOf('x-button-pressed') != -1) {
 			fromUseCurrent.addCls('x-button-pressed');
 			if (!fromField.isDisabled()) {
 				fromField.disable();
 			}
-		}
-		else {
+		} else {
 			fromUseCurrent.removeCls('x-button-pressed');
 			if (fromField.isDisabled()) {
 				fromField.enable();
@@ -189,13 +188,12 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 		}
 
 		toField.setValue(originalFromValue);
-		if(originalFromUseCurrentValue) {
+		if (originalFromUseCurrentValue) {
 			toUseCurrent.addCls('x-button-pressed');
 			if (!toField.isDisabled()) {
 				toField.disable();
 			}
-		}
-		else {
+		} else {
 			toUseCurrent.removeCls('x-button-pressed');
 			if (toField.isDisabled()) {
 				toField.enable();
@@ -243,19 +241,23 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 
 		SeptaMobi.API.getDirections(fromAddress, toAddress, departTime, function(options, success, response) {
 			if (success) {
-				tripPlan = {
-					toName: toAddress.get('text'),
-					fromName: fromAddress.get('text'),
-					departTime: departTime
-				};
-				
-				tripList.setTripPlan(tripPlan);		
-				
-				me.setTripData(tripPlan);
+				if (response.data.error) {
+					Ext.Msg.alert('Routing Problem', response.data.error.msg || "Unknown error.");
+				} else {
+					tripPlan = {
+						toName: toAddress.get('text'),
+						fromName: fromAddress.get('text'),
+						departTime: departTime
+					};
 
-				itinerariesStore.setData(response.data.plan.itineraries);
-				
-				tripPlannerView.push(tripList);
+					tripList.setTripPlan(tripPlan);
+
+					me.setTripData(tripPlan);
+
+					itinerariesStore.setData(response.data.plan.itineraries);
+
+					tripPlannerView.push(tripList);
+				}
 			} else {
 				Ext.Msg.alert('Routing Problem', 'There was a problem loading directions. Please try again later.');
 				//TODO Deal with error
@@ -278,7 +280,7 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 			SeptaMobi.API.getGeocode(address, function(options, success, response) {
 				if (success && response.data && response.data.length > 0 && response.data[0].metadata.latitude &&
 					response.data[0].metadata.longitude) {
-					data = response.data[0]; 
+					data = response.data[0];
 
 					lat = data.metadata.latitude;
 					lon = data.metadata.longitude;
@@ -332,7 +334,7 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 
 		record.set('fromName', tripData.fromName);
 		record.set('toName', tripData.toName);
-		
+
 		tripDetail.setTripData(tripData, record);
 		tripPlannerView.push(tripDetail);
 	},
@@ -344,9 +346,11 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 			tripDetail = me.getTripDetail(),
 			itenerary = tripDetail.getItenerary(),
 			legsLength = itenerary.legs.length,
-			i = 0, lines = [], decodedPoints, bounds, multiPolyLine;
+			i = 0,
+			lines = [],
+			decodedPoints, bounds, multiPolyLine;
 
-		for(; i < legsLength; i++) {
+		for (; i < legsLength; i++) {
 			decodedPoints = mapCmp.decode(itenerary.legs[i].legGeometry.points);
 			lines.push(decodedPoints);
 		}

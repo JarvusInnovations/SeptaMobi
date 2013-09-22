@@ -106,7 +106,7 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 
 	onUseCurrentTap: function(checkButton) {
 		var me = this,
-			newValue = checkButton.getCls().indexOf('x-pressed') == -1,
+			newValue = checkButton.getCls().indexOf('x-button-pressed') == -1,
 			fromCheckButton = me.getFromUseCurrent(),
 			fromTextField = me.getFromField(),
 			toCheckButton = me.getToUseCurrent(),
@@ -124,8 +124,8 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 		}
 		
 		if (newValue) {
-			checkButton.addCls('x-pressed');
-			otherCheckButton.removeCls('x-pressed');
+			checkButton.addCls('x-button-pressed');
+			otherCheckButton.removeCls('x-button-pressed');
 			textField.setValue('Current Location');
 			textField.disable();
 			
@@ -134,7 +134,7 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 				otherTextField.setValue('');
 			}
 		} else {
-			checkButton.removeCls('x-pressed');
+			checkButton.removeCls('x-button-pressed');
 			textField.setValue('');
 			textField.enable();
 		}
@@ -197,11 +197,11 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 
 		//Validate
 		if (!fromAddress) {
-			Ext.Msg.alert('Please enter a valid from address');
+			Ext.Msg.alert('Routing Problem', 'The “from” address entered was not recognized by the system. Try choosing an address from the suggested list.');
 			return;
 		}
 		if (!toAddress) {
-			Ext.Msg.alert('Please enter a valid from address');
+			Ext.Msg.alert('Routing Problem', 'The “to” address entered was not recognized by the system. Try choosing an address from the suggested list.');
 			return;
 		}
 
@@ -235,7 +235,7 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 				
 				tripPlannerView.push(tripList);
 			} else {
-				Ext.Msg.alert('Could not load directions, please try again later');
+				Ext.Msg.alert('Routing Problem', 'There was a problem loading directions. Please try again later.');
 				//TODO Deal with error
 			}
 			tripPlannerView.setMasked(false);
@@ -267,7 +267,7 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 
 					me.onRouteTap();
 				} else {
-					Ext.Msg.alert('Could not geocode from address: ' + address.get('text'));
+					Ext.Msg.alert('Routing Problem', 'Sorry, could not get a location for address: ' + address.get('text'));
 				}
 			}, me);
 

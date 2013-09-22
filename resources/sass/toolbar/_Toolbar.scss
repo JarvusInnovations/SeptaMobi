@@ -6,10 +6,10 @@
 	@include background-image(linear-gradient($base-color, rgba($base-color, .85) ));
 	border: none;
 	color: #fff;
+}
 
-	.x-center {
-		font-family: $headline-face;
-		font-size: 24px;
-		text-transform: uppercase;
-	}
-}	
+.x-title {
+	font-family: $headline-face;
+	font-size: x-large;
+	text-transform: uppercase;
+}

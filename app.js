@@ -15,7 +15,8 @@
 
 //<debug>
 Ext.Loader.setPath({
-    'Ext': 'touch/src'
+    'Ext': 'touch/src',
+    'Jarvus': 'x/Jarvus'
 });
 //</debug>
 

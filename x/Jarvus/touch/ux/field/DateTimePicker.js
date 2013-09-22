@@ -1,8 +1,8 @@
 /**
  * @aside guide forms
  *
- * This is a specialized field which shows a {@link Jarvus.ux.picker.DateTime} when tapped. If it has a predefined value,
- * or a value is selected in the {@link Jarvus.ux.picker.DateTime}, it will be displayed like a normal {@link Ext.field.Text}
+ * This is a specialized field which shows a {@link Jarvus.touch.ux.picker.DateTime} when tapped. If it has a predefined value,
+ * or a value is selected in the {@link Jarvus.touch.ux.picker.DateTime}, it will be displayed like a normal {@link Ext.field.Text}
  * (but not selectable/changable).
  *
  *     Ext.create('Ext.ux.field.DateTimePicker', {
@@ -105,12 +105,12 @@
  *
  */
 
-Ext.define('Jarvus.ux.field.DateTimePicker', {
+Ext.define('Jarvus.touch.ux.field.DateTimePicker', {
     extend: 'Ext.field.Text',
     alternateClassName: 'Ext.form.DateTimePicker',
     xtype: 'datetimepickerfield',
     requires: [
-        'Jarvus.ux.picker.DateTime',
+        'Jarvus.touch.ux.picker.DateTime',
         'Ext.DateExtras'
     ],
 
@@ -125,8 +125,8 @@ Ext.define('Jarvus.ux.field.DateTimePicker', {
         ui: 'select',
 
         /**
-         * @cfg {Object/Jarvus.ux.picker.DateTime} picker
-         * An object that is used when creating the internal {@link Jarvus.ux.picker.DateTime} component or a direct instance of {@link Jarvus.ux.picker.DateTime}
+         * @cfg {Object/Jarvus.touch.ux.picker.DateTime} picker
+         * An object that is used when creating the internal {@link Jarvus.touch.ux.picker.DateTime} component or a direct instance of {@link Jarvus.touch.ux.picker.DateTime}
          * Defaults to true
          * @accessor
          */
@@ -141,7 +141,7 @@ Ext.define('Jarvus.ux.field.DateTimePicker', {
 
         /**
          * @cfg {Object/Date} value
-         * Default value for the field and the internal {@link Jarvus.ux.picker.DateTime} component. Accepts an object of 'year',
+         * Default value for the field and the internal {@link Jarvus.touch.ux.picker.DateTime} component. Accepts an object of 'year',
          * 'month' and 'day' values, all of which should be numbers, or a {@link Date}.
          *
          * Example: {year: 1989, day: 1, month: 5} = 1st May 1989 or new Date()
@@ -210,7 +210,7 @@ Ext.define('Jarvus.ux.field.DateTimePicker', {
             this.getComponent().setValue('');
         }
 
-        if (this._picker && this._picker instanceof Jarvus.ux.picker.DateTime) {
+        if (this._picker && this._picker instanceof Jarvus.touch.ux.picker.DateTime) {
             this._picker.setValue(newValue);
         }
     },
@@ -221,7 +221,7 @@ Ext.define('Jarvus.ux.field.DateTimePicker', {
      */
     updateDateFormat: function(newDateFormat, oldDateFormat) {
         var value = this.getValue();
-        if (newDateFormat != oldDateFormat && Ext.isDate(value) && this._picker && this._picker instanceof Jarvus.ux.picker.DateTime) {
+        if (newDateFormat != oldDateFormat && Ext.isDate(value) && this._picker && this._picker instanceof Jarvus.touch.ux.picker.DateTime) {
             this.getComponent().setValue(Ext.Date.format(value, newDateFormat || Ext.util.Format.defaultDateFormat));
         }
     },
@@ -232,7 +232,7 @@ Ext.define('Jarvus.ux.field.DateTimePicker', {
      * @return {Date} The date selected
      */
     getValue: function() {
-        if (this._picker && this._picker instanceof Jarvus.ux.picker.DateTime) {
+        if (this._picker && this._picker instanceof Jarvus.touch.ux.picker.DateTime) {
             return this._picker.getValue();
         }
 
@@ -264,7 +264,7 @@ Ext.define('Jarvus.ux.field.DateTimePicker', {
             value = this.getValue();
 
         if (picker && !picker.isPicker) {
-            picker = Ext.factory(picker, Jarvus.ux.picker.DateTime);
+            picker = Ext.factory(picker, Jarvus.touch.ux.picker.DateTime);
             picker.on({
                 scope: this,
                 cancel: 'onPickerCancel',
@@ -313,7 +313,7 @@ Ext.define('Jarvus.ux.field.DateTimePicker', {
     
     /**
      * Called when the picker changes its value
-     * @param {Jarvus.ux.picker.DateTime} picker The date picker
+     * @param {Jarvus.touch.ux.picker.DateTime} picker The date picker
      * @param {Object} value The new value from the date picker
      * @private
      */

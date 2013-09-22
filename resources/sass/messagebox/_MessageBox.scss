@@ -1,0 +1,43 @@
+.x-msgbox {
+    background: rgba(black, .8);
+    border: none;
+    border-radius: .25em;
+    color: white;
+    padding: .6em;
+    
+    .x-toolbar.x-msgbox-title {
+        background: none;
+        height: 2em;
+    }
+    
+    .x-title {
+        color: inherit;
+        font-weight: normal;
+    }
+    
+    .x-msgbox-text {
+        font: -apple-system-short-body;
+        margin: .6em 0;
+    }
+    
+    .x-msgbox-buttons {
+        background: none;
+        padding: 0;
+        
+        .x-button {
+            background: $base-color;
+            border: none;
+            border-radius: 2px;
+            padding: .4em .6em;
+            
+            &.x-button-pressing,
+            &.x-button-pressed {
+                background: darken($base-color, 10);
+            }
+        }
+        
+        .x-button-label {
+            color: white;
+        }
+    }
+}

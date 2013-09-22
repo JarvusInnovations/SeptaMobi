@@ -1,3 +1,29 @@
-.schedule{
-
+.schedule {
+	
+	&.x-list .x-list-item.x-list-item-tpl {
+	
+		.x-innerhtml {
+			@include hairline;
+			padding: 1em;
+			font-size: smaller;
+		}
+		
+		&.x-item-pressed,
+        &.x-item-selected {
+            background: rgba($base-color, .2);
+        }
+        
+        &::after {
+            content: '>';
+            font-family: SeptaMobi;
+            font-size: small;
+            opacity: .4;
+            position: absolute;
+            right: 1.1em;
+            top: 1.1em;
+        }
+	}
+	
 }
+
+

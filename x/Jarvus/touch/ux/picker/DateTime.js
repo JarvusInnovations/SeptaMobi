@@ -1,7 +1,7 @@
-Ext.define('Jarvus.ux.picker.DateTime', {
+Ext.define('Jarvus.touch.ux.picker.DateTime', {
     extend: 'Ext.picker.Picker',
     xtype: 'datetimepicker',
-    alternateClassName: 'Jarvus.ux.picker.DateTimePicker',
+    alternateClassName: 'Jarvus.touch.ux.picker.DateTimePicker',
     requires: ['Ext.DateExtras'],
 
     config: {

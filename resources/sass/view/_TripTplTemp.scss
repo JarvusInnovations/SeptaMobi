@@ -1,7 +1,6 @@
 .trip-details {
-   // @include hairline;
-   	background: rgba(00,00,00,.1);
- //  	color: #fff;
+    @include hairline;
+   	background-color: rgba(00,00,00,.1);
     font-size: small;
     padding: .75em 1.2em;
     font: -apple-system-short-footnote;
@@ -59,10 +58,13 @@
         content: 'l';
     }
     
-        &.bus::before { content: 'b'; }
-      &.train::before { content: 't'; }
-    &.trolley::before { content: 'c'; }
-       &.walk::before { content: 'w'; }
+          &.bus::before { content: 'b'; }
+        &.train::before,
+       &.subway::before { content: 't'; }
+      &.trolley::before,
+         &.tram::before,
+    &.cable_car::before { content: 'c'; }
+         &.walk::before { content: 'w'; }
 }
 
 .leg-description {
@@ -99,8 +101,7 @@
     font: -apple-system-footnote;
 }
 
-.step-rel-direction,
-.step-street-name {
+.step-direction {
     font-weight: bold;
 }
 

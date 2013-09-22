@@ -50,7 +50,7 @@ Ext.define('SeptaMobi.controller.Schedule', {
 			routeVariants: {
 				select: 'onRoutesVariantsSelect'
 			},
-			routeDetails: {
+			'schedule-routedetails dataview': {
 				select: 'onRouteDetailsSelect'
 			},
 			routeDetailsMap: {

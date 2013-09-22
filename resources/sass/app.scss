@@ -20,15 +20,16 @@ $regionalrail: #5186a0;
 @import 'stylesheets/fonts/antonio/Antonio';
 @import 'stylesheets/fonts/septamobi/SeptaMobi';
 
+@import 'mixins';
 
 @import 'button/SegmentedButton',
 		'button/Button',
+		'dataview/Dataview',
 		'tab/Bar',
 		'tab/Tab',
 		'toolbar/Toolbar';
 
-@import 'view/Mixins',
-		'view/TripTplTemp',
+@import 'view/TripTplTemp',
 		'view/Dashboard',
 		'view/Bookmarks',
 		'view/TripPlanner',
@@ -48,7 +49,3 @@ $regionalrail: #5186a0;
 	background-position: 58% -50px;
 	font: -apple-system-body;
 }
-
-
-
-	

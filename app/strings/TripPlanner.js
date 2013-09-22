@@ -61,7 +61,7 @@ Ext.define('SeptaMobi.strings.TripPlanner', {
         WALK:           "Walk",
         BICYCLE:        "Bicycle",
         CAR:            "Car",
-        TRAM:           "Tram",
+        TRAM:           "Trolley",
         SUBWAY:         "Subway",
         RAIL:           "Rail",
         BUS:            "Bus",

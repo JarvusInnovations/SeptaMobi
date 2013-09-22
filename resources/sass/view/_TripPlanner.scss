@@ -54,6 +54,10 @@
             content: none;
         }
     }
+    
+    & + .x-mask {
+        background: transparent;
+    }
 }
 
 .field-button {

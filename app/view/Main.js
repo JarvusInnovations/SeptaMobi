@@ -31,39 +31,6 @@ Ext.define('SeptaMobi.view.Main', {
             title: 'Trip Planner',
             iconCls: 'tab-trip-planner',
             xtype: 'tripplanner'
-        }, {
-            title: 'Trip TPL',
-            iconCls: 'tab-trip-planner',
-
-            scrollable: true,
-
-            items: [{
-                docked: 'top',
-                xtype: 'titlebar',
-                title: 'Trip TPL (Temp)'
-            }, {
-                xtype: 'triptpltemp'
-            }]
-        },{
-            title: 'Leaflet Demo',
-            iconCls: 'map',
-
-            scrollable: true,
-            layout: 'fit',
-
-            items: [{
-                docked: 'top',
-                xtype: 'titlebar',
-                title: 'SeptaMobi.ux.Leaflet (Demo)'
-            },{
-                xtype: 'leaflet-demo',
-                useCurrentLocation: true,
-                autoMapCenter: false,
-                enableOwnPositionMarker: true,
-                mapOptions: {
-                    zoom: 15
-                }
-            }]
         }]
     }
 });

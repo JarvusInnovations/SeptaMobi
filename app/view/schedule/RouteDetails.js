@@ -10,11 +10,12 @@ Ext.define('SeptaMobi.view.schedule.RouteDetails', {
 		busMarkers: [],
 
 		title: 'Route Details (?!)',
+		cls: 'schedule',
 		items: [{
 			xtype: 'dataview',
 			title: 'Stops',
 			itemId: 'routeDetailList',
-			cls: 'list-view',
+			cls: 'list-style',
 			itemTpl: [
 				'<div>',
 					'<span>{name}</span>',

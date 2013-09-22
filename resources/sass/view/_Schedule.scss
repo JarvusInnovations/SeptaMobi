@@ -1,11 +1,15 @@
 .schedule {
 	
+	
+	.x-dataview-item, .x-list-item.x-list-item-tpl {
+		font-size: smaller;
+	}
+	
 	&.x-list .x-list-item.x-list-item-tpl {
 	
 		.x-innerhtml {
 			@include hairline;
 			padding: 1em;
-			font-size: smaller;
 		}
 		
 		&.x-item-pressed,

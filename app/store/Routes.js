@@ -19,6 +19,30 @@ Ext.define('SeptaMobi.store.Routes', {
 			}
 		},
 
-		sorters: 'routeLongName'
+		sorters: [
+			{
+				sorterFn: function(record1, record2) {
+					var shortName1 = record1.get('routeShortName'),
+						shortName1Int = parseInt(shortName1),
+						shortName1IsNumeric = !isNaN(shortName1Int),
+						shortName2 = record2.get('routeShortName'),
+						shortName2Int = parseInt(shortName2),
+						shortName2IsNumeric = !isNaN(shortName2Int);
+						
+					if (shortName1IsNumeric && !shortName2IsNumeric) {
+						return -1;
+					} else if(!shortName1IsNumeric && shortName2IsNumeric) {
+						return 1;
+					}
+					
+					if(shortName1IsNumeric) {
+						shortName1 = shortName1Int;
+						shortName2 = shortName2Int;
+					}
+
+					return shortName1 > shortName2 ? 1 : (shortName1 == shortName2 ? 0 : -1);
+				}
+			}
+		]
 	}
 });

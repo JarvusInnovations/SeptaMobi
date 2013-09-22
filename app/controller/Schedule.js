@@ -29,6 +29,7 @@ Ext.define('SeptaMobi.controller.Schedule', {
 
 				xtype: 'schedule-routedetails'
 			},
+			routeDetailsMap: 'schedule-routedetails leafletmap',
 			stopTimes: {
 				selector: 'schedule-stoptimes',
 				autoCreate: true,
@@ -51,6 +52,9 @@ Ext.define('SeptaMobi.controller.Schedule', {
 			},
 			routeDetails: {
 				select: 'onRouteDetailsSelect'
+			},
+			routeDetailsMap: {
+				maprender: 'onRouteDetailsMapRender'
 			}
 		}
 	},
@@ -116,6 +120,7 @@ Ext.define('SeptaMobi.controller.Schedule', {
 			navView = me.getNavView();
 
 		routeDetails.setStops(record.get('stops'));
+		routeDetails.setEncodedPoints(record.get('encodedPoints'));
 
 		navView.push(routeDetails);
 	},
@@ -138,5 +143,40 @@ Ext.define('SeptaMobi.controller.Schedule', {
 		stopTimesStore.load();
 
 		navView.push(stopTimes);
+	},
+
+	onRouteDetailsMapRender: function() {
+		var me = this,
+			routeDetails = me.getRouteDetails(),
+			stops = routeDetails.getStops(),
+			mapCmp = me.getRouteDetailsMap(),
+			map = mapCmp.getMap(),
+			stopLength = stops.getRange().length,
+			markers = [],
+			i = 0, stop, marker, latLng, bounds, decodedPoints, polyLine;
+
+		for(; i < stopLength; i++) {
+			stop = stops.getAt(i);
+
+			latLng = [stop.get('lat'), stop.get('lon')];
+
+			marker = L.marker(latLng).addTo(map);
+			marker.bindPopup(stop.get('name')).openPopup();
+
+			markers.push(marker);
+		}
+
+		decodedPoints = mapCmp.decode(routeDetails.getEncodedPoints());
+
+		polyLine = L.polyline(decodedPoints).addTo(map);
+
+		bounds = polyLine.getBounds();
+
+		routeDetails.setStopMarkers(markers);
+		routeDetails.setRoutePolyLine(polyLine);
+
+		Ext.defer(function() {
+			map.fitBounds(bounds);
+		}, 1000, this);
 	}
 });

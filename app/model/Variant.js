@@ -9,6 +9,10 @@ Ext.define('SeptaMobi.model.Variant', {
 		}, {
 			name: 'direction',
 			type: 'int'
+		}, {
+			name: 'encodedPoints',
+			mapping: 'geometry.points',
+			type: 'string'
 		}],
 
 		associations: [{

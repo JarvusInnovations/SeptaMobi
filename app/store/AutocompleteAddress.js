@@ -15,7 +15,8 @@ Ext.define('SeptaMobi.store.AutocompleteAddress', {
 				rootProperty: 'suggestions'
 			},
 			extraParams: {
-				'auth-id': '5519210895803725602'
+				'auth-id': '5519210895803725602',
+				'prefer': 'Philadelphia, PA'
 			}
 		},
 

@@ -8,6 +8,7 @@ Ext.define('SeptaMobi.controller.Schedule', {
 			'schedule.StopTimes'
 		],
 		stores: [
+			'Buses',
 			'Routes',
 			'StopTimes'
 		],
@@ -117,12 +118,23 @@ Ext.define('SeptaMobi.controller.Schedule', {
 			routeDetails = me.getRouteDetails(),
 			routeVariants = me.getRouteVariants(),
 			detailsRecord = routeVariants.getDetailsRecord(),
-			navView = me.getNavView();
+			navView = me.getNavView(),
+			busesStore = Ext.getStore('Buses'),
+			busMarkers = [], i = 0, busLength;
 
 		routeDetails.setStops(record.get('stops'));
 		routeDetails.setEncodedPoints(record.get('encodedPoints'));
 
 		navView.push(routeDetails);
+
+		if(record.get('type') == 3) {
+			//Load Bus Positions
+			busesStore.load({
+				params: {
+					route: record.get('routeShortName')
+				}
+			});
+		}
 	},
 
 	onRouteDetailsSelect: function(list, record) {
@@ -152,19 +164,23 @@ Ext.define('SeptaMobi.controller.Schedule', {
 			mapCmp = me.getRouteDetailsMap(),
 			map = mapCmp.getMap(),
 			stopLength = stops.getRange().length,
-			markers = [],
-			i = 0, stop, marker, latLng, bounds, decodedPoints, polyLine;
+			busStore = Ext.getStore('Buses'),
+			buses = busStore.getRange(),
+			busLength = buses.length,
+			stopMarkers = [], busMarkers = [],
+			i = 0, stop, marker, latLng, bounds, decodedPoints, polyLine, infoTemplate;
 
-		for(; i < stopLength; i++) {
-			stop = stops.getAt(i);
+		//TODO remove any prexisting stop markers?
+		// for(; i < stopLength; i++) {
+		// 	stop = stops.getAt(i);
 
-			latLng = [stop.get('lat'), stop.get('lon')];
+		// 	latLng = [stop.get('lat'), stop.get('lon')];
 
-			marker = L.marker(latLng).addTo(map);
-			marker.bindPopup(stop.get('name')).openPopup();
+		// 	marker = L.marker(latLng).addTo(map);
+		// 	marker.bindPopup(stop.get('name')).openPopup();
 
-			markers.push(marker);
-		}
+		// 	stopMarkers.push(marker);
+		// }
 
 		decodedPoints = mapCmp.decode(routeDetails.getEncodedPoints());
 
@@ -172,8 +188,33 @@ Ext.define('SeptaMobi.controller.Schedule', {
 
 		bounds = polyLine.getBounds();
 
-		routeDetails.setStopMarkers(markers);
+		routeDetails.setStopMarkers(stopMarkers);
 		routeDetails.setRoutePolyLine(polyLine);
+
+		// routeDetails.removeBusMarkers();
+
+		//TODO move template to view cfg?
+		infoTemplate = Ext.create('Ext.XTemplate', [
+			'bus {label}'
+			,'<br> to {[values.destination||"<em>unknown destination</em>"]}'
+			,'<br>reported {[values.Offset ? (values.Offset+" minutes ago") : "just now"]}'
+		]);
+
+		for(i = 0; i < busLength; i++) {
+			latLng = [buses[i].get('lat'), buses[i].get('lng')];
+
+			marker = L.marker(latLng, {
+				icon: L.icon({
+					iconUrl: 'http://septa.mobi/app/SeptaMobi/build/production/resources/images/markers/bus_blue.png'
+				})
+			}).addTo(map);
+
+			marker.bindPopup(infoTemplate.apply(buses[i].getData())).openPopup();
+
+			busMarkers.push(marker);
+		}
+
+		routeDetails.setBusMarkers(busMarkers);
 
 		Ext.defer(function() {
 			map.fitBounds(bounds);

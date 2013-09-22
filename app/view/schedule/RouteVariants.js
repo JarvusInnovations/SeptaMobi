@@ -17,9 +17,11 @@ Ext.define('SeptaMobi.view.schedule.RouteVariants', {
 	updateDetailsRecord: function(detailsRecord) {
 		var data = Ext.Array.map(detailsRecord.variants().getRange(), function(r) {
 			return {
+				routeShortName: detailsRecord.get('routeShortName'),
 				data: r.getData(),
 				stops: r.stops(),
-				encodedPoints: r.get('encodedPoints')
+				encodedPoints: r.get('encodedPoints'),
+				type: detailsRecord.get('type')
 			};
 		});
 

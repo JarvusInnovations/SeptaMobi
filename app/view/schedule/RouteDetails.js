@@ -7,6 +7,7 @@ Ext.define('SeptaMobi.view.schedule.RouteDetails', {
 		stopMarkers: [],
 		encodedPoints: null,
 		routePolyLine: null,
+		busMarkers: [],
 
 		title: 'Route Details (?!)',
 
@@ -35,5 +36,16 @@ Ext.define('SeptaMobi.view.schedule.RouteDetails', {
 		var data = Ext.Array.map(stops.getRange(), function(r) { return r.getData(); });
 
 		this.down('#routeDetailList').setData(data);
+	},
+
+	removeBusMarkers: function() {
+		var mapCmp = this.down('leafletmap'),
+			map = mapCmp.getMap(),
+			busMarkers = this.getBusMarkers(),
+			marker;
+
+		while(marker = busMarkers.pop()) {
+			map.removeLayer(marker);
+		}
 	}
 });

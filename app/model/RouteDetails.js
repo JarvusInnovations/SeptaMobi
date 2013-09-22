@@ -34,7 +34,7 @@ Ext.define('SeptaMobi.model.RouteDetails', {
 			pageParam: false,
 			limitParam: false,
 			startParam: false,
-			url: location.protocol == 'http:' ? './api/routedetails' : 'http://opentrips.codeforphilly.org/opentripplanner-api-webapp/ws/transit/routeData',
+			url: (window.SeptaMobi_API && SeptaMobi_API.routeDetails) || (location.protocol == 'http:' ? './api/routedetails' : 'http://opentrips.codeforphilly.org/opentripplanner-api-webapp/ws/transit/routeData'),
 			reader: {
 				type: 'json',
 				rootProperty: 'routeData'

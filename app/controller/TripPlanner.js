@@ -172,13 +172,35 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 			fromUseCurrent = me.getFromUseCurrent(),
 			originalFromAddress = me.getFromAddress(),
 			originalFromValue = fromField.getValue(),
-			originalFromUseCurrentValue = fromUseCurrent.getChecked();
+			originalFromUseCurrentValue = fromUseCurrent.getCls().indexOf('x-button-pressed') != -1;
 
 		fromField.setValue(toField.getValue());
-		fromUseCurrent.setChecked(toUseCurrent.getChecked());
+		if(toUseCurrent.getCls().indexOf('x-button-pressed') != -1) {
+			fromUseCurrent.addCls('x-button-pressed');
+			if (!fromField.isDisabled()) {
+				fromField.disable();
+			}
+		}
+		else {
+			fromUseCurrent.removeCls('x-button-pressed');
+			if (fromField.isDisabled()) {
+				fromField.enable();
+			}
+		}
 
 		toField.setValue(originalFromValue);
-		toUseCurrent.setChecked(originalFromUseCurrentValue);
+		if(originalFromUseCurrentValue) {
+			toUseCurrent.addCls('x-button-pressed');
+			if (!toField.isDisabled()) {
+				toField.disable();
+			}
+		}
+		else {
+			toUseCurrent.removeCls('x-button-pressed');
+			if (toField.isDisabled()) {
+				toField.enable();
+			}
+		}
 
 		me.setFromAddress(me.getToAddress());
 		me.setToAddress(originalFromAddress);

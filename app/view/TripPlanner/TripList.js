@@ -4,6 +4,7 @@ Ext.define('SeptaMobi.view.TripPlanner.TripList', {
     xtype: 'triplist',
 
     config: {
+    	title: 'Route Options',
         tripPlan: null,
         itineraries: null,
         scrollable: true,

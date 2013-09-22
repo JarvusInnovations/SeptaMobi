@@ -3,8 +3,7 @@
 }
 		
 .x-toolbar.x-docked-top {
-	background: $base-color;
-	@include background-image(linear-gradient($base-color, rgba($base-color, .8) ));
+	@include background-image(linear-gradient($base-color, rgba($base-color, .85) ));
 	border: none;
 	color: #fff;
 

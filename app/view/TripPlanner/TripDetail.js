@@ -4,6 +4,7 @@ Ext.define('SeptaMobi.view.TripPlanner.TripDetail', {
 	xtype: 'tripdetail',
 
 	config: {
+		title: 'Route Details',
 		tripDetail: null,
 		itenerary: null,
 		currentMarkers: [],
@@ -16,7 +17,6 @@ Ext.define('SeptaMobi.view.TripPlanner.TripDetail', {
 			itemId: 'tripDetail',
 			tpl: [
 				'<dl class="trip-details">',
-	                '<h1>Trip Details</h1>',
 	                '<div class="dli">',
 	                    '<dt>From</dt>',
 	                    '<dd>{fromName}</dd>',
@@ -38,6 +38,7 @@ Ext.define('SeptaMobi.view.TripPlanner.TripDetail', {
     	}, {
     		xtype: 'tabpanel',
     		flex: 1,
+    		cls: 'route-map-tabs',
     		items: [{
 	    		xtype: 'container',
 	    		title: 'Route',

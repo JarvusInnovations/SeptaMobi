@@ -66,3 +66,40 @@ $tabs-bottom-icon-size: 22px;
 		}
 	}
 }
+
+.route-map-tabs {
+
+	.x-tabbar {
+		margin: .5em 1em;
+	}
+	
+	.x-tab {
+		background: transparent;
+		border: 1px solid $base-color;
+		width: 50%;
+		
+		&:first-child{
+			@include border-radius(2px 0 0 2px);
+		}
+		&:last-child{
+			@include border-radius(0 2px 2px 0);
+		}
+		
+		&.x-tab-pressed, &.x-tab-active {
+	    	background: rgba($base-color, .2);
+		}
+		& + .x-tab {
+    		border-left: 0;
+		}
+		
+		.x-button-label {
+	    	font-size: smaller;
+	    	padding: .2em;
+		}
+	}
+
+
+}
+
+
+

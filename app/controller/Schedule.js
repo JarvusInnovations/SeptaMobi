@@ -5,9 +5,11 @@ Ext.define('SeptaMobi.controller.Schedule', {
 		views: [
 			'schedule.RouteVariants',
 			'schedule.RouteDetails',
+			'schedule.StopTimes'
 		],
 		stores: [
-			'Routes'
+			'Routes',
+			'StopTimes'
 		],
 		models: [
 			'RouteDetails'
@@ -26,6 +28,12 @@ Ext.define('SeptaMobi.controller.Schedule', {
 				autoCreate: true,
 
 				xtype: 'schedule-routedetails'
+			},
+			stopTimes: {
+				selector: 'schedule-stoptimes',
+				autoCreate: true,
+
+				xtype: 'schedule-stoptimes'
 			}
 		},
 		control: {
@@ -40,6 +48,9 @@ Ext.define('SeptaMobi.controller.Schedule', {
 			},
 			routeVariants: {
 				select: 'onRoutesVariantsSelect'
+			},
+			routeDetails: {
+				select: 'onRouteDetailsSelect'
 			}
 		}
 	},
@@ -52,7 +63,7 @@ Ext.define('SeptaMobi.controller.Schedule', {
 				xtype: 'loadmask',
 				message: 'Loading Routes&hellip;'
 			});
-			
+
 			routeStore.load({
 				callback: function(records, operation, success) {
 					navView.setMasked(false);
@@ -68,9 +79,9 @@ Ext.define('SeptaMobi.controller.Schedule', {
 
 		if (isPressed) {
 			routeType = button.routeType;
-			
-			routeStore.clearFilter(!!routeType); // pass true to suppress update if we're going to apply a routeType filter next
-			
+
+			routeStore.clearFilter( !! routeType); // pass true to suppress update if we're going to apply a routeType filter next
+
 			if (routeType) {
 				routeStore.filter('routeType', routeType);
 			}
@@ -81,12 +92,12 @@ Ext.define('SeptaMobi.controller.Schedule', {
 		var me = this,
 			routeVariants = me.getRouteVariants(),
 			navView = me.getNavView();
-		
+
 		routeVariants.setMasked({
 			xtype: 'loadmask',
 			message: 'Loading Details&hellip;'
 		});
-		
+
 		navView.push(routeVariants);
 
 		SeptaMobi.model.RouteDetails.load(record.getId(), {
@@ -107,5 +118,25 @@ Ext.define('SeptaMobi.controller.Schedule', {
 		routeDetails.setStops(record.get('stops'));
 
 		navView.push(routeDetails);
+	},
+
+	onRouteDetailsSelect: function(list, record) {
+		var me = this,
+			stopTimes = me.getStopTimes(),
+			navView = me.getNavView(),
+			stopTimesStore = Ext.getStore('StopTimes'),
+			now = new Date(),
+			tomorrow = (new Date()).setDate(now.getDate() + 1);
+
+		stopTimesStore.getProxy().setExtraParams({
+			id: record.get('id'),
+			agency: 'SEPTA',
+			startTime: now.getTime(),
+			endDate: tomorrow
+		});
+
+		stopTimesStore.load();
+
+		navView.push(stopTimes);
 	}
 });

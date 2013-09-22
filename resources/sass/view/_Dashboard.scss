@@ -4,7 +4,32 @@
 	font-size: 2em;
 	font-weight: normal;
 	margin: .5em;
+	overflow: visible;
 	padding: .1em;
+	
+	&:before {
+		background: url(../images/newroute-top.png) no-repeat;
+		background-size: 1000px 5px;
+		background-position: top center;
+		content: ' ';
+		height: 5px;
+		position: absolute;
+		top: -5px;
+		left: -8em;
+		width: 1000px;
+	}
+	
+	&:after {
+		background: url(../images/newroute-bottom.png) no-repeat;
+		background-size: 1000px 5px;
+		background-position: bottom center;
+		bottom: -5px;
+		content: ' ';
+		height: 5px;
+		left: -8em;
+		position: absolute;
+		width: 1000px;
+	}
 }
 
 .x-tabbar {

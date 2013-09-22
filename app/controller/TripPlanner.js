@@ -75,7 +75,7 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 			'selectaddresspanel dataview': {
 				select: 'onSelectAddressPanelAddressSelect'
 			},
-			'triplist list': {
+			'triplist dataview': {
 				select: 'onTripSelect'
 			},
 			'tripdetail leafletmap': {

@@ -168,7 +168,7 @@ Ext.define('SeptaMobi.controller.Schedule', {
 			buses = busStore.getRange(),
 			busLength = buses.length,
 			stopMarkers = [], busMarkers = [],
-			i = 0, stop, marker, latLng, bounds, decodedPoints, polyLine, infoTemplate;
+			i = 0, stop, latLng, bounds, decodedPoints, polyLine, infoTemplate;
 
 		//TODO remove any prexisting stop markers?
 		//TODO Option to show stops?
@@ -204,7 +204,7 @@ Ext.define('SeptaMobi.controller.Schedule', {
 		buses.forEach(function(bus) {
 			latLng = [bus.get('lat'), bus.get('lng')];
 
-			marker = L.marker(latLng, {
+			var marker = L.marker(latLng, {
 				icon: L.icon({
 				    iconUrl: 'resources/images/bus-marker.png',
 					iconRetinaUrl: 'resources/images/bus-marker-2x.png',
@@ -214,7 +214,7 @@ Ext.define('SeptaMobi.controller.Schedule', {
 			}).addTo(map);
 
 			setTimeout(function() {
-				marker.bindPopup(infoTemplate.apply(bus.getData())).openPopup()
+				marker.bindPopup(infoTemplate.apply(bus.getData()));
 			}, 1000);
 
 			busMarkers.push(marker);

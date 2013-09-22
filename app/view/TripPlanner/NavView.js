@@ -3,7 +3,7 @@ Ext.define('SeptaMobi.view.TripPlanner.NavView', {
     requires: [
         'Ext.form.Panel',
         'Ext.form.FieldSet',
-        'Jarvus.ux.field.DateTimePicker'
+        'Jarvus.touch.ux.field.DateTimePicker'
     ],
 
     xtype: 'tripplanner',

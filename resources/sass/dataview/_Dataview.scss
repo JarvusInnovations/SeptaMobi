@@ -8,7 +8,7 @@
 
         &.x-item-pressed,
         &.x-item-selected {
-            background: rgba($base-color, .2);
+            background-color: rgba($base-color, .2);
         }
         
         &::after {
@@ -20,5 +20,21 @@
             right: 1.1em;
             top: 1.1em;
         }
+        
     }
+}
+
+.x-dataview.list-style.times {
+	
+	.x-dataview-item {
+		
+		&.x-item-pressed,
+		&.x-item-selected {
+			background-color: transparent;
+		}
+		
+		&::after {
+			content: ' ';	
+		}
+	}
 }

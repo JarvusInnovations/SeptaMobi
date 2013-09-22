@@ -14,7 +14,7 @@
 		
 		&.x-item-pressed,
         &.x-item-selected {
-            background: rgba($base-color, .2);
+            background-color: rgba($base-color, .2);
         }
         
         &::after {
@@ -28,6 +28,14 @@
         }
 	}
 	
+	&.times span {
+		font-weight: bold;
+		
+		&.phase {
+			font-weight: normal;
+			float: right;
+		}
+	}
 }
 
 

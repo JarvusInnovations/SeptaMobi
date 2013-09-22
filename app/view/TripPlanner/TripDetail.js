@@ -43,6 +43,7 @@ Ext.define('SeptaMobi.view.TripPlanner.TripDetail', {
 	    		xtype: 'container',
 	    		title: 'Route',
 	    		itemId: 'itenerary',
+	    		scrollable: true,
 	    		tpl: [
 					'<ol class="trip-legs">',
 		                '<li class="trip-leg departure">',

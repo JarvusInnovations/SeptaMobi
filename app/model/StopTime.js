@@ -6,7 +6,7 @@ Ext.define('SeptaMobi.model.StopTime', {
 
         fields: [{
             name: 'time',
-            dateFormat: 'timestamp',
+             dateFormat: 'timestamp',
             type: 'date'
         }, {
             name: 'phase',

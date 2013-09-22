@@ -1,20 +1,22 @@
 Ext.define('SeptaMobi.view.schedule.RouteDetails', {
-	extend: 'Ext.Container',
+	extend: 'Ext.dataview.DataView',
 	xtype: 'schedule-routedetails',
 
 	config: {
-		title: 'Route Detail',
+		stops: null,
+
+		title: 'Route Details (?!)',
 		
-		detailsRecord: null,
-		
-		tpl: [
+		itemTpl: [
 			'<div>',
-				'<span>{routeLongName}</span>',
+				'<span>{name}</span>',
 			'</div>'
 		]
 	},
 	
-	updateDetailsRecord: function(detailsRecord) {
-		this.setData(detailsRecord.getData());
+	updateStops: function(stops) {
+		var data = Ext.Array.map(stops.getRange(), function(r) { return r.getData(); });
+
+		this.setData(data);
 	}
 });

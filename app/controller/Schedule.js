@@ -3,7 +3,8 @@ Ext.define('SeptaMobi.controller.Schedule', {
 
 	config: {
 		views: [
-			'schedule.RouteDetails'
+			'schedule.RouteVariants',
+			'schedule.RouteDetails',
 		],
 		stores: [
 			'Routes'
@@ -14,6 +15,12 @@ Ext.define('SeptaMobi.controller.Schedule', {
 		refs: {
 			navView: 'schedule-navview',
 			routesList: 'schedule-routeslist',
+			routeVariants: {
+				selector: 'schedule-routevariants',
+				autoCreate: true,
+
+				xtype: 'schedule-routevariants'
+			},
 			routeDetails: {
 				selector: 'schedule-routedetails',
 				autoCreate: true,
@@ -30,6 +37,9 @@ Ext.define('SeptaMobi.controller.Schedule', {
 			},
 			routesList: {
 				select: 'onRoutesListSelect'
+			},
+			routeVariants: {
+				select: 'onRoutesVariantsSelect'
 			}
 		}
 	},
@@ -69,22 +79,33 @@ Ext.define('SeptaMobi.controller.Schedule', {
 
 	onRoutesListSelect: function(list, record) {
 		var me = this,
-			routeDetails = me.getRouteDetails(),
+			routeVariants = me.getRouteVariants(),
 			navView = me.getNavView();
 		
-		routeDetails.setMasked({
+		routeVariants.setMasked({
 			xtype: 'loadmask',
 			message: 'Loading Details&hellip;'
 		});
 		
-		navView.push(routeDetails);
+		navView.push(routeVariants);
 
 		SeptaMobi.model.RouteDetails.load(record.getId(), {
 			callback: function(detailsRecord) {
-				routeDetails.setDetailsRecord(detailsRecord);
-				routeDetails.setMasked(false);
+				routeVariants.setDetailsRecord(detailsRecord);
+				routeVariants.setMasked(false);
 			}
 		});
+	},
 
+	onRoutesVariantsSelect: function(list, record) {
+		var me = this,
+			routeDetails = me.getRouteDetails(),
+			routeVariants = me.getRouteVariants(),
+			detailsRecord = routeVariants.getDetailsRecord(),
+			navView = me.getNavView();
+
+		routeDetails.setStops(record.get('stops'));
+
+		navView.push(routeDetails);
 	}
 });

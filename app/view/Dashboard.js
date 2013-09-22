@@ -31,13 +31,13 @@ Ext.define('SeptaMobi.view.Dashboard', {
 						type: 'string'
 					}],
 					data: [{
-						message: 'Alert 1'
+						message: 'Test Alert 1'
 					},{
-						message: 'Schedules are not done yet'
+						message: 'Test Alert 2'
 					},{
-						message: 'SEPTA'
+						message: 'Test Alert 3'
 					},{
-						message: 'Another message'
+						message: 'Test Alert 4'
 					}]
 				}
 			}, {

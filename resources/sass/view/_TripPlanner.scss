@@ -29,8 +29,31 @@
 	}
 }
 
-.field-button-ct {
-
+.x-panel.address-autocomplete-panel {
+    margin-top: -.6em;
+    padding: 0;
+    
+    .x-button {
+        background: none;
+        border: none;
+        color: $base-color;
+        padding: .6em;
+    }
+    
+    .x-dataview-emptytext {
+        color: $muted-color;
+        padding: 3.6em;
+        text-align: center;
+    }
+    
+    .autocomplete-option {
+        font-size: small;
+        padding: .8em;
+        
+        &::after {
+            content: none;
+        }
+    }
 }
 
 .field-button {

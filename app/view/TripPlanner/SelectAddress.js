@@ -5,10 +5,11 @@ Ext.define('SeptaMobi.view.TripPlanner.SelectAddress', {
 	xtype: 'selectaddresspanel',
 
 	config: {
+	    cls: 'address-autocomplete-panel',
 		field: null,
 
 		height: 200,
-		width: '95%',
+		width: '100%',
 
 		modal: true,
 		hideOnMaskTap: true,
@@ -21,7 +22,9 @@ Ext.define('SeptaMobi.view.TripPlanner.SelectAddress', {
 			xtype: 'dataview',
 			store: 'AutocompleteAddress',
 			emptyText: 'No Results',
-			itemTpl: '<div>{text}</div>',
+			itemTpl: '{text}',
+			cls: 'autocomplete-options list-style',
+			itemCls: 'autocomplete-option',
 			flex: 1
 		}, {
 			xtype: 'button',

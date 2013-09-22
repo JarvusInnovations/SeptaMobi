@@ -5,7 +5,7 @@ Ext.define('SeptaMobi.view.schedule.RouteVariants', {
 	config: {
 		detailsRecord: null,
 
-		title: 'Route Variants (TEMP!)',
+		title: 'Route Variants (TEMP)',
 		cls: 'list-style schedule',
 
 		itemTpl: [

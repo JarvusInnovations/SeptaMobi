@@ -9,7 +9,7 @@ Ext.define('SeptaMobi.view.schedule.RouteDetails', {
 		routePolyLine: null,
 		busMarkers: [],
 
-		title: 'Route Details (?!)',
+		title: 'Route Details',
 		cls: 'schedule',
 		items: [{
 			xtype: 'dataview',

@@ -83,7 +83,7 @@ Ext.define('SeptaMobi.controller.Schedule', {
 			routeType;
 
 		if (isPressed) {
-			routeType = button.routeType;
+			routeType = button.config.routeType;
 
 			routeStore.clearFilter( !! routeType); // pass true to suppress update if we're going to apply a routeType filter next
 

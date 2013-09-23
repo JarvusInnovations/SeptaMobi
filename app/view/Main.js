@@ -6,8 +6,7 @@ Ext.define('SeptaMobi.view.Main', {
         'SeptaMobi.view.TripPlanner.NavView',
         'SeptaMobi.view.schedule.NavView',
         'SeptaMobi.view.TripTplTemp',
-        'Ext.TitleBar',
-        'SeptaMobi.view.LeafletMap'
+        'Ext.TitleBar'
     ],
 
     config: {

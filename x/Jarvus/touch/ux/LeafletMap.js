@@ -7,14 +7,16 @@
  *     <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
  *
  * ## Example
- * 
+ *
  *     Ext.Viewport.add({
  *         xtype: 'leafletmap',
  *         useCurrentLocation: true
  *     });
  *
+ *
+ * Based on Ext.ux.LeafletMap by http://about.me/juerg.hunziker
  */
-Ext.define('SeptaMobi.ux.LeafletMap', {
+Ext.define('Jarvus.touch.ux.LeafletMap', {
     extend: 'Ext.Container',
     xtype: 'leafletmap',
     requires: ['Ext.util.Geolocation'],
@@ -86,16 +88,16 @@ Ext.define('SeptaMobi.ux.LeafletMap', {
         /**
          * @cfg {String} [tileLayerUrl="http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"]
          * URL template for tile-layer in the following form
-         * 
+         *
          *     'http://{s}.somedomain.com/blabla/{z}/{x}/{y}.png'
-         * 
-         * {s} means one of the randomly chosen subdomains (their range is specified in options; a, b or c by default, 
+         *
+         * {s} means one of the randomly chosen subdomains (their range is specified in options; a, b or c by default,
          * can be omitted), {z} — zoom level, {x} and {y} — tile coordinates.
-         * 
+         *
          * You can use custom keys in the template, which will be evaluated from {@link Ext.ux.LeafletMap#tileLayerOptions}, like this:
-         * 
+         *
          *     tileLayerUrl: 'http://{s}.somedomain.com/{foo}/{z}/{x}/{y}.png', tileLayerOptions: {foo: 'bar'};
-         * 
+         *
          * @accessor
          */
         tileLayerUrl: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -332,7 +334,7 @@ Ext.define('SeptaMobi.ux.LeafletMap', {
             this.setInitialCenter(false);
         }
         if(ownPositionMarker) {
-            ownPositionMarker.setLatLng(L.latLng(geo.getLatitude(), geo.getLongitude()));
+            ownPositionMarker.setLatLng(ll.latLng(geo.getLatitude(), geo.getLongitude()));
         }
     },
 
@@ -393,16 +395,17 @@ Ext.define('SeptaMobi.ux.LeafletMap', {
      */
     addOwnPositionMarker: function() {
         var me = this,
+            ll = window.L,
             icon,
             iconOptions,
             ownPositionMarker,
             markerOptions;
 
         iconOptions = Ext.merge({}, me.getOwnPositionMarkerIcon());
-        icon = L.icon(iconOptions);
+        icon = ll.icon(iconOptions);
 
         markerOptions = Ext.merge({ icon: icon }, me.getOwnPositionMarkerOptions());
-        ownPositionMarker = L.marker([me.getGeo().getLatitude(), me.getGeo().getLongitude()], markerOptions);
+        ownPositionMarker = ll.marker([me.getGeo().getLatitude(), me.getGeo().getLongitude()], markerOptions);
         me.setOwnPositionMarker(ownPositionMarker);
         ownPositionMarker.addTo(me.getMap());
     },
@@ -453,40 +456,5 @@ Ext.define('SeptaMobi.ux.LeafletMap', {
         }
 
         this.callParent();
-    },
-
-    decode: function (encoded) {
-        var len = encoded.length;
-        var index = 0;
-        var latlngs = [];
-        var lat = 0;
-        var lng = 0;
-
-        while (index < len) {
-            var b;
-            var shift = 0;
-            var result = 0;
-            do {
-                b = encoded.charCodeAt(index++) - 63;
-                result |= (b & 0x1f) << shift;
-                shift += 5;
-            } while (b >= 0x20);
-            var dlat = ((result & 1) ? ~(result >> 1) : (result >> 1));
-            lat += dlat;
-
-            shift = 0;
-            result = 0;
-            do {
-                b = encoded.charCodeAt(index++) - 63;
-                result |= (b & 0x1f) << shift;
-                shift += 5;
-            } while (b >= 0x20);
-            var dlng = ((result & 1) ? ~(result >> 1) : (result >> 1));
-            lng += dlng;
-
-            latlngs.push([lat * 1e-5, lng * 1e-5]);
-        }
-
-        return latlngs;
     }
 });

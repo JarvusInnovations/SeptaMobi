@@ -1,8 +1,11 @@
 //TODO Show selected options on trip detail
 Ext.define('SeptaMobi.view.TripPlanner.TripDetail', {
     extend: 'Ext.Container',
-    requires: [ 'SeptaMobi.strings.TripPlanner' ],
     xtype: 'tripdetail',
+	requires: [
+	   'SeptaMobi.strings.TripPlanner',
+	   'Jarvus.touch.ux.LeafletMap'
+	],
 
 	config: {
 		title: 'Route Details',

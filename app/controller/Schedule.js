@@ -1,5 +1,8 @@
 Ext.define('SeptaMobi.controller.Schedule', {
 	extend: 'Ext.app.Controller',
+	requires: [
+	   'Jarvus.util.Polyline'
+	],
 
 	config: {
 		views: [
@@ -159,6 +162,7 @@ Ext.define('SeptaMobi.controller.Schedule', {
 
 	onRouteDetailsMapRender: function() {
 		var me = this,
+			ll = window.L,
 			routeDetails = me.getRouteDetails(),
 			stops = routeDetails.getStops(),
 			mapCmp = me.getRouteDetailsMap(),
@@ -177,15 +181,15 @@ Ext.define('SeptaMobi.controller.Schedule', {
 
 		// 	latLng = [stop.get('lat'), stop.get('lon')];
 
-		// 	marker = L.marker(latLng).addTo(map);
+		// 	marker = ll.marker(latLng).addTo(map);
 		// 	marker.bindPopup(stop.get('name')).openPopup();
 
 		// 	stopMarkers.push(marker);
 		// }
 
-		decodedPoints = mapCmp.decode(routeDetails.getEncodedPoints());
+		decodedPoints = Jarvus.util.Polyline.decode(routeDetails.getEncodedPoints());
 
-		polyLine = L.polyline(decodedPoints).addTo(map);
+		polyLine = ll.polyline(decodedPoints).addTo(map);
 
 		bounds = polyLine.getBounds();
 
@@ -204,8 +208,8 @@ Ext.define('SeptaMobi.controller.Schedule', {
 		buses.forEach(function(bus) {
 			latLng = [bus.get('lat'), bus.get('lng')];
 
-			var marker = L.marker(latLng, {
-				icon: L.icon({
+			var marker = ll.marker(latLng, {
+				icon: ll.icon({
 				    iconUrl: 'resources/images/bus-marker.png',
 					iconRetinaUrl: 'resources/images/bus-marker-2x.png',
 					iconSize: [28, 31],

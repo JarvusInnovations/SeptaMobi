@@ -1,6 +1,9 @@
 Ext.define('SeptaMobi.view.schedule.RouteDetails', {
 	extend: 'Ext.tab.Panel',
 	xtype: 'schedule-routedetails',
+	requires: [
+	   'Jarvus.touch.ux.LeafletMap'
+	],
 
 	config: {
 		stops: null,

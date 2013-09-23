@@ -1,5 +1,8 @@
 Ext.define('SeptaMobi.controller.TripPlanner', {
 	extend: 'Ext.app.Controller',
+	requires: [
+	   'Jarvus.util.Polyline'
+	],
 
 	requires: [
 		'Ext.util.Geolocation',
@@ -341,6 +344,7 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 
 	onTripDetailMapRender: function() {
 		var me = this,
+			ll = window.L,
 			mapCmp = me.getTripDetailMap(),
 			map = mapCmp.getMap(),
 			tripDetail = me.getTripDetail(),
@@ -351,11 +355,11 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 			decodedPoints, bounds, multiPolyLine;
 
 		for (; i < legsLength; i++) {
-			decodedPoints = mapCmp.decode(itenerary.legs[i].legGeometry.points);
+			decodedPoints = Jarvus.util.Polyline.decode(itenerary.legs[i].legGeometry.points);
 			lines.push(decodedPoints);
 		}
 
-		multiPolyLine = L.multiPolyline(lines).addTo(map);
+		multiPolyLine = ll.multiPolyline(lines).addTo(map);
 
 		tripDetail.setTripLine(multiPolyLine);
 

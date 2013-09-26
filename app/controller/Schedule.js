@@ -49,7 +49,8 @@ Ext.define('SeptaMobi.controller.Schedule', {
 				toggle: 'onRoutesListSegmentedButtonToggle'
 			},
 			routesList: {
-				select: 'onRoutesListSelect'
+				select: 'onRoutesListSelect',
+				leavescreen: 'onRoutesListLeaveScreen'
 			},
 			routeVariants: {
 				select: 'onRoutesVariantsSelect'
@@ -114,6 +115,10 @@ Ext.define('SeptaMobi.controller.Schedule', {
 				routeVariants.setMasked(false);
 			}
 		});
+	},
+
+	onRoutesListLeaveScreen: function(list) {
+		list.deselectAll();
 	},
 
 	onRoutesVariantsSelect: function(list, record) {

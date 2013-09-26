@@ -100,19 +100,36 @@ Ext.define('SeptaMobi.controller.Schedule', {
 	onRoutesListSelect: function(list, record) {
 		var me = this,
 			routeVariants = me.getRouteVariants(),
-			navView = me.getNavView();
+			navView = me.getNavView(),
+			i = 0,
+			routeDetails = me.getRouteDetails(),
+			i = 0,
+			bestVariant = null, maxStopsLength = 0,
+			variant, variantsLength;
 
-		routeVariants.setMasked({
+		routeDetails.setMasked({
 			xtype: 'loadmask',
 			message: 'Loading Details&hellip;'
 		});
 
-		navView.push(routeVariants);
+		navView.push(routeDetails);
 
 		SeptaMobi.model.RouteDetails.load(record.getId(), {
 			callback: function(detailsRecord) {
-				routeVariants.setDetailsRecord(detailsRecord);
-				routeVariants.setMasked(false);
+				variantsLength = detailsRecord.variants().getRange().length;
+
+				for(; i < variantsLength; i ++) {
+					variant = detailsRecord.variants().getAt(i);
+
+					if(variant.stops().getRange().length > maxStopsLength) {
+						maxStopsLength = variant.stops().getRange().length;
+						bestVariant = variant;
+					}
+				}
+
+				routeDetails.setStops(bestVariant.stops());
+
+				routeDetails.setMasked(false);
 			}
 		});
 	},

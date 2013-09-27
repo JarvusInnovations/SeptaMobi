@@ -33,6 +33,7 @@ Ext.define('SeptaMobi.controller.Schedule', {
 
 				xtype: 'schedule-routedetails'
 			},
+			routeDetailsList: 'schedule-routedetails dataview',
 			routeDetailsMap: 'schedule-routedetails leafletmap',
 			stopTimes: {
 				selector: 'schedule-stoptimes',
@@ -51,6 +52,9 @@ Ext.define('SeptaMobi.controller.Schedule', {
 			routesList: {
 				select: 'onRoutesListSelect',
 				leavescreen: 'onRoutesListLeaveScreen'
+			},
+			routeDetails: {
+				leavescreen: 'onRouteDetailsLeaveScreen'
 			},
 			routeVariants: {
 				select: 'onRoutesVariantsSelect'
@@ -104,8 +108,11 @@ Ext.define('SeptaMobi.controller.Schedule', {
 			i = 0,
 			routeDetails = me.getRouteDetails(),
 			i = 0,
-			bestVariant = null, maxStopsLength = 0,
-			variant, variantsLength;
+			bestVariant = null,
+			maxStopsLength = 0,
+			variant,
+			variantsLength,
+			stops = new Ext.util.MixedCollection();
 
 		routeDetails.setMasked({
 			xtype: 'loadmask',
@@ -116,19 +123,13 @@ Ext.define('SeptaMobi.controller.Schedule', {
 
 		SeptaMobi.model.RouteDetails.load(record.getId(), {
 			callback: function(detailsRecord) {
-				variantsLength = detailsRecord.variants().getRange().length;
+				detailsRecord.variants().each(function (variant) {
+				    variant.stops().each(function(stop) {
+				    	stops.add(stop);
+				    });
+				});
 
-				for(; i < variantsLength; i ++) {
-					variant = detailsRecord.variants().getAt(i);
-
-					if(variant.stops().getRange().length > maxStopsLength) {
-						maxStopsLength = variant.stops().getRange().length;
-						bestVariant = variant;
-					}
-				}
-
-				routeDetails.setStops(bestVariant.stops());
-
+				routeDetails.setStops(stops);
 				routeDetails.setMasked(false);
 			}
 		});
@@ -136,6 +137,10 @@ Ext.define('SeptaMobi.controller.Schedule', {
 
 	onRoutesListLeaveScreen: function(list) {
 		list.deselectAll();
+	},
+
+	onRouteDetailsLeaveScreen: function(routeDetails) {
+		this.getRouteDetailsList().deselectAll();
 	},
 
 	onRoutesVariantsSelect: function(list, record) {

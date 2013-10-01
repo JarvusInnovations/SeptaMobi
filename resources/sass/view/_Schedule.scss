@@ -36,6 +36,21 @@
 			float: right;
 		}
 	}
+	
+	.bus-number {
+		@include border-radius(30px);
+		background-color: $base-color;
+		color: #fff;
+		display: inline-block;
+		font-weight: 900;
+		font-size: smaller;
+		line-height: 1em;
+		padding: 4px;
+		min-height: 20px;
+		min-width: 20px;
+		margin-right: 10px;
+		text-align: center;		
+	}
 }
 
 

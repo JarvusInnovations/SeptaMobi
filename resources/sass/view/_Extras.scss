@@ -1,0 +1,18 @@
+.extras {
+	
+	.x-button {
+		background-color: transparent;
+		background: repeat-x bottom left url(../images/hairline.png);
+		border: none;
+		font-family: $headline-face;
+		font-size: 1.2em;
+		letter-spacing: 1px;
+		font-weight: normal;
+		padding: .5em .75em;
+		text-transform: uppercase;
+		
+		.x-button-label {
+			text-align: left;
+		}
+	}
+}

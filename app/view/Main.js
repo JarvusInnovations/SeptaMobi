@@ -33,6 +33,7 @@ Ext.define('SeptaMobi.view.Main', {
             xtype: 'tripplanner'
         },{
             title: 'Extras',
+            iconCls: 'tab-trip-planner',
             xtype: 'extrasview'
         }]
     }

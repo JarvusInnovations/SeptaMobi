@@ -24,7 +24,8 @@ Ext.application({
     name: 'SeptaMobi',
 
     requires: [
-        'Ext.MessageBox'
+        'Ext.MessageBox',
+        'Jarvus.touch.override.nav.CardAnimation'
     ],
 
     controllers: [

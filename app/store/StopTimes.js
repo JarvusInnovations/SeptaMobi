@@ -17,6 +17,11 @@ Ext.define('SeptaMobi.store.StopTimes', {
 			extraParams: {
 				'agency': 'SEPTA'
 			}
-		}
+		},
+
+		filters: [{
+			property: "phase",
+			value: /departure/
+		}]
 	}
 });

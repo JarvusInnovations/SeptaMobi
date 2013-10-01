@@ -20,7 +20,10 @@ Ext.define('SeptaMobi.model.Route', {
 		},{
 			name: 'displayName',
 			convert: function(v,r) {
-				if(r.get('routeShortName') == r.get('routeLongName')) {
+				if(r.get('routeType') == 3) {
+					return r.get('routeLongName');
+				}
+				else if(r.get('routeShortName') == r.get('routeLongName')) {
 					return r.get('routeShortName');
 				}
 				else {

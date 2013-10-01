@@ -12,7 +12,7 @@ Ext.define('SeptaMobi.view.schedule.StopTimes', {
 		disableSelection: true,
 		itemTpl: [
 			'<div>',
-				'<span>{time:date("m/d/Y g:i A")}</span> <span class="phase">{phase}</span>',
+				'<span>{time:date("m/d/Y g:i A")}</span>',
 			'</div>'
 		]
 	}

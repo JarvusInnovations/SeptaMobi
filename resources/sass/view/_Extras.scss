@@ -14,5 +14,9 @@
 		.x-button-label {
 			text-align: left;
 		}
+		
+		&.x-button-pressing {
+			background-color: rgba($base-color, .2);
+		}
 	}
 }

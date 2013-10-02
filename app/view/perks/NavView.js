@@ -7,6 +7,7 @@ Ext.define('SeptaMobi.view.perks.NavView', {
 
 	config: {
 		title: 'Septa Pass Perks',
+		cls: 'perks',
 		// items: [{
 		// 	xtype: 'container',
 			layout: {
@@ -16,12 +17,12 @@ Ext.define('SeptaMobi.view.perks.NavView', {
 			items: [{
 				xtype: 'selectfield',
 				itemId: 'perkSorter',
-				label: 'Sort By',
+				label: 'Sort By:',
+				labelWidth: '60px',
 				options: [
 					{text: 'End Date', value: 'endDate_DSC'}
 					,{text: 'Locations Near Me', value: 'nearme'}
 				],
-				height: 40
 				// scrollDock: 'top',
 				// docked: 'top'
 			},{
@@ -29,10 +30,11 @@ Ext.define('SeptaMobi.view.perks.NavView', {
 				store: 'Perks',
 				// title: 'Septa Pass Perks',
 				itemTpl: [
-					'{perk_name}<br>',
-					'{startDate} - {endDate}<br>',
-					'{loc_name} - {address1}<br>',
-					,'{description}'
+					'<div class="perk loc-name">{loc_name}</div>',
+					'<div class="perk name">{perk_name}</div>',
+					'<div class="perk date">Offer ends on {endDate}</div>',
+					'<div class="perk address">{address1}</div>',
+					'<div class="perk description>{description}</div>'
 				],
 				flex: 1
 			}]

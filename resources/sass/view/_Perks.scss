@@ -1,0 +1,53 @@
+
+.perks {
+	line-height: 1.3em;
+	
+	.x-list-item {
+		background: repeat-x bottom left url(../images/hairline.png);
+		padding: .8em 1.8em .8em 1.2em;
+		
+		&.x-list-item-tpl .x-innerhtml {
+			padding: 0;
+		}
+		
+		&.x-item-pressed.x-list-item-tpl, &.x-item-selected.x-list-item {
+			background-color: rgba($base-color, .2);
+		}
+		
+		&::after {
+			content: '>';
+			font-family: SeptaMobi;
+			font-size: small;
+			opacity: .4;
+			position: absolute;
+			right: 1.1em;
+			top: 1.1em;
+		}
+	}
+}
+
+
+
+.perk {
+	clear: both;
+	
+	&.loc-name {
+		font-weight: bold;
+		font: -apple-system-short-headline;
+	}
+	
+	&.name {
+		font-size: .95em;
+		font: -apple-system-short-subheadline;
+	}
+	
+	&.address, &.description, &.date {
+		font-size: smaller;
+		font: -apple-system-footnote;
+		line-height: 1.3em;
+	}
+	
+	&.date {
+		color: #777;
+	}
+}

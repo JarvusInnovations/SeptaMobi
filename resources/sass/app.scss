@@ -29,14 +29,16 @@ $regionalrail: #5186a0;
 		'tab/Bar',
 		'tab/Tab',
 		'toolbar/Toolbar',
-		'picker/Picker';
+		'picker/Picker',
+		'field/SelectField';
 
 @import 'view/TripTplTemp',
 		'view/Dashboard',
 		'view/Bookmarks',
 		'view/TripPlanner',
 		'view/Schedule',
-		'view/Extras';	
+		'view/Extras',
+		'view/Perks';	
 		
 @include st-loading-spinner;
 

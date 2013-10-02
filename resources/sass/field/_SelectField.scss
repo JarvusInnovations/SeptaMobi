@@ -1,0 +1,32 @@
+
+.x-field-select {
+	background: repeat-x bottom left url(../images/hairline.png);
+	padding: .8em 1.2em;
+	
+	.x-form-label {
+		font-family: $headline-face;
+		font-weight: normal;
+		letter-spacing: 1px;
+		margin-right: .6em;
+		text-align: right;
+		text-transform: uppercase;
+	}
+	
+	&.x-field .x-input-el {
+		background: none;
+		border: none;
+	}
+	
+	&:x-field .x-field-input {
+	
+		&::after {
+			content: '^';
+			font-family: SeptaMobi;
+			font-size: small;
+			opacity: .4;
+			position: absolute;
+			right: -.25em;
+			top: .25em;
+		}
+	}
+}

@@ -1,12 +1,13 @@
 Ext.define('SeptaMobi.controller.TripPlanner', {
 	extend: 'Ext.app.Controller',
 	requires: [
-	   'Jarvus.util.Polyline'
+		'Jarvus.util.Polyline'
 	],
 
 	requires: [
 		'Ext.util.Geolocation',
-		'SeptaMobi.API'
+		'SeptaMobi.API',
+		'SeptaMobi.view.BookmarkPanel'
 	],
 
 	config: {
@@ -22,6 +23,7 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 		],
 		stores: [
 			'AutocompleteAddress',
+			'Bookmarks',
 			'Itineraries'
 		],
 		refs: {
@@ -49,7 +51,15 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 
 				xtype: 'tripdetail'
 			},
-			tripDetailMap: 'tripdetail leafletmap'
+			tripDetailMap: 'tripdetail leafletmap',
+			toggleBookmarkButton: 'tripplanner button[action=toggleBookmark]',
+			bookmarkPanel: {
+				selector: 'bookmarkpanel',
+				autoCreate: true,
+
+				xtype: 'bookmarkpanel',
+				fullScreen: true
+			}
 		},
 		control: {
 			'tripplanner #fromField': {
@@ -83,6 +93,12 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 			},
 			'tripdetail leafletmap': {
 				maprender: 'onTripDetailMapRender'
+			},
+			'tripplanner': {
+				transitioncomplete: 'onTripPlannerNavTransitionComplete'
+			},
+			toggleBookmarkButton: {
+				tap: 'onTripPlannerToggleBookmarkTapped'
 			}
 		}
 	},
@@ -249,7 +265,11 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 				} else {
 					tripPlan = {
 						toName: toAddress.get('text'),
+						toLat: response.data.plan.to.lat,
+						toLon: response.data.plan.to.lon,
 						fromName: fromAddress.get('text'),
+						fromLat: response.data.plan.from.lat,
+						fromLon: response.data.plan.from.lon,
 						departTime: departTime
 					};
 
@@ -366,5 +386,57 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 		Ext.defer(function() {
 			map.fitBounds(multiPolyLine.getBounds());
 		}, 1000, me);
+	},
+
+	onTripPlannerNavTransitionComplete: function(incomingItem, outgoingItem) {
+		var bookmarkStore = Ext.getStore('Bookmarks'),
+			plan = outgoingItem.getTripPlan(),
+			bookmark = Ext.create('SeptaMobi.model.Bookmark', plan),
+			toggleBookmarkButton = this.getToggleBookmarkButton();
+
+		if (outgoingItem.isXType('triplist')) {
+			// TODO check if bookmark exists and set button text
+			if(bookmarkStore.hasBookmark(bookmark)) {
+				toggleBookmarkButton.addCls('bookmarked');
+			}
+			else {
+				toggleBookmarkButton.removeCls('bookmarked');
+			}
+
+			toggleBookmarkButton.show();
+		} else {
+			toggleBookmarkButton.hide();
+		}
+	},
+
+	onTripPlannerToggleBookmarkTapped: function(button) {
+		var me = this,
+			tripList = me.getTripList(),
+			plan = tripList.getTripPlan(),
+			bookmarkStore = Ext.getStore('Bookmarks'),
+			bookmark = Ext.create('SeptaMobi.model.Bookmark', plan),
+			bookmarkIndex, bookmarkPanel;
+
+		if(button.getCls() && button.getCls().indexOf('bookmarked') != -1) {
+			bookmarkIndex = bookmarkStore.findExact('uid', bookmark.get('uid'));
+			if(bookmarkIndex != -1) {
+				bookmarkStore.removeAt(bookmarkIndex);
+				bookmarkStore.sync();
+
+				button.removeCls('bookmarked');
+
+				Ext.Msg.alert('Info', 'Bookmark has been removed.', Ext.emptyFn);
+			}
+			else {
+				Ext.Msg.alert('Error', 'Bookmark could not be found.', Ext.emptyFn);
+			}
+		}
+		else {
+			bookmarkPanel = me.getBookmarkPanel(),
+
+			bookmarkPanel.setButton(button);
+			bookmarkPanel.setBookmark(bookmark);
+			bookmarkPanel.show();
+		}
 	}
 });

@@ -48,41 +48,43 @@ Ext.define('SeptaMobi.view.Dashboard', {
 					'<div>',
 						'<span class="line {lineName}">{lineName}</span>',
 						'<h4>{name}</h4>',
-						'<p>{to} <span class="arrow"></span> {from}</p>',
+						'<p>{fromName} <span class="arrow"></span> {toName}</p>',
 						'<span class="disclosure"/>',
 					'</div>'
 				],
-				store: {
-					fields: [{
-						name: 'name',
-						type: 'string'
-					},{
-						name: 'from',
-						type: 'string'
-					}, {
-						name: 'to',
-						type: 'string'
-					}, {
-						name: 'lineName',
-						type: 'string'
-					}],
-					data: [{
-						name: 'Home to Work',
-						from: '304 Arch St',
-						to: '908 North 3rd St',
-						lineName: '***'
-					},{
-						name: 'Home to Center City',
-						from: '3rd St',
-						to: '15th St Station',
-						lineName: 'MFL'
-					},{
-						name: 'Stadium to Center City',
-						from: 'Att Station',
-						to: '15th St Station',
-						lineName: 'BSL'
-					}]
-				}
+				store: 'Bookmarks',
+				emptyText: 'No bookmarks yet!'
+				// store: {
+				// 	fields: [{
+				// 		name: 'name',
+				// 		type: 'string'
+				// 	},{
+				// 		name: 'from',
+				// 		type: 'string'
+				// 	}, {
+				// 		name: 'to',
+				// 		type: 'string'
+				// 	}, {
+				// 		name: 'lineName',
+				// 		type: 'string'
+				// 	}],
+				// 	data: [{
+				// 		name: 'Home to Work',
+				// 		from: '304 Arch St',
+				// 		to: '908 North 3rd St',
+				// 		lineName: '***'
+				// 	},{
+				// 		name: 'Home to Center City',
+				// 		from: '3rd St',
+				// 		to: '15th St Station',
+				// 		lineName: 'MFL'
+				// 	},{
+				// 		name: 'Stadium to Center City',
+				// 		from: 'Att Station',
+				// 		to: '15th St Station',
+				// 		lineName: 'BSL'
+				// 	}]
+				// }
 			}]
 		}]
 	}

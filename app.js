@@ -29,6 +29,7 @@ Ext.application({
     ],
 
     controllers: [
+        'Bookmark',
         'Schedule',
         'TripPlanner'
         //<debug>

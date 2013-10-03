@@ -9,6 +9,18 @@ Ext.define('SeptaMobi.view.TripPlanner.NavView', {
     xtype: 'tripplanner',
 
     config: {
+        navigationBar: {
+            docked: 'top',
+            items: [
+                {
+                    xtype: 'button',
+                    align: 'right',
+                    text: 'Bookmark',
+                    action: 'toggleBookmark',
+                    hidden: true
+                }
+            ]
+        },
         items: [{
             xtype: 'formpanel',
             title: 'Trip Planner',

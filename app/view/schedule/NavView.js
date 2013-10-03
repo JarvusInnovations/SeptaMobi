@@ -6,6 +6,17 @@ Ext.define('SeptaMobi.view.schedule.NavView', {
 	],
 
 	config: {
+		navigationBar: {
+            docked: 'top',
+            items: [
+                {
+                    xtype: 'button',
+                    align: 'right',
+                    text: 'Bookmark',
+                    action: 'toggleBookmark'
+                }
+            ]
+        },
 		items: [{
 			xtype: 'schedule-routeslist'
 		}]

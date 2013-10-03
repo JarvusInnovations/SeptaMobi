@@ -1,0 +1,24 @@
+
+.x-panel {
+	
+	&.x-floating {
+		background: repeat-x top left url(../images/hairline.png);
+		background-color: #fff;
+		padding: 0;
+		
+		.x-panel-inner {
+			background: #fff;
+			
+			
+			.x-list-item {
+				background: repeat-x bottom left url(../images/hairline.png);
+				padding: .6em 1em;
+				font-family: 
+				
+				&.x-item-selected {
+					background: rgba($base-color, .2);
+				}
+			}
+		}
+	}
+}

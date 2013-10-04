@@ -133,3 +133,43 @@
 
 .itinerary-detail {
 }
+
+.directions-carousel-ct {
+    background: rgba(black, .8);
+    color: white;
+    
+    .x-carousel-item {
+        padding: 1em .5em;
+    }
+    
+    .x-carousel-indicator {
+        & > span {
+            background: rgba(white, .2);
+            @include border-radius(100%);
+            height: .5em;
+            margin-bottom: .5em;
+            width: .5em;
+        }
+        
+        & > .x-carousel-indicator-active {
+            background: rgba(white, .8);
+        }
+    }
+}
+
+.directions-arrow {
+    background: none;
+    border: none;
+    font-family: SeptaMobi;
+    font-size: large;
+    height: 100%;
+    padding: .5em;
+    
+    &.x-item-disabled {
+        opacity: .1;
+    }
+    
+    &.next {
+        @include rotate(180deg);
+    }
+}

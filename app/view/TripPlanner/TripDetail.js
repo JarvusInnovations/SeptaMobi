@@ -105,16 +105,47 @@ Ext.define('SeptaMobi.view.TripPlanner.TripDetail', {
                     }
                 ]
             }, {
-                xtype: 'leafletmap',
-
+                xtype: 'container',
+                layout: 'fit',
                 title: 'Map',
-                tileLayerOptions: { detectRetina: true},
-                useCurrentLocation: true,
-                autoMapCenter: false,
-                enableOwnPositionMarker: true,
-                mapOptions: {
-                    zoom: 15
-                }
+                items: [{
+                    xtype: 'leafletmap',
+    
+                    title: 'Map',
+                    tileLayerOptions: { detectRetina: true},
+                    useCurrentLocation: true,
+                    autoMapCenter: false,
+                    enableOwnPositionMarker: true,
+                    mapOptions: {
+                        zoom: 15
+                    }                    
+                },{
+                    xtype: 'container',
+                    cls: 'directions-carousel-ct',
+                    bottom: 16,
+                    width: '100%',
+                    height: 96,
+                    layout: { type: 'hbox', align: 'middle' },
+                    items: [{
+                        xtype: 'button',
+                        cls: 'directions-arrow prev',
+                        disabled: true,
+                        text: '<'
+                    },{
+                        xtype: 'carousel',
+                        height: '100%',
+                        flex: 1,
+                        items: [{
+                            html: 'Item 1<br>extra line<br>another line'
+                        },{
+                            html: 'Item 2'
+                        }]
+                    },{
+                        xtype: 'button',
+                        cls: 'directions-arrow next',
+                        text: '<'
+                    }]
+                }]
             }]
         }]
     },

@@ -22,3 +22,63 @@
 		}
 	}
 }
+
+.panel-popup.x-panel {
+	margin: 0 auto;
+	width: 90%;
+	
+	.x-panel-inner {
+		background: $dark-trans-black;
+		border-radius: .25em;
+		color: #fff;
+		height: auto;
+		padding: 1em;
+		position: absolute;
+		top: 20%;
+	}
+	
+	.x-form-label {
+		font-family: $headline-face;
+		text-transform: uppercase;
+	}
+	
+	input {
+		border: none;
+		border-radius: 2px;
+		padding: .4em 1.75em .4em .6em;
+	}
+	
+	.x-field-clearable .x-field-input {
+		padding-right: 0;
+	}
+	
+	.x-field-input .x-clear-icon {
+		height: 15px;
+		right: 5px;
+		top: 26%;
+		width: 15px;
+	}
+	
+	.x-button {
+        background: $base-color;
+        border: none;
+        border-radius: 2px;
+        float: left;
+        margin: .75em 0 0;
+        padding: .4em .6em;
+        width: 47%;
+        
+        &.x-button-pressing,
+        &.x-button-pressed {
+            background: darken($base-color, 10);
+        }
+        
+        &:nth-child(2) {
+	        float: right;
+        }
+    }
+    
+    .x-button-label {
+        color: white;
+    }
+}

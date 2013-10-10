@@ -5,11 +5,13 @@ Ext.define('SeptaMobi.view.BookmarkPanel', {
 	config: {
 		bookmark: null,
 		button: null,
+		cls: 'panel-popup',
 
 		items: [{
 			xtype: 'textfield',
-			label: 'Bookmark Name',
-			labelWidth: '50%'
+			label: 'Bookmark Name:',
+			labelWidth: '50%',
+			labelAlign: 'top'
 		}, {
 			xtype: 'button',
 			action: 'ok',

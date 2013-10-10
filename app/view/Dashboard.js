@@ -45,11 +45,11 @@ Ext.define('SeptaMobi.view.Dashboard', {
 				title: 'Bookmarks',
 				cls: 'bookmarks',
 				itemTpl: [
-					'<div>',
-						'<span class="line {lineName}">{lineName}</span>',
-						'<h4>{name}</h4>',
+					'<div class="bookmark">',
+						'<div class="line {lineName}">{lineName}</div>',
+						'<div class="text"><h4>{name}</h4>',
 						'<p>{fromName} <span class="arrow"></span> {toName}</p>',
-						'<span class="disclosure"/>',
+						'<span class="disclosure"/></div>',
 					'</div>'
 				],
 				store: 'Bookmarks',

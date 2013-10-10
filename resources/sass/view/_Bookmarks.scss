@@ -1,12 +1,18 @@
 
 .bookmarks {
+
+	.bookmark {
+		@include display-box;
+		@include box-align(stretch);
+		padding: .75em 0;
+	}
 	
 	&.x-list .x-list-item.x-list-item-tpl .x-innerhtml {
 		@include hairline;
 		overflow: hidden;
 		margin-right: .8em;
 		padding: 0 1em 0 0;
-		
+			
 		&:after {
 			content: '>';
 			font-family: SeptaMobi;
@@ -22,16 +28,16 @@
 	.line {
 		color: #fff;
 		background-color: $base-color;
-		display: block;
+		//display: block;
 		font-size: 1.7em;
 		font-family: $headline-face;
 		float: left;
-		min-height: 55px;
-		margin-right: .8em;
-		padding-top: .5em;
+		//min-height: 55px;
+		margin-right: .5em;
+		//padding-top: .5em;
 		text-align: center;
-		width: 60px;
-		
+		min-width: 60px;
+	
 		&.MFL {
 			background-color: $mfl;
 		}
@@ -40,13 +46,17 @@
 		}
 	}
 	
+	.text {
+		@include box-flex(1);
+	}
+	
 	h4 {
 		font-weight: bold;
 		margin: 0;
-		padding-top: .5em;
 	}
 	p {
-		margin-bottom: .5em;
+		line-height: 1.3em;
+		overflow: hidden;
 	}
 	.arrow {
 		background-image: url(../images/bookmarks-arrow.png);

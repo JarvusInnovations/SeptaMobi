@@ -19,7 +19,7 @@ Ext.define('SeptaMobi.controller.Schedule', {
 			'RouteDetails'
 		],
 		refs: {
-			navView: 'schedule-navview',
+			navView: 'stops-navview',
 			routesList: 'schedule-routeslist',
 			routeVariants: {
 				selector: 'schedule-routevariants',
@@ -64,6 +64,9 @@ Ext.define('SeptaMobi.controller.Schedule', {
 			},
 			routeDetailsMap: {
 				maprender: 'onRouteDetailsMapRender'
+			}, 
+			'schedule-navview button[action=toggleBookmark]': {
+				tap: 'onScheduleToggleBookmarkTapped'
 			}
 		}
 	},
@@ -112,7 +115,8 @@ Ext.define('SeptaMobi.controller.Schedule', {
 			maxStopsLength = 0,
 			variant,
 			variantsLength,
-			stops = new Ext.util.MixedCollection();
+			stops = new Ext.util.MixedCollection(),
+			encodedPoints = [];
 
 		routeDetails.setMasked({
 			xtype: 'loadmask',
@@ -127,8 +131,10 @@ Ext.define('SeptaMobi.controller.Schedule', {
 				    variant.stops().each(function(stop) {
 				    	stops.add(stop);
 				    });
+				    encodedPoints.push(variant.get('encodedPoints'));
 				});
-
+				
+				routeDetails.setEncodedPoints(encodedPoints);
 				routeDetails.setStops(stops);
 				routeDetails.setMasked(false);
 			}
@@ -198,6 +204,8 @@ Ext.define('SeptaMobi.controller.Schedule', {
 			busStore = Ext.getStore('Buses'),
 			buses = busStore.getRange(),
 			busLength = buses.length,
+			encodedPoints = routeDetails.getEncodedPoints(),
+			encodedPointsLength = encodedPoints.length,
 			stopMarkers = [], busMarkers = [],
 			i = 0, stop, latLng, bounds, decodedPoints, polyLine, infoTemplate;
 
@@ -214,14 +222,19 @@ Ext.define('SeptaMobi.controller.Schedule', {
 		// 	stopMarkers.push(marker);
 		// }
 
-		decodedPoints = Jarvus.util.Polyline.decode(routeDetails.getEncodedPoints());
-
-		polyLine = ll.polyline(decodedPoints).addTo(map);
-
-		bounds = polyLine.getBounds();
+		for(; i < encodedPointsLength; i++) {
+			decodedPoints = Jarvus.util.Polyline.decode(encodedPoints[i]);
+			polyLine = ll.polyline(decodedPoints).addTo(map);			
+			//TODO figure out a better way to get bounds
+			if(i == 0) {
+				bounds = polyLine.getBounds();
+			}
+		}
+		
+		// polyLine = ll.polyline(decodedPoints).addTo(map);		
 
 		routeDetails.setStopMarkers(stopMarkers);
-		routeDetails.setRoutePolyLine(polyLine);
+		// routeDetails.setRoutePolyLine(polyLine);
 
 		routeDetails.removeBusMarkers();
 
@@ -256,5 +269,13 @@ Ext.define('SeptaMobi.controller.Schedule', {
 		Ext.defer(function() {
 			map.fitBounds(bounds);
 		}, 1000, this);
+	},
+
+	onScheduleToggleBookmarkTapped: function() {
+		console.log('bookmark toggle tapped');
+
+		var me = this,
+			navView = me.getNavView(),
+			activeItem = navView.getActiveItem();
 	}
 });

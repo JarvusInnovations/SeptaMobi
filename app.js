@@ -31,6 +31,7 @@ Ext.application({
     controllers: [
         'Bookmark',
         'Schedule',
+        'Stop',
         'TripPlanner'
         //<debug>
         ,'Extras'

@@ -1,4 +1,4 @@
-Ext.define('SeptaMobi.model.Stop', {
+Ext.define('SeptaMobi.model.NearByStop', {
     extend: 'Ext.data.Model',
 
     config: {
@@ -9,13 +9,13 @@ Ext.define('SeptaMobi.model.Stop', {
             mapping: 'id.id',
             type: 'int'
         }, {
-            name: 'name',
+            name: 'stopName',
             type: 'string'
         }, {
-            name: 'lat',
+            name: 'stopLat',
             type: 'float'
         }, {
-            name: 'lon',
+            name: 'stopLon',
             type: 'float'
         }, {
             name: 'routes'

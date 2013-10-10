@@ -79,5 +79,42 @@ Ext.define('SeptaMobi.API', {
 				Ext.callback(callback, scope, [options, success, response]);
 			}
 		});
+	},
+
+	getNearByStops: function(lat, lon, callback, scope) {
+		var	routeStore = Ext.getStore('Routes'),
+			nearByStopsStore = Ext.getStore('NearByStops'),
+			i = 0,
+			records, stopsLength, routesLength, j, routes;
+
+		Ext.Ajax.request({
+				url: (window.SeptaMobi_API && SeptaMobi_API.stopsNearPoint) || (location.protocol == 'http:' ? './api/stopsNearPoint' : 'http://opentrips.codeforphilly.org/opentripplanner-api-webapp/ws/transit/stopsNearPoint'),
+			method: 'GET',
+			params: {
+				lat: lat,
+				lon: lon
+			},
+			callback: function(options, success, response) {
+				if ((response.getResponseHeader('content-type') || '').indexOf('application/json') == 0 && response.responseText) {
+					response.data = Ext.decode(response.responseText, true);
+				}
+
+				records = response.data.stops;
+				stopsLength = records.length;
+
+				for (; i < stopsLength; i++) {
+					routes = records[i].routes;
+					routesLength = routes.length;
+
+					for (j = 0; j < routesLength; j++) {
+						routes[j] = routeStore.getById(routes[j].id);
+					}
+				}
+				
+				nearByStopsStore.setData(records);
+
+				Ext.callback(callback, scope, [options, success, response]);
+			}
+		});
 	}
 });

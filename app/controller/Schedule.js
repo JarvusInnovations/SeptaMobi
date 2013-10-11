@@ -115,6 +115,7 @@ Ext.define('SeptaMobi.controller.Schedule', {
 			maxStopsLength = 0,
 			variant,
 			variantsLength,
+			previousIndex = -1,
 			stops = new Ext.util.MixedCollection(),
 			encodedPoints = [];
 
@@ -127,9 +128,19 @@ Ext.define('SeptaMobi.controller.Schedule', {
 
 		SeptaMobi.model.RouteDetails.load(record.getId(), {
 			callback: function(detailsRecord) {
-				detailsRecord.variants().each(function (variant) {
-				    variant.stops().each(function(stop) {
-				    	stops.add(stop);
+				detailsRecord.variants().each(function (variant, vindex) {
+					console.log('Variant Index', vindex);
+				    variant.stops().each(function(stop, index) {
+				    	if(stops.contains(stop)) {
+				    		previousIndex = stops.indexOf(stop);
+				    	}
+				    	else if(previousIndex == -1) {
+				    		stops.add(stop);
+				    		previousIndex = -1;
+				    	}
+				    	else {
+				    		stops.insert(previousIndex, stop);
+				    	}
 				    });
 				    encodedPoints.push(variant.get('encodedPoints'));
 				});

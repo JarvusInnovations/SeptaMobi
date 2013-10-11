@@ -12,6 +12,9 @@ Ext.define('SeptaMobi.controller.Stop', {
 		control: {
 			navView: {
 				show: 'onStopsShow'
+			},
+			'stops-main': {
+				leavescreen: 'onStopsMainLeaveScreen'
 			}
 		}
 	},
@@ -34,6 +37,10 @@ Ext.define('SeptaMobi.controller.Stop', {
 				}
 			});
 		}
+	},
+
+	onStopsMainLeaveScreen: function(panel) {
+		panel.down('schedule-routeslist').deselectAll();
 	},
 
 	updateLocation: function() {

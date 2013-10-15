@@ -14,7 +14,8 @@ Ext.define('SeptaMobi.view.Dashboard', {
 		}, {
 			xtype: 'button',
 			text: 'New Route',
-			cls: 'newroute-btn'
+			cls: 'newroute-btn',
+			action: 'newRoute'
 		}, {
 			xtype: 'tabpanel',
 			flex: 1,

@@ -27,7 +27,9 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 			'Itineraries'
 		],
 		refs: {
+			mainTabView: 'main',
 			tripPlannerView: 'tripplanner',
+			tripPlannerForm: 'tripplanner formpanel',
 			fromField: 'tripplanner #fromField',
 			toField: 'tripplanner #toField',
 			fromUseCurrent: 'tripplanner #fromUseCurrent',
@@ -100,7 +102,20 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 			toggleBookmarkButton: {
 				tap: 'onTripPlannerToggleBookmarkTapped'
 			}
+		},
+		routes: {
+			'tripplanner': 'showTripPlanner'
 		}
+	},
+
+	showTripPlanner: function() {
+		var me = this,
+			mainTabView = me.getMainTabView(),
+			tripPlannerForm = me.getTripPlannerForm(),
+			tripPlannerNavView = me.getTripPlannerView();
+
+		mainTabView.setActiveItem(2);
+		tripPlannerNavView.pop(tripPlannerForm);
 	},
 
 	onAddressFieldFocus: function(field) {

@@ -25,11 +25,14 @@ Ext.application({
 
     requires: [
         'Ext.MessageBox',
-        'Jarvus.touch.override.nav.CardAnimation'
+        'Jarvus.touch.override.nav.CardAnimation',
+        'Jarvus.touch.override.app.PushPath'
     ],
 
     controllers: [
         'Bookmark',
+        'Dashboard',
+        'Main',
         'Schedule',
         'Stop',
         'TripPlanner'

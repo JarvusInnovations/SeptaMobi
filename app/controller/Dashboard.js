@@ -4,6 +4,9 @@ Ext.define('SeptaMobi.controller.Dashboard', {
 	config: {
 		refs: {
 		},
+		stores: [
+			'Alerts'
+		],
 
 		control: {
 			'button[action=newRoute]': {

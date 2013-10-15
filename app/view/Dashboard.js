@@ -1,6 +1,6 @@
 Ext.define('SeptaMobi.view.Dashboard', {
 	extend: 'Ext.Container',
-	requires: [],
+	requires: ['SeptaMobi.store.Alerts'],
 	xtype: 'dashboard',
 	
 	config: {
@@ -24,23 +24,16 @@ Ext.define('SeptaMobi.view.Dashboard', {
 				xtype: 'dataview',
 				title: 'Alerts',
 				itemTpl: [
-					'<div>{message}</div>'
+					'<div>{message}</div>',
+					'<span class="bus-number">{route_name}</span>',
+					'<span>{[this.getMessage(values)]}</span>',
+					{
+						getMessage: function(record) {
+							return record.advisory_message || record.detour_message;
+						}
+					}
 				],
-				store: {
-					fields: [{
-						name: 'message',
-						type: 'string'
-					}],
-					data: [{
-						message: 'Test Alert 1'
-					},{
-						message: 'Test Alert 2'
-					},{
-						message: 'Test Alert 3'
-					},{
-						message: 'Test Alert 4'
-					}]
-				}
+				store: 'Alerts'
 			}, {
 				xtype: 'list',
 				title: 'Bookmarks',

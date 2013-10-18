@@ -19,3 +19,5 @@ Not all controllers support routing, all controllers need sub routes
 Perks are not sortable
 
 Token locations are not implemented
+
+Assets are missing for perks, token locations, and other bus direction

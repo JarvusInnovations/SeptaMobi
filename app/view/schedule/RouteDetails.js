@@ -6,7 +6,7 @@ Ext.define('SeptaMobi.view.schedule.RouteDetails', {
 	],
 
 	config: {
-		stops: null,
+		// stops: null,
 		stopMarkers: [],
 		encodedPoints: [],
 		routePolyLine: null,
@@ -22,7 +22,8 @@ Ext.define('SeptaMobi.view.schedule.RouteDetails', {
 				'<div>',
 					'<span>{name}</span>',
 				'</div>'
-			]
+			],
+			store: 'Stops'
 		}, {
 			xtype: 'leafletmap',
 			title: 'Map',
@@ -36,11 +37,11 @@ Ext.define('SeptaMobi.view.schedule.RouteDetails', {
 		}]
 	},
 	
-	updateStops: function(stops) {
-		var data = Ext.Array.map(stops.getRange(), function(r) { return r.getData(); });
+	// updateStops: function(stops) {
+	// 	var data = Ext.Array.map(stops.getRange(), function(r) { return r.getData(); });
 
-		this.down('dataview').setData(data);
-	},
+	// 	this.down('dataview').setData(data);
+	// },
 
 	removeBusMarkers: function() {
 		var mapCmp = this.down('leafletmap'),

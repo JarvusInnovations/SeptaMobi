@@ -8,10 +8,10 @@ Ext.define('SeptaMobi.view.schedule.RoutesList', {
 		
 		loadingText: false,
 		cls: 'schedule',
-		store: 'Routes',
+		// store: 'Routes',
 		itemHeight: 30,
 		itemTpl: [
-			'<div>',
+			'<div>',				
 				'<tpl if="routeType == 3">',
 				'<span class="bus-number">{routeShortName}</span>',
 				'</tpl>',
@@ -25,10 +25,6 @@ Ext.define('SeptaMobi.view.schedule.RoutesList', {
 				flex: 1
 			},
 			items: [{
-				//Todo remove , only using for testing
-				text: 'All',
-				pressed: true
-			}, {
 				text: 'Bus',
 				routeType: 3 
 			}, {

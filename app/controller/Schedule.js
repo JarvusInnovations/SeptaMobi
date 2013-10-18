@@ -6,13 +6,14 @@ Ext.define('SeptaMobi.controller.Schedule', {
 
 	config: {
 		views: [
-			'schedule.RouteVariants',
+			'schedule.RouteDirections',
 			'schedule.RouteDetails',
 			'schedule.StopTimes'
 		],
 		stores: [
 			'Buses',
 			'Routes',
+			'Stops',
 			'StopTimes'
 		],
 		models: [
@@ -21,11 +22,11 @@ Ext.define('SeptaMobi.controller.Schedule', {
 		refs: {
 			navView: 'stops-navview',
 			routesList: 'schedule-routeslist',
-			routeVariants: {
-				selector: 'schedule-routevariants',
+			routeDirections: {
+				selector: 'schedule-routedirections',
 				autoCreate: true,
 
-				xtype: 'schedule-routevariants'
+				xtype: 'schedule-routedirections'
 			},
 			routeDetails: {
 				selector: 'schedule-routedetails',
@@ -35,6 +36,7 @@ Ext.define('SeptaMobi.controller.Schedule', {
 			},
 			routeDetailsList: 'schedule-routedetails dataview',
 			routeDetailsMap: 'schedule-routedetails leafletmap',
+			stopRouteDetailsMap: 'stops-routemap',
 			stopTimes: {
 				selector: 'schedule-stoptimes',
 				autoCreate: true,
@@ -56,15 +58,16 @@ Ext.define('SeptaMobi.controller.Schedule', {
 			routeDetails: {
 				leavescreen: 'onRouteDetailsLeaveScreen'
 			},
-			routeVariants: {
-				select: 'onRoutesVariantsSelect'
+			routeDirections: {
+				leavescreen: 'onRouteDirectionsLeaveScreen',
+				select: 'onRouteDirectionsSelect'
 			},
 			'schedule-routedetails dataview': {
 				select: 'onRouteDetailsSelect'
 			},
 			routeDetailsMap: {
 				maprender: 'onRouteDetailsMapRender'
-			}, 
+			}, 			
 			'schedule-navview button[action=toggleBookmark]': {
 				tap: 'onScheduleToggleBookmarkTapped'
 			}
@@ -106,10 +109,9 @@ Ext.define('SeptaMobi.controller.Schedule', {
 
 	onRoutesListSelect: function(list, record) {
 		var me = this,
-			routeVariants = me.getRouteVariants(),
 			navView = me.getNavView(),
 			i = 0,
-			routeDetails = me.getRouteDetails(),
+			routeDirections = me.getRouteDirections(),
 			i = 0,
 			bestVariant = null,
 			maxStopsLength = 0,
@@ -117,37 +119,57 @@ Ext.define('SeptaMobi.controller.Schedule', {
 			variantsLength,
 			previousIndex = -1,
 			stops = new Ext.util.MixedCollection(),
-			encodedPoints = [];
+			stopsStore = Ext.getStore('Stops'),
+			encodedPoints = [], direction, stopDirections;
 
-		routeDetails.setMasked({
+		routeDirections.setMasked({
 			xtype: 'loadmask',
 			message: 'Loading Details&hellip;'
 		});
 
-		navView.push(routeDetails);
+		navView.push(routeDirections);
 
 		SeptaMobi.model.RouteDetails.load(record.getId(), {
 			callback: function(detailsRecord) {
+				detailsRecord.variants().sort([{
+			        property : 'stopCount',
+			        direction: 'DESC'
+			    }]);
+			    debugger 
 				detailsRecord.variants().each(function (variant, vindex) {
-					console.log('Variant Index', vindex);
+					console.log('Variant length -', variant.stops().getRange().length);
 				    variant.stops().each(function(stop, index) {
+				    	// console.log('Stop - ', stop.get('name'));
+				    	direction = variant.get('direction');		    	
 				    	if(stops.contains(stop)) {
 				    		previousIndex = stops.indexOf(stop);
+				    		stopDirections = stop.get('directions');
+				    		if(!Ext.Array.contains(stopDirections, direction)) {
+				    			stop.set('directions', stopDirections);
+				    			stopDirections.push(direction);
+				    		}
+				    		// console.log('skip');
 				    	}
-				    	else if(previousIndex == -1) {
+				    	else if(previousIndex == -1) {				    		
 				    		stops.add(stop);
 				    		previousIndex = -1;
 				    	}
 				    	else {
 				    		stops.insert(previousIndex, stop);
 				    	}
+				    	stop.set('directions', [direction]);
 				    });
 				    encodedPoints.push(variant.get('encodedPoints'));
 				});
 				
-				routeDetails.setEncodedPoints(encodedPoints);
-				routeDetails.setStops(stops);
-				routeDetails.setMasked(false);
+				// routeDetails.setEncodedPoints(encodedPoints);
+				// routeDetails.setStops(stops);
+				// routeDetails.setMasked(false);
+				debugger
+				stopsStore.setData(stops.getRange());
+
+				routeDirections.setData([stops.first().getData(), stops.last().getData()]);
+				routeDirections.setMasked(false);
 			}
 		});
 	},
@@ -156,33 +178,46 @@ Ext.define('SeptaMobi.controller.Schedule', {
 		list.deselectAll();
 	},
 
+	onRouteDirectionsLeaveScreen: function(routeDirections) {
+		routeDirections.deselectAll();
+	},
+
 	onRouteDetailsLeaveScreen: function(routeDetails) {
 		this.getRouteDetailsList().deselectAll();
 	},
 
-	onRoutesVariantsSelect: function(list, record) {
+	onRouteDirectionsSelect: function(list, record) {
 		var me = this,
-			routeDetails = me.getRouteDetails(),
-			routeVariants = me.getRouteVariants(),
-			detailsRecord = routeVariants.getDetailsRecord(),
+			stopsStore = Ext.getStore('Stops'),
 			navView = me.getNavView(),
-			busesStore = Ext.getStore('Buses'),
-			busMarkers = [], i = 0, busLength;
+			routeDetails = me.getRouteDetails();
 
-		routeDetails.setStops(record.get('stops'));
 		routeDetails.setEncodedPoints(record.get('encodedPoints'));
-
 		navView.push(routeDetails);
-
-		if(record.get('type') == 3) {
-			//Load Bus Positions
-			busesStore.load({
-				params: {
-					route: record.get('routeShortName')
-				}
-			});
-		}
 	},
+	// onRoutesVariantsSelect: function(list, record) {
+	// 	var me = this,
+	// 		routeDetails = me.getRouteDetails(),
+	// 		routeVariants = me.getRouteVariants(),
+	// 		detailsRecord = routeVariants.getDetailsRecord(),
+	// 		navView = me.getNavView(),
+	// 		busesStore = Ext.getStore('Buses'),
+	// 		busMarkers = [], i = 0, busLength;
+
+	// 	routeDetails.setStops(record.get('stops'));
+	// 	routeDetails.setEncodedPoints(record.get('encodedPoints'));
+
+	// 	navView.push(routeDetails);
+
+	// 	if(record.get('type') == 3) {
+	// 		//Load Bus Positions
+	// 		busesStore.load({
+	// 			params: {
+	// 				route: record.get('routeShortName')
+	// 			}
+	// 		});
+	// 	}
+	// },
 
 	onRouteDetailsSelect: function(list, record) {
 		var me = this,

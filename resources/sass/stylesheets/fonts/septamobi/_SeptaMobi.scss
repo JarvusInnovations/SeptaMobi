@@ -6,21 +6,28 @@
     )
 );
 
-@include icon('bus',     'b', 'SeptaMobi');
-@include icon('train',   't', 'SeptaMobi');
-@include icon('trolley', 'c', 'SeptaMobi');
-@include icon('walk',    'w', 'SeptaMobi');
+@include icon('bus',     '\e609', 'SeptaMobi');
+@include icon('train',   '\e60b', 'SeptaMobi');
+@include icon('trolley', '\e610', 'SeptaMobi');
+@include icon('walk',    '\e614', 'SeptaMobi');
 
-@include icon('reverse',  'r', 'SeptaMobi');
-@include icon('pinpoint', 'p', 'SeptaMobi');
-@include icon('schedule', 's', 'SeptaMobi');
-@include icon('location', 'l', 'SeptaMobi');
-@include icon('back',     '<', 'SeptaMobi');
-@include icon('chevron',  '>', 'SeptaMobi');
+@include icon('reverse',  '\e60d', 'SeptaMobi');
+@include icon('pinpoint', '\e60e', 'SeptaMobi');
+@include icon('schedule', '\e60c', 'SeptaMobi');
+@include icon('location', '\e612', 'SeptaMobi');
+@include icon('back',     '\e611', 'SeptaMobi');
+@include icon('chevron',  '\e60a', 'SeptaMobi');
+@include icon('hidepoints', '68',    'SeptaMobi');
+@include icon('showpoints', '\ee602', 'SeptaMobi');
+@include icon('bookmark', '\e603',   'SeptaMobi');
+@include icon('bookmarked', '\e604', 'SeptaMobi');
 
-@include icon('tab-location',     'L', 'SeptaMobi');
-@include icon('tab-bookmarks',    'B', 'SeptaMobi');
-@include icon('tab-trip-planner', 'I', 'SeptaMobi');
-@include icon('tab-alerts',       'A', 'SeptaMobi');
-@include icon('tab-dashboard',    'D', 'SeptaMobi');
-@include icon('tab-schedule',     'S', 'SeptaMobi');
+
+@include icon('tab-location',     '\e607', 'SeptaMobi');
+@include icon('tab-bookmarks',    '\e606', 'SeptaMobi');
+@include icon('tab-trip-planner', '\e60f', 'SeptaMobi');
+@include icon('tab-alerts',       '\e605', 'SeptaMobi');
+@include icon('tab-dashboard',    '\e613', 'SeptaMobi');
+@include icon('tab-schedule',     '\e60c', 'SeptaMobi');
+@include icon('tab-stops', 		  '\e601', 'SeptaMobi');
+@include icon('tab-token',		  '\e600', 'SeptaMobi');

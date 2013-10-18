@@ -14,9 +14,27 @@
 		}
 			
 		&:before{
-			content: '<';
+			content: '\e611';
 			font-family: SeptaMobi;
 			
+		}
+	}
+	
+	&.bookmarked, &.bookmarks {
+		background: transparent;
+		border: none;
+		font-size: 1.2em;
+		line-height: 1em;
+		margin-right: .5em;
+		font-weight: bold;
+		
+		.x-button-label {
+			display: none;
+		}
+		
+		&:before {
+			content: '\e606';
+			font-family: SeptaMobi;
 		}
 	}
 }

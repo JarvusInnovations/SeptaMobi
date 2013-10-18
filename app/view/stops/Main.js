@@ -11,11 +11,11 @@ Ext.define('SeptaMobi.view.stops.Main', {
     config: {
     	items: [{
             title: 'Stops',
-            iconCls: 'stops-nearbylist',
+            //iconCls: 'stops-nearbylist',
             xtype: 'stops-nearbylist'
         }, {
             title: 'Schedule',
-            iconCls: 'tab-stops',
+           // iconCls: 'tab-stops',
             xtype: 'schedule-routeslist'
         }]
     }

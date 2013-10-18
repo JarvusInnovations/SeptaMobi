@@ -21,3 +21,5 @@ Perks are not sortable
 Token locations are not implemented
 
 Assets are missing for perks, token locations, and other bus direction
+
+Trip planner carousel not hooked up to live data

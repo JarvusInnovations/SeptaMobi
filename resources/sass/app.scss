@@ -40,7 +40,8 @@ $regionalrail: #5186a0;
 		'view/TripPlanner',
 		'view/Schedule',
 		'view/Extras',
-		'view/Perks';	
+		'view/Perks',
+		'view/Stops';	
 		
 @include st-loading-spinner;
 
@@ -55,4 +56,8 @@ $regionalrail: #5186a0;
 	background-size: cover;
 	background-position: 58% -50px;
 	font: -apple-system-body;
+}
+
+.x-list .x-list-item .x-list-item-body, .x-list .x-list-item.x-list-item-tpl .x-innerhtml {
+	padding: 0;
 }

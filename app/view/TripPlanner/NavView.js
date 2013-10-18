@@ -17,7 +17,8 @@ Ext.define('SeptaMobi.view.TripPlanner.NavView', {
                     align: 'right',
                     text: 'Bookmark',
                     action: 'toggleBookmark',
-                    hidden: true
+                    hidden: true,
+                    cls: 'bookmarks'
                 }
             ]
         },

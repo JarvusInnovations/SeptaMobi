@@ -2,7 +2,7 @@
     .x-dataview-item {
         @include hairline;
         //font-size: smaller;
-        padding: 1em 2.4em 1em 1em;
+        padding: .8em 2.4em .8em .8em;
         padding-right: 2.4em;
         position: relative;
 
@@ -12,13 +12,13 @@
         }
         
         &::after {
-            content: '>';
+            content: '\e60a';
             font-family: SeptaMobi;
             font-size: small;
             opacity: .4;
             position: absolute;
             right: 1.1em;
-            top: 1.1em;
+            top: 1.4em;
         }
         
     }

@@ -4,7 +4,7 @@
 	.bookmark {
 		@include display-box;
 		@include box-align(stretch);
-		padding: .75em 0;
+		padding: 0;
 	}
 	
 	&.x-list .x-list-item.x-list-item-tpl .x-innerhtml {
@@ -14,7 +14,7 @@
 		padding: 0 1em 0 0;
 			
 		&:after {
-			content: '>';
+			content: '\e60a';
 			font-family: SeptaMobi;
 			position: absolute;
 			top: 33%;
@@ -31,10 +31,9 @@
 		//display: block;
 		font-size: 1.7em;
 		font-family: $headline-face;
-		float: left;
 		//min-height: 55px;
 		margin-right: .5em;
-		//padding-top: .5em;
+		padding-top: 8%;
 		text-align: center;
 		min-width: 60px;
 	
@@ -48,6 +47,7 @@
 	
 	.text {
 		@include box-flex(1);
+		padding: .75em 0;
 	}
 	
 	h4 {
@@ -56,6 +56,7 @@
 	}
 	p {
 		line-height: 1.3em;
+		margin-bottom: .25em;
 		overflow: hidden;
 	}
 	.arrow {

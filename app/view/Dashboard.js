@@ -23,6 +23,7 @@ Ext.define('SeptaMobi.view.Dashboard', {
 			items: [{
 				xtype: 'dataview',
 				title: 'Alerts',
+				cls: 'alerts',
 				itemTpl: [
 					'<div>{message}</div>',
 					'<span class="bus-number">{route_name}</span>',

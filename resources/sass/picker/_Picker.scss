@@ -1,3 +1,4 @@
+$picker-row-height: 2.5em;
 
 .x-picker {
 	background: #fff;
@@ -15,4 +16,14 @@
 	.x-item-selected {
 		color: $base-color;
 	}
+}
+
+.x-picker-bar {
+    height: $picker-row-height;
+}
+
+.x-picker-slot {
+    .x-dataview-item {
+        height: $picker-row-height;
+    }
 }

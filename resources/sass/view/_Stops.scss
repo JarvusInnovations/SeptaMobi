@@ -1,0 +1,84 @@
+
+.stops {
+	
+	.x-list-item {
+		background: repeat-x bottom left url(../images/hairline.png);
+		padding: 0em 0em 0em 0em;
+		overflow: hidden;
+		
+		&.x-list-item-tpl .x-innerhtml {
+			padding: 0;
+		}
+		
+		&.x-item-pressed.x-list-item-tpl, &.x-item-selected.x-list-item {
+			background-color: rgba($base-color, .2);
+		}
+		
+		&::after {
+			content: '>';
+			font-family: SeptaMobi;
+			font-size: small;
+			opacity: .4;
+			position: absolute;
+			right: 1.1em;
+			top: .75em;
+		}
+	}
+	
+	.routes {
+		display: table;
+		padding-right: 1em;
+		overflow: hidden;
+		
+		&:last-child .bus-number {
+			margin-bottom: 1px;
+		}
+	}
+	
+	h3 {
+		background: rgba(00,00,00,.075);
+		font: -apple-system-short-headline;
+		font-weight: bold;
+		line-height: 2em;
+		padding-right: 1.8em;
+		overflow: hidden;
+		
+		
+		&::before {
+			background: $bus;
+			content: ' ';
+			display: block;
+			float: left;
+			height: 2em;
+			margin: 0 .5em 0 0;
+			width: 2em;
+		}
+	}
+	
+	p {
+		display: table-cell;
+		font: -apple-system-short-subheadline;
+		font-size: smaller;
+		overflow: hidden;
+		vertical-align: middle;
+	}
+	
+	.bus-number {
+		background: $bus;
+		color: #fff;
+		clear: left;
+		display: table;
+		font-family: $headline-face;
+		font-weight: bold;
+		float: left;
+		height: 2.5em;
+		margin-right: .5em;
+		text-align: center;
+		width: 2em;
+		
+		.number {
+			display: table-cell;
+			vertical-align: middle;
+		}
+	}
+}

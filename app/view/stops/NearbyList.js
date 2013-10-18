@@ -4,16 +4,15 @@ Ext.define('SeptaMobi.view.stops.NearbyList', {
 	
 	config: {
         store: 'NearByStops',
-
+        cls: 'stops',
 		itemTpl: [
             '<div>',
-                '<span>{stopName}</span>',
+                '<h3>{stopName}</h3>',
                 '<tpl for="routes">',
-                    '<br/>',
-                    '<tpl if="this.isBus(values)">',
-                        '<span class="bus-number">{[values.get("routeShortName")]}</span>',
+                    '<div class="routes"><tpl if="this.isBus(values)">',
+                        '<span class="bus-number"><span class="number">{[values.get("routeShortName")]}</span></span>',
                     '</tpl>',
-                    '<span>{[values.get("displayName")]}</span>',
+                    '<p>{[values.get("displayName")]}</p></div>',
                 '</tpl>',
             '</div>',
             {

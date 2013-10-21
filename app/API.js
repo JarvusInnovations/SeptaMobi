@@ -94,7 +94,8 @@ Ext.define('SeptaMobi.API', {
 			method: 'GET',
 			params: {
 				lat: lat,
-				lon: lon
+				lon: lon,
+				radius: window.SeptaMobi_Defaults ? window.SeptaMobi_Defaults.stops_near_by_default_search_radius : 200
 			},
 			callback: function(options, success, response) {
 				if ((response.getResponseHeader('content-type') || '').indexOf('application/json') == 0 && response.responseText) {

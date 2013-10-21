@@ -4,7 +4,7 @@
 	
 	.x-list-item {
 		background: repeat-x bottom left url(../images/hairline.png);
-		padding: .8em 1.8em .8em 1.2em;
+		padding: .8em 1.8em .8em 1em;
 		
 		&.x-list-item-tpl .x-innerhtml {
 			padding: 0;
@@ -15,7 +15,7 @@
 		}
 		
 		&::after {
-			content: '\e60a';
+			content: '\e60c';
 			font-family: SeptaMobi;
 			font-size: small;
 			opacity: .4;

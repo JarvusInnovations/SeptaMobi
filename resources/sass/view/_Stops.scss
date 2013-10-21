@@ -1,5 +1,5 @@
 
-.stops {
+.nearbylist {
 	
 	.x-list-item {
 		background: repeat-x bottom left url(../images/hairline.png);
@@ -15,7 +15,7 @@
 		}
 		
 		&::after {
-			content: '\e60a';
+			content: '\e60c';
 			font-family: SeptaMobi;
 			font-size: small;
 			opacity: .4;
@@ -23,8 +23,11 @@
 			right: 1.1em;
 			top: .75em;
 		}
-	}
-	
+	}	
+}
+
+.nearbylist, .stops {
+
 	.routes {
 		display: table;
 		padding-right: 1em;
@@ -80,5 +83,10 @@
 			display: table-cell;
 			vertical-align: middle;
 		}
-	}
+	}	
 }
+
+
+
+
+

@@ -5,14 +5,17 @@ Ext.define('SeptaMobi.view.stops.RouteList', {
 	config: {
         title: 'Routes',
 
+        cls: 'stops',
+        setMinHeight: 40,
 		itemTpl: [
-            '<div>',
+			//'<h3>{stopName}</h3>',
+            '<div class="routes">',
                 '<tpl if="this.isBus(values)">',
-                    '<span class="bus-number">{routeShortName}</span>',
+                    '<span class="bus-number"><span class="number">{routeShortName}</span></span>',
                 '</tpl>',
-                '<span>{displayName}</span>',
+                '<p>{displayName}</p>',
             '</div>',
-            {
+           {
                 isBus: function(record) {
                     return record.routeType == 3;
                 }

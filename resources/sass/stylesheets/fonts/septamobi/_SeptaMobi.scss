@@ -6,28 +6,29 @@
     )
 );
 
-@include icon('bus',     '\e609', 'SeptaMobi');
-@include icon('train',   '\e60b', 'SeptaMobi');
-@include icon('trolley', '\e610', 'SeptaMobi');
-@include icon('walk',    '\e614', 'SeptaMobi');
+@include icon('bus',     '\e60b', 'SeptaMobi');
+@include icon('train',   '\e60d', 'SeptaMobi');
+@include icon('trolley', '\e612', 'SeptaMobi');
+@include icon('walk',    '\e616', 'SeptaMobi');
 
-@include icon('reverse',  '\e60d', 'SeptaMobi');
-@include icon('pinpoint', '\e60e', 'SeptaMobi');
+@include icon('reverse',  '\e60f', 'SeptaMobi');
+@include icon('pinpoint', '\e610', 'SeptaMobi');
 @include icon('schedule', '\e60c', 'SeptaMobi');
-@include icon('location', '\e612', 'SeptaMobi');
-@include icon('back',     '\e611', 'SeptaMobi');
-@include icon('chevron',  '\e60a', 'SeptaMobi');
-@include icon('hidepoints', '68',    'SeptaMobi');
-@include icon('showpoints', '\ee602', 'SeptaMobi');
-@include icon('bookmark', '\e603',   'SeptaMobi');
-@include icon('bookmarked', '\e604', 'SeptaMobi');
+@include icon('location', '\e609', 'SeptaMobi');
+@include icon('back',     '\e613', 'SeptaMobi');
+@include icon('chevron',  '\e60c', 'SeptaMobi');
+@include icon('hidepoints', '\e601',    'SeptaMobi');
+@include icon('showpoints', '\ee604', 'SeptaMobi');
+@include icon('bookmark', '\e605',   'SeptaMobi');
+@include icon('bookmarked', '\e606', 'SeptaMobi');
+@include icon('perks', '\e603', 'SeptaMobi');
 
 
-@include icon('tab-location',     '\e607', 'SeptaMobi');
-@include icon('tab-bookmarks',    '\e606', 'SeptaMobi');
-@include icon('tab-trip-planner', '\e60f', 'SeptaMobi');
-@include icon('tab-alerts',       '\e605', 'SeptaMobi');
-@include icon('tab-dashboard',    '\e613', 'SeptaMobi');
-@include icon('tab-schedule',     '\e60c', 'SeptaMobi');
-@include icon('tab-stops', 		  '\e601', 'SeptaMobi');
-@include icon('tab-token',		  '\e600', 'SeptaMobi');
+@include icon('tab-location',     '\e614', 'SeptaMobi');
+@include icon('tab-bookmarks',    '\e608', 'SeptaMobi');
+@include icon('tab-trip-planner', '\e611', 'SeptaMobi');
+@include icon('tab-alerts',       '\e607', 'SeptaMobi');
+@include icon('tab-dashboard',    '\e615', 'SeptaMobi');
+@include icon('tab-schedule',     '\e60e', 'SeptaMobi');
+@include icon('tab-stops', 		  '\e600', 'SeptaMobi');
+@include icon('tab-token',		  '\e602', 'SeptaMobi');

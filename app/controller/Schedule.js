@@ -120,6 +120,8 @@ Ext.define('SeptaMobi.controller.Schedule', {
 			previousIndex = -1,
 			stops = new Ext.util.MixedCollection(),
 			stopsStore = Ext.getStore('Stops'),
+			encodedPoints = [],
+			direction, stopDirections;
 
 		routeDirections.setMasked({
 			xtype: 'loadmask',
@@ -155,11 +157,13 @@ Ext.define('SeptaMobi.controller.Schedule', {
 				    	}
 				    	stop.set('directions', [direction]);
 				    });
+
 				    encodedPoints.push(variant.get('encodedPoints'));
 				});
 				
 				stopsStore.setData(stops.getRange());
 
+				routeDirections.setEncodedPoints(encodedPoints);
 				routeDirections.setData([stops.first().getData(), stops.last().getData()]);
 				routeDirections.setMasked(false);
 			}
@@ -182,7 +186,10 @@ Ext.define('SeptaMobi.controller.Schedule', {
 		var me = this,
 			stopsStore = Ext.getStore('Stops'),
 			navView = me.getNavView(),
+			routeDetails = me.getRouteDetails(),
+			routeDirections = me.getRouteDirections();
 
+		routeDetails.setEncodedPoints(routeDirections.getEncodedPoints());
 		navView.push(routeDetails);
 	},
 	// onRoutesVariantsSelect: function(list, record) {
@@ -239,6 +246,7 @@ Ext.define('SeptaMobi.controller.Schedule', {
 			buses = busStore.getRange(),
 			busLength = buses.length,
 			encodedPoints = routeDetails.getEncodedPoints(),
+			encodedPointsLength = encodedPoints ? encodedPoints.length : 0,
 			stopMarkers = [], busMarkers = [],
 			i = 0, stop, latLng, bounds, decodedPoints, polyLine, infoTemplate;
 
@@ -299,6 +307,11 @@ Ext.define('SeptaMobi.controller.Schedule', {
 
 		routeDetails.setBusMarkers(busMarkers);
 
+		if(bounds) {
+			Ext.defer(function() {
+				map.fitBounds(bounds);
+			}, 1000, this);
+		}
 	},
 
 	onScheduleToggleBookmarkTapped: function() {

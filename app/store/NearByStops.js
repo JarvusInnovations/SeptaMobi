@@ -3,7 +3,7 @@ Ext.define('SeptaMobi.store.NearByStops', {
 	requires: ['SeptaMobi.model.NearByStop'],
 
 	config: {
-		model: 'SeptaMobi.model.NearByStop',
+		model: 'SeptaMobi.model.NearByStop'
 		// proxy: {
 		// 	type: 'ajax',
 		// 	pageParam: false,

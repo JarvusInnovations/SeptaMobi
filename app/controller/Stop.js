@@ -33,7 +33,7 @@ Ext.define('SeptaMobi.controller.Stop', {
 				leavescreen: 'onStopsMainLeaveScreen'
 			},
 			'stops-nearbylist': {
-				select: 'onNearbyStopListSelect',
+				select: 'onNearbyStopListSelect'
 			},
 			routeList: {
 				select: 'onStopRoutesSelect',
@@ -228,5 +228,5 @@ Ext.define('SeptaMobi.controller.Stop', {
 		Ext.defer(function() {
 			map.fitBounds(bounds);
 		}, 1000, this);
-	},
+	}
 });

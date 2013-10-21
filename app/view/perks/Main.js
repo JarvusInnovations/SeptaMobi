@@ -26,9 +26,7 @@ Ext.define('SeptaMobi.view.perks.Main', {
 				options: [
 					{text: 'End Date', value: 'endDate_DSC'}
 					,{text: 'Locations Near Me', value: 'nearme'}
-				],
-				// scrollDock: 'top',
-				// docked: 'top'
+				]
 			},{
 				xtype: 'list',
 				store: 'Perks',

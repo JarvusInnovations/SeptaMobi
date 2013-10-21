@@ -135,7 +135,11 @@ Ext.define('SeptaMobi.controller.Schedule', {
 			        property : 'stopCount',
 			        direction: 'DESC'
 			    }]);
+<<<<<<< HEAD
 			    debugger 
+=======
+
+>>>>>>> 6e277804d9644d64b47788c64f51375717f485fa
 				detailsRecord.variants().each(function (variant, vindex) {
 					console.log('Variant length -', variant.stops().getRange().length);
 				    variant.stops().each(function(stop, index) {
@@ -165,7 +169,10 @@ Ext.define('SeptaMobi.controller.Schedule', {
 				// routeDetails.setEncodedPoints(encodedPoints);
 				// routeDetails.setStops(stops);
 				// routeDetails.setMasked(false);
+<<<<<<< HEAD
 				debugger
+=======
+>>>>>>> 6e277804d9644d64b47788c64f51375717f485fa
 				stopsStore.setData(stops.getRange());
 
 				routeDirections.setData([stops.first().getData(), stops.last().getData()]);

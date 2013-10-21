@@ -407,12 +407,13 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 
 	onTripPlannerNavTransitionComplete: function(incomingItem, outgoingItem) {
 		var bookmarkStore = Ext.getStore('Bookmarks'),
-			plan = outgoingItem.getTripPlan(),
-			bookmark = Ext.create('SeptaMobi.model.Bookmark', plan),
-			toggleBookmarkButton = this.getToggleBookmarkButton();
+			toggleBookmarkButton = this.getToggleBookmarkButton(),
+			plan, bookmark;
 
 		if (outgoingItem.isXType('triplist')) {
-			// TODO check if bookmark exists and set button text
+			plan = outgoingItem.getTripPlan();
+			bookmark = Ext.create('SeptaMobi.model.Bookmark', plan);
+
 			if(bookmarkStore.hasBookmark(bookmark)) {
 				toggleBookmarkButton.addCls('bookmarked');
 			}

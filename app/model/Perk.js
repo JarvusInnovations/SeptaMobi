@@ -2,12 +2,16 @@ Ext.define('SeptaMobi.model.Perk', {
 	extend: 'Ext.data.Model',
 
 	config: {
+		idProperty: 'id',
+
 		fields:[{
-			name: 'perk_id',
-			type: 'string'
+			name: 'id',
+			type: 'string',
+			mapping: 'perk_id'
 		},{
-			name: 'perk_name',
-			type: 'string'
+			name: 'name',
+			type: 'string',
+			mapping: 'perk_name'
 		},{
 			name: 'status',
 			type: 'string'

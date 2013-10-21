@@ -13,6 +13,11 @@ Ext.define('SeptaMobi.model.Variant', {
 			name: 'encodedPoints',
 			mapping: 'geometry.points',
 			type: 'string'
+		}, {
+			name: 'stopCount',
+			convert: function(v,r) {
+				return r.raw.stops.length;
+			}
 		}],
 
 		associations: [{

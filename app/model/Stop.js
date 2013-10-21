@@ -19,6 +19,9 @@ Ext.define('SeptaMobi.model.Stop', {
             type: 'float'
         }, {
             name: 'routes'
+        }, {
+            name: 'direction',
+            type: 'string'
         }],
 
         belongsTo: 'Variant'

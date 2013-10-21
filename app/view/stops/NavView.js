@@ -5,18 +5,18 @@ Ext.define('SeptaMobi.view.stops.NavView', {
 	requires: ['SeptaMobi.view.stops.Main'],
 	
 	config: {
-		navigationBar: {
-            docked: 'top',
-            items: [
-                {
-                    xtype: 'button',
-                    align: 'right',
-                    text: 'Bookmark',
-                    action: 'toggleBookmark',
-                    cls: 'bookmarks'
-                }
-            ]
-        },
+		// navigationBar: {
+  //           docked: 'top',
+  //           items: [
+  //               {
+  //                   xtype: 'button',
+  //                   align: 'right',
+  //                   text: 'Bookmark',
+  //                   action: 'toggleBookmark',
+  //				 cls: 'bookmarks'
+  //               }
+  //           ]
+  //       },
 		items: [{
 			xtype: 'stops-main',
 	        title: 'Stops'

@@ -14,7 +14,7 @@
 		}
 			
 		&:before{
-			content: '\e613';
+			content: '\e612';
 			font-family: SeptaMobi;
 			
 		}
@@ -33,7 +33,22 @@
 		}
 		
 		&:before {
-			content: '\e608';
+			content: '\e604';
+			font-family: SeptaMobi;
+		}
+	}
+	
+	.x-button-icon {
+		text-align: center;
+		width: 1.2em;
+		
+		&.token::before {
+			content: '\e602';
+			font-family: SeptaMobi;
+		}
+		
+		&.perk::before {
+			content: '\e616';
 			font-family: SeptaMobi;
 		}
 	}

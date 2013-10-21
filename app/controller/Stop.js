@@ -144,27 +144,6 @@ Ext.define('SeptaMobi.controller.Stop', {
 			busesStore.load({
 				params: {
 					route: record.get('routeShortName')
-				},
-				callback: function(buses) {
-					buses.forEach(function(bus) {
-						latLng = [bus.get('lat'), bus.get('lng')];
-						//TODO change marker based on bus direction
-						var marker = ll.marker(latLng, {
-							icon: ll.icon({
-								iconUrl: 'resources/images/bus-marker.png',
-								iconRetinaUrl: 'resources/images/bus-marker-2x.png',
-								iconSize: [28, 31],
-								iconAnchor: [14, 30]
-							})
-						}).addTo(map);
-
-						setTimeout(function() {
-							marker.bindPopup(infoTemplate.apply(bus.getData()));
-						}, 1000);
-
-						busMarkers.push(marker);
-					});
-					routeDetails.setBusMarkers(busMarkers);
 				}
 			});
 		}

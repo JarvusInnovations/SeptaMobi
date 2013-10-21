@@ -12,7 +12,8 @@ Ext.define('SeptaMobi.view.stops.NavView', {
                     xtype: 'button',
                     align: 'right',
                     text: 'Bookmark',
-                    action: 'toggleBookmark'
+                    action: 'toggleBookmark',
+                    cls: 'bookmarks'
                 }
             ]
         },

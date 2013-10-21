@@ -323,6 +323,8 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 					lat = data.metadata.latitude;
 					lon = data.metadata.longitude;
 
+					// Fix issue that was preventing models from getting updated
+					address.modified = true;
 					address.set('lon', lon);
 					address.set('lat', lat);
 					address.set('text', data.delivery_line_1 + ", " + data.last_line);

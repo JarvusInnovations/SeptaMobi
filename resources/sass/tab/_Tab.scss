@@ -67,7 +67,7 @@ $tabs-bottom-icon-size: 22px;
 	}
 }
 
-.route-map-tabs, .schedule, .stops-main {
+.route-map-tabs, .schedule, .stops-main, .perks {
 
 	.x-tabbar {
 		border-bottom-width: 0;
@@ -95,6 +95,7 @@ $tabs-bottom-icon-size: 22px;
 		
 		.x-button-label {
 	    	font-size: smaller;
+	    	font: -apple-system-short-subheadline;
 	    	padding: .4em;
 		}
 	}

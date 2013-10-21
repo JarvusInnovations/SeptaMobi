@@ -4,7 +4,7 @@ Ext.define('SeptaMobi.view.stops.NearbyList', {
 	
 	config: {
         store: 'NearByStops',
-        cls: 'stops',
+        cls: 'nearbylist',
 		itemTpl: [
             '<div>',
                 '<h3>{stopName}</h3>',

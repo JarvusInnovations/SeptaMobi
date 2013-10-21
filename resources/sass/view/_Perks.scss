@@ -1,10 +1,10 @@
 
-.perks {
+.perks, .tokens {
 	line-height: 1.3em;
 	
 	.x-list-item {
 		background: repeat-x bottom left url(../images/hairline.png);
-		padding: .8em 1.8em .8em 1em;
+		padding: .8em 1.8em 1em 1em;
 		
 		&.x-list-item-tpl .x-innerhtml {
 			padding: 0;

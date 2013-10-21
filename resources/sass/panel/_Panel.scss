@@ -52,11 +52,21 @@
 		padding-right: 0;
 	}
 	
-	.x-field-input .x-clear-icon {
-		height: 15px;
+	.x-field-input .x-clear-icon {	
+		@include border-radius(20px);
+		height: 18px;
 		right: 5px;
-		top: 26%;
-		width: 15px;
+		top: 20%;
+		text-align: center;
+		width: 18px;
+		vertical-align: middle;
+	
+		&::before {
+			content: 'x';
+			color: #000;
+			font-size: smaller;
+			vertical-align: text-top;
+		}
 	}
 	
 	.x-button {

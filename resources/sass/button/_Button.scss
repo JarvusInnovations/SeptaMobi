@@ -31,12 +31,24 @@
 		.x-button-label {
 			display: none;
 		}
+	}
+
+	&.bookmarks {
 		
-		&:before {
+		&::before {
 			content: '\e604';
 			font-family: SeptaMobi;
 		}
 	}
+	
+	&.bookmarked {
+		
+		&::before {
+			content: '\e605';
+			font-family: SeptaMobi;
+		}
+	}
+	
 	
 	.x-button-icon {
 		text-align: center;

@@ -48,7 +48,7 @@
 		
 		
 		&::before {
-			background: $accent-color;
+			background: darken($base-color, 20%);
 			content: ' ';
 			display: block;
 			float: left;
@@ -67,7 +67,7 @@
 	}
 	
 	.bus-number {
-		background: $accent-color;
+		background: darken($base-color, 20%);
 		color: #fff;
 		clear: left;
 		display: table;

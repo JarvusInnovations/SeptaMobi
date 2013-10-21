@@ -22,7 +22,7 @@ Ext.define('SeptaMobi.view.perks.Main', {
 				xtype: 'selectfield',
 				itemId: 'perkSorter',
 				label: 'Sort By:',
-				labelWidth: '60px',
+				labelWidth: '70px',
 				options: [
 					{text: 'End Date', value: 'endDate_DSC'}
 					,{text: 'Locations Near Me', value: 'nearme'}

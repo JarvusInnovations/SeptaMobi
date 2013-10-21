@@ -116,13 +116,13 @@ Ext.define('SeptaMobi.controller.Stop', {
 			routeLength = routes.length,
 			i = 0;
 
-		if (routeLength > 1) {
+		if (routeLength == 1) {
+			me.onStopRoutesSelect(routeList, routes[0]);
+		} else {
 			routeList.setData(Ext.Array.map(routes, function(r) {
 				return r.getData()
 			}));
 			navView.push(routeList);
-		} else {
-			console.log('Push route detail');
 		}
 	},
 

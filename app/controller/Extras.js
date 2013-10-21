@@ -7,11 +7,13 @@ Ext.define('SeptaMobi.controller.Extras', {
 	config: {
 		views: [
 			'perks.Main',
-			'extras.NavView'
+			'extras.NavView',
+			'extras.Tokens'
 		],
 		stores: [
 			'Perks',
-			'NearByPerks'
+			'NearByPerks',
+			'Tokens'
 		],
 		models: [
 			'Perk'
@@ -20,6 +22,12 @@ Ext.define('SeptaMobi.controller.Extras', {
 			perksView: {
 				selector: 'perksview',
 				xtype: 'perksview',
+				autoCreate: true
+			},
+
+			tokensView: {
+				selector: 'tokensview',
+				xtype: 'tokensview',
 				autoCreate: true
 			},
 
@@ -43,6 +51,10 @@ Ext.define('SeptaMobi.controller.Extras', {
 
 			perksMap: {
 				maprender: 'onPerksViewMapRender'
+			},
+
+			'tokensview leafletmap': {
+				maprender: 'onTokensViewMapRender'
 			}
 		}
 	},
@@ -53,7 +65,6 @@ Ext.define('SeptaMobi.controller.Extras', {
 			perksView = me.getPerksView();
 
 		extrasView.push(perksView);
-		console.log('Showing perks', perksView, extrasView);
 	},
 
 	onPerksViewRender: function(navView) {
@@ -65,9 +76,39 @@ Ext.define('SeptaMobi.controller.Extras', {
 	},
 
 	showTokenLocator: function(btn) {
-		var me = this;
+		var me = this,
+			tokensStore = Ext.getStore('Tokens'),
+			navView = me.getExtrasNavView(),
+			tokensView = me.getTokensView();
 
-		console.log('Show Token Locator');
+		tokensView.setMasked({
+			xtype: 'loadmask',
+			message: 'Loading Near By Token Stores&hellip;'
+		});
+
+		Ext.device.Geolocation.getCurrentPosition({
+			success: function(position) {
+				tokensStore.load({
+					params: {
+						lat: position.coords.latitude,
+						lon: position.coords.longitude
+					},
+					callback: function(perks) {
+						tokensView.setMasked(false);
+					},
+					failure: function() {
+						tokensView.setMasked(false);
+						alert('Location error occurred.');
+					}
+				});
+			},
+			failure: function() {
+				tokensView.setMasked(false);
+				alert('Location error occurred.');
+			}
+		});
+
+		navView.push(tokensView);
 	},
 
 	onPerksViewMapRender: function(mapCmp) {
@@ -78,6 +119,41 @@ Ext.define('SeptaMobi.controller.Extras', {
 		if(!nearByPerksStore.isLoaded()) {
 			me.showPerksOnMap();
 		}
+	},
+
+	onTokensViewMapRender: function(mapCmp) {
+		var me = this,
+			ll = window.L,
+			map = mapCmp.getMap(),
+			tokensStore = Ext.getStore('Tokens'),
+			tokensView = me.getTokensView(),
+			tokenMarkers = [];
+
+		tokenTemplate = Ext.create('Ext.XTemplate', [
+			'{name}<br/>',
+			'{address}'
+		]);
+
+		tokensStore.getRange().forEach(function(token) {
+			latLng = [token.get('lat'), token.get('lon')];
+
+			var marker = ll.marker(latLng, {
+				icon: ll.icon({
+					iconUrl: 'resources/images/token.png',
+					iconRetinaUrl: 'resources/images/token-2x.png'
+					// iconSize: [28, 31],
+					// iconAnchor: [14, 30]
+				})
+			}).addTo(map);
+			debugger
+			setTimeout(function() {
+				marker.bindPopup(tokenTemplate.apply(token.getData()));
+			}, 1000);
+
+			tokenMarkers.push(marker);
+		});
+
+		tokensView.setMarkers(tokenMarkers);
 	},
 
 	showPerksOnMap: function() {

@@ -1,3 +1,4 @@
+//TODO Replace with SystemLocation model
 Ext.define('SeptaMobi.model.Perk', {
 	extend: 'Ext.data.Model',
 

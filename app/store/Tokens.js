@@ -1,11 +1,9 @@
-Ext.define('SeptaMobi.store.NearByPerks', {
+Ext.define('SeptaMobi.store.Tokens', {
 	extend: 'Ext.data.Store',
-	requires: [
-		'SeptaMobi.model.NearByPerk'
-	],
+	requires: ['SeptaMobi.model.SystemLocation'],
 
 	config: {
-		model: 'SeptaMobi.model.NearByPerk',
+		model: 'SeptaMobi.model.SystemLocation',
 
 		proxy: {
 			type: 'ajax',
@@ -14,9 +12,9 @@ Ext.define('SeptaMobi.store.NearByPerks', {
 				type: 'json'
 			},
 			extraParams: {
-				'type': 'perk_locations',
+				'type': 'sales_locations',
 				'radius': 3
 			}
 		}
 	}
-})
+});

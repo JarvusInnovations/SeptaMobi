@@ -68,7 +68,9 @@ Ext.define('SeptaMobi.API', {
 			method: 'GET',
 			params: {
 				fromPlace: fromAddress.get('lat') + ',' + fromAddress.get('lon'),
-				toPlace: toAddress.get('lat') + ',' + toAddress.get('lon')
+				toPlace: toAddress.get('lat') + ',' + toAddress.get('lon'),
+				//TODO Add UI for this as an option / allow for user defaults
+				maxWalkDistance: 1207 //Meters
 				//TODO Add depart time
 			},
 			callback: function(options, success, response) {

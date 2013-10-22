@@ -14,7 +14,7 @@
 		}
 			
 		&:before{
-			content: '\e613';
+			content: '\e612';
 			font-family: SeptaMobi;
 			
 		}
@@ -31,9 +31,36 @@
 		.x-button-label {
 			display: none;
 		}
+	}
+
+	&.bookmarks {
 		
-		&:before {
-			content: '\e608';
+		&::before {
+			content: '\e604';
+			font-family: SeptaMobi;
+		}
+	}
+	
+	&.bookmarked {
+		
+		&::before {
+			content: '\e605';
+			font-family: SeptaMobi;
+		}
+	}
+	
+	
+	.x-button-icon {
+		text-align: center;
+		width: 1.2em;
+		
+		&.token::before {
+			content: '\e602';
+			font-family: SeptaMobi;
+		}
+		
+		&.perk::before {
+			content: '\e616';
 			font-family: SeptaMobi;
 		}
 	}

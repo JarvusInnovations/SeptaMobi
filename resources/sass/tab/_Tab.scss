@@ -20,7 +20,7 @@ $tabs-bottom-icon-size: 22px;
                 
                 & > .x-button-label {
                     font-size: x-small;
-                    margin: .4em 0;
+                    margin: .3em 0;
                 }
             }
         }
@@ -67,7 +67,7 @@ $tabs-bottom-icon-size: 22px;
 	}
 }
 
-.route-map-tabs, .schedule, .stops-main, .perks {
+.route-map-tabs, .schedule, .stops-main, .perks, .tokens {
 
 	.x-tabbar {
 		border-bottom-width: 0;
@@ -96,7 +96,7 @@ $tabs-bottom-icon-size: 22px;
 		.x-button-label {
 	    	font-size: smaller;
 	    	font: -apple-system-short-subheadline;
-	    	padding: .4em;
+	    	padding: .3em;
 		}
 	}
 

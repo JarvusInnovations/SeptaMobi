@@ -11,11 +11,12 @@
 		@include hairline;
 		overflow: hidden;
 		margin-right: .8em;
-		padding: 0 1em 0 0;
+		padding: 0 1.8em 0 0;
 			
 		&:after {
-			content: '\e60c';
+			content: '\e60b';
 			font-family: SeptaMobi;
+			opacity: .4;
 			position: absolute;
 			top: 33%;
 			right: 1em;
@@ -30,7 +31,6 @@
 		background-color: $base-color;
 		//display: block;
 		font-size: 1.7em;
-		font-family: $headline-face;
 		//min-height: 55px;
 		margin-right: .5em;
 		padding-top: 8%;
@@ -43,6 +43,12 @@
 		&.BSL {
 			background-color: $bsl;
 		}
+		
+		&::before {
+			content: '\e605';
+			font-family: SeptaMobi;
+		}
+	
 	}
 	
 	.text {

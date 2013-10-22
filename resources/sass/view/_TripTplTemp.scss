@@ -50,21 +50,21 @@
     
     &.departure::before {
         color: $departure-color;
-        content: '\e614';
+        content: '\e613';
     }
     
     &.arrival::before {
         color: $arrival-color;
-        content: '\e614';
+        content: '\e613';
     }
     
-          &.bus::before { content: '\e60b'; }
+          &.bus::before { content: '\e60a'; }
         &.train::before,
-       &.subway::before { content: '\e60d'; }
+       &.subway::before { content: '\e60c'; }
       &.trolley::before,
          &.tram::before,
-    &.cable_car::before { content: '\e612'; }
-         &.walk::before { content: '\e616'; }
+    &.cable_car::before { content: '\e611'; }
+         &.walk::before { content: '\e600'; }
 }
 
 .leg-description {

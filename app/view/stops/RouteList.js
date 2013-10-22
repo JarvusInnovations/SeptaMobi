@@ -6,7 +6,7 @@ Ext.define('SeptaMobi.view.stops.RouteList', {
         title: 'Routes',
 
         cls: 'stops',
-        setMinHeight: 40,
+        itemHeight: 40,
 		itemTpl: [
 			//'<h3>{stopName}</h3>',
             '<div class="routes">',

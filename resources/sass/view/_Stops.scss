@@ -21,7 +21,7 @@
 			opacity: .4;
 			position: absolute;
 			right: 1.1em;
-			top: .75em;
+			top: .8em;
 		}
 	}	
 }
@@ -48,7 +48,7 @@
 		
 		
 		&::before {
-			background: darken($base-color, 20%);
+			background: rgba($base-color, .6);
 			content: ' ';
 			display: block;
 			float: left;
@@ -67,7 +67,7 @@
 	}
 	
 	.bus-number {
-		background: darken($base-color, 20%);
+		background: rgba($base-color, .6);
 		color: #fff;
 		clear: left;
 		display: table;

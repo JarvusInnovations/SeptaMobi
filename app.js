@@ -32,13 +32,11 @@ Ext.application({
     controllers: [
         'Bookmark',
         'Dashboard',
+        'Extras',
         'Main',
         'Schedule',
         'Stop',
         'TripPlanner'
-        //<debug>
-        ,'Extras'
-        //</debug>
     ],
 
     views: [

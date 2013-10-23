@@ -3,7 +3,9 @@ Ext.define('SeptaMobi.view.TripPlanner.TripDetail', {
     extend: 'Ext.Container',
     xtype: 'tripdetail',
 	requires: [
+       'Ext.carousel.Carousel',
 	   'SeptaMobi.strings.TripPlanner',
+       'SeptaMobi.template.TripPoint',
 	   'Jarvus.touch.ux.LeafletMap'
 	],
 
@@ -20,26 +22,6 @@ Ext.define('SeptaMobi.view.TripPlanner.TripDetail', {
             xtype: 'container',
             itemId: 'tripDetail',
             tpl: ''
-//          tpl: [
-//              '<dl class="trip-details">',
-//                  '<div class="dli">',
-//                      '<dt>From</dt>',
-//                      '<dd>{fromName}</dd>',
-//                  '</div>',
-//                  '<div class="dli">',
-//                      '<dt>To</dt>',
-//                      '<dd>{toName}</dd>',
-//                  '</div>',
-//                  '<div class="dli">',
-//                      '<dt>Travel</dt>',
-//                      '<dd>{modes}</dd>',
-//                  '</div>',
-//                  '<div class="dli">',
-//                      '<dt>Time</dt>',
-//                      '<dd>{[values.duration/1000/60]}&nbsp;min</dd>',
-//                  '</div>',,
-//              '</dl>'
-//          ]
         }, {
             xtype: 'tabpanel',
             flex: 1,
@@ -134,12 +116,7 @@ Ext.define('SeptaMobi.view.TripPlanner.TripDetail', {
                     },{
                         xtype: 'carousel',
                         height: '100%',
-                        flex: 1,
-                        items: [{
-                            html: 'Item 1<br>extra line<br>another line'
-                        },{
-                            html: 'Item 2'
-                        }]
+                        flex: 1
                     },{
                         xtype: 'button',
                         cls: 'directions-arrow next',
@@ -151,12 +128,34 @@ Ext.define('SeptaMobi.view.TripPlanner.TripDetail', {
     },
 
     setTripData: function(tripDetail, itenerary) {
-        var iteneraryData = itenerary.getData();
+        var me = this,
+            carousel = me.down('carousel'),
+            iteneraryData = itenerary.getData(),
+            tripElementLength = iteneraryData.legs.length,
+            tpl = Ext.create('SeptaMobi.template.TripPoint'), 
+            i = 0, tplHtml, carouselItems = [];
 
         iteneraryData.legs[iteneraryData.legs.length - 1].destination = itenerary.get('toName');
 
-        this.setTripDetail(tripDetail);
-        this.setItenerary(iteneraryData);
+        me.setTripDetail(tripDetail);
+        me.setItenerary(iteneraryData);
+
+        for(; i < tripElementLength + 2; i++) {
+            if( i == 0) {
+                iteneraryData.type = 'startPoint';
+                tplHtml = tpl.apply(iteneraryData);
+            }
+            else if(i == tripElementLength + 1) {
+                iteneraryData.type = 'endPoint';
+                tplHtml = tpl.apply(iteneraryData);
+            }
+            else {
+                iteneraryData.legs[i - 1].type = 'leg';
+                tplHtml = tpl.apply(iteneraryData.legs[i - 1]);
+            }
+            carouselItems.push({html: tplHtml});
+        }
+        carousel.setItems(carouselItems);
     },
 
     updateTripDetail: function(tripDetail) {

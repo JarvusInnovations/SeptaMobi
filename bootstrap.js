@@ -672,6 +672,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "SeptaMobi.store.Stops": [],
   "SeptaMobi.store.Tokens": [],
   "SeptaMobi.strings.TripPlanner": [],
+  "SeptaMobi.template.TripPoint": [],
   "SeptaMobi.view.BookmarkPanel": [],
   "SeptaMobi.view.Dashboard": [],
   "SeptaMobi.view.Main": [],
@@ -1579,6 +1580,7 @@ Ext.ClassManager.addNameAliasMappings({
   "SeptaMobi.store.Stops": [],
   "SeptaMobi.store.Tokens": [],
   "SeptaMobi.strings.TripPlanner": [],
+  "SeptaMobi.template.TripPoint": [],
   "SeptaMobi.view.BookmarkPanel": [
     "widget.bookmarkpanel"
   ],

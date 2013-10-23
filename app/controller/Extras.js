@@ -195,7 +195,9 @@ Ext.define('SeptaMobi.controller.Extras', {
 
 							setTimeout(function() {
 								var perkDetail = perksStore.getById(perk.get('id'));
-								marker.bindPopup(perkTemplate.apply(perkDetail.getData()));
+								if(perkDetail) {
+									marker.bindPopup(perkTemplate.apply(perkDetail.getData()));
+								}
 							}, 1000);
 
 							perkMarkers.push(marker);

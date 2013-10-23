@@ -45,7 +45,7 @@
 	input {
 		border: none;
 		border-radius: 2px;
-		padding: .4em 1.75em .4em .6em;
+		padding: .4em 1.75em .4em .2em;
 	}
 	
 	.x-field-clearable .x-field-input {
@@ -56,8 +56,9 @@
 		@include border-radius(20px);
 		height: 18px;
 		right: 5px;
-		top: 20%;
+		top: 22%;
 		text-align: center;
+		padding: 0 5px;
 		width: 18px;
 		vertical-align: middle;
 	
@@ -65,7 +66,8 @@
 			content: 'x';
 			color: #000;
 			font-size: smaller;
-			vertical-align: text-top;
+			vertical-align: middle;
+			display: table-cell;
 		}
 	}
 	

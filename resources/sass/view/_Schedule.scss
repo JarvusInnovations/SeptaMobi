@@ -9,7 +9,7 @@
 	
 		.x-innerhtml {
 			@include hairline;
-			padding: 1em;
+			padding: 1em 2em 1em 1em;
 		}
 		
 		&.x-item-pressed,
@@ -24,7 +24,7 @@
             opacity: .4;
             position: absolute;
             right: 1.1em;
-            top: 1.1em;
+            top: 1.3em;
         }
 	}
 	
@@ -37,11 +37,16 @@
 		}
 	}
 	
+	span {
+		
+	}
+	
 	.bus-number {
 		@include border-radius(30px);
 		background-color: $base-color;
 		color: #fff;
-		display: inline-block;
+		display: block;
+		float: left;
 		font-weight: 900;
 		font-size: smaller;
 		line-height: 1em;

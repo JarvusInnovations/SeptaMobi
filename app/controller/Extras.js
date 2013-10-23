@@ -145,7 +145,7 @@ Ext.define('SeptaMobi.controller.Extras', {
 					// iconAnchor: [14, 30]
 				})
 			}).addTo(map);
-			debugger
+
 			setTimeout(function() {
 				marker.bindPopup(tokenTemplate.apply(token.getData()));
 			}, 1000);

@@ -20,6 +20,7 @@ Ext.define('SeptaMobi.view.stops.NearbyList', {
                     return record.get('routeType') == 3;
                 }
             }
-        ]
+        ],
+        emptyText: 'There are no stops near by your current location.'
 	}
 });

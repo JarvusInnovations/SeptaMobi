@@ -83,6 +83,27 @@ Ext.define('SeptaMobi.API', {
 		});
 	},
 
+	routesForStop: function(stopId, callback, scope) {
+		var records;
+
+		Ext.Ajax.request({
+				url: (window.SeptaMobi_API && SeptaMobi_API.routesForStop) || (location.protocol == 'http:' ? './api/routesForStop' : 'http://opentrips.codeforphilly.org/opentripplanner-api-webapp/ws/transit/routesForStop'),
+			method: 'GET',
+			params: {
+				id: stopId
+			},
+			callback: function(options, success, response) {
+				if ((response.getResponseHeader('content-type') || '').indexOf('application/json') == 0 && response.responseText) {
+					response.data = Ext.decode(response.responseText, true);
+				}
+
+				records = response.data.routes;
+
+				Ext.callback(callback, scope, [records, options, success, response]);
+			}
+		});
+	},
+
 	getNearByStops: function(lat, lon, callback, scope) {
 		var	routeStore = Ext.getStore('Routes'),
 			nearByStopsStore = Ext.getStore('NearByStops'),

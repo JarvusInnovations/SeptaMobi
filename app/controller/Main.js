@@ -21,10 +21,6 @@ Ext.define('SeptaMobi.controller.Main', {
 				me.pushPath('dashboard');
 				break;
 			}
-			case 2:{
-				me.pushPath('stops');
-				break;
-			}
 			case 3: {
 				me.pushPath('tripplanner');
 				break;

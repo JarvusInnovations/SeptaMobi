@@ -11,7 +11,9 @@ Ext.define('SeptaMobi.controller.Stop', {
 			'NearByStops'
 		],
 		refs: {
+			mainTabView: 'main',
 			navView: 'stops-navview',
+			stopsMainView: 'stops-main',
 			routeList: {
 				selector: 'stops-routelist',
 				autoCreate: true,
@@ -26,22 +28,99 @@ Ext.define('SeptaMobi.controller.Stop', {
 			}
 		},
 		control: {
+			// mainTabView: {
+			// 	activeitemchange: 'onMainTabViewActiveItemChange'
+			// },
 			navView: {
 				show: 'onStopsShow'
 			},
-			'stops-main': {
+			stopsMainView: {
+				activate: 'onStopsMainViewActivate',
 				leavescreen: 'onStopsMainLeaveScreen'
 			},
 			'stops-nearbylist': {
 				select: 'onNearbyStopListSelect'
 			},
 			routeList: {
+				activate: 'onRouteListActivate',
 				select: 'onStopRoutesSelect',
 				leavescreen: 'onStopRoutesLeaveScreen'
 			},
 			routeMap: {
 				maprender: 'onRouteMapRender'
 			}
+		},
+		routes: {
+			'stops': 'showStops',
+			'stops/:id': 'showStopDetails'
+		}
+	},
+
+	// onMainTabViewActiveItemChange: function(tabpanel, item) {
+	// 	var me = this,
+	// 		mainTabView = me.getMainTabView();
+
+	// 	if(tabpanel.indexOf(item) == 2) {
+	// 		if(false) {
+				
+	// 		}
+	// 		else {
+	// 			me.pushPath('stops');
+	// 		}
+	// 	}
+	// },
+
+	showStops: function() {
+		var me = this,
+			mainTabView = me.getMainTabView(),
+			navView = me.getNavView(),
+			stopsMainView = me.getStopsMainView();
+
+		mainTabView.setActiveItem(1);
+		navView.pop(stopsMainView);
+	},
+
+	showStopDetails: function(id) {
+		var me = this,
+			nearByStopsStore = Ext.getStore('NearByStops'),
+			i = 0, stop;
+
+		if(!nearByStopsStore.isLoaded()) {
+			me.updateLocation(function() { me.showStops(id) });
+		}
+		
+		stop = nearByStopsStore.getById(id);
+
+		if (!stop) {
+			SeptaMobi.API.routesForStop(id, function(records) {
+				me.loadRoutes(id, records);
+			});
+		} else {
+			me.loadRoutes(id, stop.get('routes'));
+		}
+	},
+
+	loadRoutes: function(stopId, routes) {
+
+		var me = this,
+			routeList = me.getRouteList(),
+			navView = me.getNavView();
+
+		if(routes.length == 1) {
+			me.onStopRoutesSelect(routeList, routes[0]);
+		}
+		else {
+			me.pushPath('stops/' + stopId);
+			routeList.setStopId(stopId);
+			//TODO why is this not showing just the routes that I'm explicitly setting here
+			routeList.setData(Ext.Array.map(routes, function(r) {
+				if(r.isModel) {
+					return r.getData();
+				}
+				//TODO should this occur in the API method?
+				return Ext.create('SeptaMobi.model.Route', r).getData();
+			}));
+			navView.push(routeList);
 		}
 	},
 
@@ -65,11 +144,16 @@ Ext.define('SeptaMobi.controller.Stop', {
 		}
 	},
 
+	onStopsMainViewActivate: function() {
+		console.log('Stops main view activate');
+		this.pushPath('stops');
+	},
+
 	onStopsMainLeaveScreen: function(panel) {
 		panel.down('stops-nearbylist').deselectAll();
 	},
 
-	updateLocation: function() {
+	updateLocation: function(callback, scope) {
 		var me = this,
 			navView = me.getNavView(),
 			nearByStopsStore = Ext.getStore('NearByStops'),
@@ -82,48 +166,65 @@ Ext.define('SeptaMobi.controller.Stop', {
 				message: 'Loading Near-By Stops&hellip;'
 			});
 
-			if (!me.geo) {
-				me.geo = Ext.create('Ext.util.Geolocation', {
-					autoUpdate: false,
-					listeners: {
-						locationupdate: function(geo) {
-							SeptaMobi.API.getNearByStops(geo.getLatitude(), geo.getLongitude(), function() {
-								navView.setMasked(false);
-							});
-						},
-						locationerror: function(geo, bTimeout, bPermissionDenied, bLocationUnavailable, message) {
-							if (bTimeout) {
-								alert('Location timeout occurred.');
-							} else {
-								alert('Location error occurred.');
-							}
-							navView.setMasked(false);
-						}
-					}
-				});
-			}
+			SeptaMobi.API.getNearByStops(39.9500, -75.1700, function() {
+				navView.setMasked(false);
+				if(callback) {
+					Ext.callback(callback, scope, nearByStopsStore);
+				}
+			});
+			// if (!me.geo) {
+			// 	me.geo = Ext.create('Ext.util.Geolocation', {
+			// 		autoUpdate: false,
+			// 		listeners: {
+			// 			locationupdate: function(geo) {
+			// 				SeptaMobi.API.getNearByStops(geo.getLatitude(), geo.getLongitude(), function() {
+			// 					navView.setMasked(false);
+			// 					if(callback) {
+			// 						Ext.callback(callback, scope, nearByStopsStore);
+			// 					}
+			// 				});
+			// 			},
+			// 			locationerror: function(geo, bTimeout, bPermissionDenied, bLocationUnavailable, message) {
+			// 				debugger
+			// 				if (bTimeout) {
+			// 					alert('Location timeout occurred.');
+			// 				} else {
+			// 					alert('Location error occurred.');
+			// 				}
+			// 				navView.setMasked(false);
+			// 			}
+			// 		}
+			// 	});
+			// }
 		}
 
-		me.geo.updateLocation();
+		// me.geo.updateLocation();
 	},
 
 	onNearbyStopListSelect: function(list, record) {
-		var me = this,
-			navView = me.getNavView(),
-			routeStore = Ext.getStore('Routes'),
-			routeList = me.getRouteList(),
-			routes = record.get('routes'),
-			routeLength = routes.length,
-			i = 0;
+		var routes = record.get('routes');
 
-		if (routeLength == 1) {
-			me.onStopRoutesSelect(routeList, routes[0]);
-		} else {
-			routeList.setData(Ext.Array.map(routes, function(r) {
-				return r.getData()
-			}));
-			navView.push(routeList);
-		}
+		this.loadRoutes(record.get('id'), routes);
+		// var me = this,
+		// 	navView = me.getNavView(),
+		// 	routeStore = Ext.getStore('Routes'),
+		// 	routeList = me.getRouteList(),
+		// 	routes = record.get('routes'),
+		// 	routeLength = routes.length,
+		// 	i = 0;
+
+		// if (routeLength == 1) {
+		// 	me.onStopRoutesSelect(routeList, routes[0]);
+		// } else {
+		// 	routeList.setData(Ext.Array.map(routes, function(r) {
+		// 		return r.getData()
+		// 	}));
+		// 	navView.push(routeList);
+		// }
+	},
+
+	onRouteListActivate: function(list) {
+		this.pushPath('stops/' + list.getStopId());
 	},
 
 	onStopRoutesSelect: function(list, record) {
@@ -133,6 +234,8 @@ Ext.define('SeptaMobi.controller.Stop', {
 			busesStore = Ext.getStore('Buses'),
 			encodedPoints = [],
 			routeMap = me.getRouteMap();
+
+		me.pushPath('stops/routes/' + record.get('id'));
 
 		navView.setMasked({
 			xtype: 'loadmask',

@@ -3,6 +3,7 @@ Ext.define('SeptaMobi.view.stops.RouteList', {
 	xtype: 'stops-routelist',
 	
 	config: {
+        stopId: null,
         title: 'Routes',
 
         cls: 'stops',

@@ -38,11 +38,8 @@ Ext.define('SeptaMobi.controller.Extras', {
 			perksMap: 'perksview leafletmap'
 		},
 		control: {
-			mainTabView: {
-				activeitemchange: 'onMainTabViewActiveItemChange'
-			},
-			extrasMainPanel: {
-				activate: 'onExtrasMainPanelActivate'
+			extrasNavView: {
+				activate: 'onExtrasNavViewActivate'
 			},
 			perksView: {
 				activate: 'onPerksViewActivate'
@@ -77,24 +74,6 @@ Ext.define('SeptaMobi.controller.Extras', {
 		}
 	},
 
-	onMainTabViewActiveItemChange: function(tabpanel, item) {
-		var me = this,
-			extrasView = me.getExtrasNavView(),
-			tokensView = me.getTokensView(),
-			perksView = me.getPerksView();
-
-		if(tabpanel.indexOf(item) == 4) {
-			if(extrasView.getActiveItem() === perksView) {
-				me.pushPath('extras/perks');
-			}
-			if(extrasView.getActiveItem() === tokensView) {
-				me.pushPath('extras/tokens');
-			}
-			else {
-				me.pushPath('extras');
-			}
-		}
-	},
 	//controller methods
 
 	showExtras: function() {
@@ -133,7 +112,7 @@ Ext.define('SeptaMobi.controller.Extras', {
 		}
 	},
 
-	onExtrasMainPanelActivate: function() {
+	onExtrasNavViewActivate: function() {
 		this.pushPath('extras');
 	},
 

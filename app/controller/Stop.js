@@ -32,10 +32,10 @@ Ext.define('SeptaMobi.controller.Stop', {
 			// 	activeitemchange: 'onMainTabViewActiveItemChange'
 			// },
 			navView: {
+				activate: 'onStopsNavViewActivate',
 				show: 'onStopsShow'
 			},
 			stopsMainView: {
-				activate: 'onStopsMainViewActivate',
 				leavescreen: 'onStopsMainLeaveScreen'
 			},
 			'stops-nearbylist': {
@@ -144,8 +144,7 @@ Ext.define('SeptaMobi.controller.Stop', {
 		}
 	},
 
-	onStopsMainViewActivate: function() {
-		console.log('Stops main view activate');
+	onStopsNavViewActivate: function() {
 		this.pushPath('stops');
 	},
 

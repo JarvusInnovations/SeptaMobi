@@ -29,10 +29,6 @@ Ext.define('SeptaMobi.controller.Main', {
 				me.pushPath('tripplanner');
 				break;
 			}
-			case 4: {
-				me.pushPath('extras');
-				break;
-			}
 		}
 	}
 });

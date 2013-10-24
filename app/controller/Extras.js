@@ -38,10 +38,18 @@ Ext.define('SeptaMobi.controller.Extras', {
 			perksMap: 'perksview leafletmap'
 		},
 		control: {
+			mainTabView: {
+				activeitemchange: 'onMainTabViewActiveItemChange'
+			},
 			extrasMainPanel: {
 				activate: 'onExtrasMainPanelActivate'
 			},
-
+			perksView: {
+				activate: 'onPerksViewActivate'
+			},
+			tokensView: {
+				activate: 'onTokensViewActivate'
+			},
 			'selectfield#perkSorter': {
 				change: 'sortPerks'
 			},
@@ -63,9 +71,31 @@ Ext.define('SeptaMobi.controller.Extras', {
 			}
 		},
 		routes: {
-			'extras': 'showExtras'
+			'extras': 'showExtras',
+			'extras/perks': 'showPerks',
+			'extras/tokens': 'showTokens'
 		}
 	},
+
+	onMainTabViewActiveItemChange: function(tabpanel, item) {
+		var me = this,
+			extrasView = me.getExtrasNavView(),
+			tokensView = me.getTokensView(),
+			perksView = me.getPerksView();
+
+		if(tabpanel.indexOf(item) == 4) {
+			if(extrasView.getActiveItem() === perksView) {
+				me.pushPath('extras/perks');
+			}
+			if(extrasView.getActiveItem() === tokensView) {
+				me.pushPath('extras/tokens');
+			}
+			else {
+				me.pushPath('extras');
+			}
+		}
+	},
+	//controller methods
 
 	showExtras: function() {
 		var me = this,
@@ -82,7 +112,37 @@ Ext.define('SeptaMobi.controller.Extras', {
 			extrasView = me.getExtrasNavView(),
 			perksView = me.getPerksView();
 
-		extrasView.push(perksView);
+		if(!perksView.hasParent()) {
+			extrasView.push(perksView);
+		}
+		if(extrasView.getActiveItem() !== perksView) {
+			extrasView.pop(perksView);
+		}
+	},
+
+	showTokens: function() {
+		var me = this,
+			extrasView = me.getExtrasNavView(),
+			tokensView = me.getTokensView();
+
+		if(!tokensView.hasParent()) {
+			extrasView.push(tokensView);
+		}
+		if(extrasView.getActiveItem() !== tokensView) {
+			extrasView.pop(tokensView);
+		}
+	},
+
+	onExtrasMainPanelActivate: function() {
+		this.pushPath('extras');
+	},
+
+	onPerksViewActivate: function() {
+		this.pushPath('extras/perks');
+	},
+
+	onTokensViewActivate: function() {
+		this.pushPath('extras/tokens');
 	},
 
 	onPerksViewRender: function(navView) {

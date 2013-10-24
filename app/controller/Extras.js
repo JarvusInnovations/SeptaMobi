@@ -19,6 +19,8 @@ Ext.define('SeptaMobi.controller.Extras', {
 			'Perk'
 		],
 		refs: {
+			mainTabView: 'main',
+			extrasMainPanel: 'extrasview #mainPanel',
 			perksView: {
 				selector: 'perksview',
 				xtype: 'perksview',
@@ -36,6 +38,9 @@ Ext.define('SeptaMobi.controller.Extras', {
 			perksMap: 'perksview leafletmap'
 		},
 		control: {
+			extrasMainPanel: {
+				activate: 'onExtrasMainPanelActivate'
+			},
 
 			'selectfield#perkSorter': {
 				change: 'sortPerks'
@@ -56,7 +61,20 @@ Ext.define('SeptaMobi.controller.Extras', {
 			'tokensview leafletmap': {
 				maprender: 'onTokensViewMapRender'
 			}
+		},
+		routes: {
+			'extras': 'showExtras'
 		}
+	},
+
+	showExtras: function() {
+		var me = this,
+			mainTabView = me.getMainTabView(),
+			extrasNavView = me.getExtrasNavView(),
+			extrasMainPanel = me.getExtrasMainPanel();
+
+		mainTabView.setActiveItem(3);
+		extrasNavView.pop(extrasMainPanel);
 	},
 
 	showPerks: function(btn) {

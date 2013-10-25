@@ -66,6 +66,10 @@ Ext.application({
 
         // Initialize the main view
         Ext.Viewport.add(Ext.create('SeptaMobi.view.Main'));
+
+        if(!location.hash) {
+            this.pushPath('dashboard');
+        }
     },
 
     onUpdated: function() {

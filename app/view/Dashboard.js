@@ -37,6 +37,7 @@ Ext.define('SeptaMobi.view.Dashboard', {
 				store: 'Alerts'
 			}, {
 				xtype: 'list',
+				itemId: 'bookmarkslist',
 				title: 'Bookmarks',
 				cls: 'bookmarks',
 				itemTpl: [

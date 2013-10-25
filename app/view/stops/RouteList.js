@@ -1,3 +1,4 @@
+//TODO good candidate for reusable template with nearby list
 Ext.define('SeptaMobi.view.stops.RouteList', {
 	extend: 'Ext.dataview.List',
 	xtype: 'stops-routelist',
@@ -9,7 +10,7 @@ Ext.define('SeptaMobi.view.stops.RouteList', {
         cls: 'stops',
         itemHeight: 40,
 		itemTpl: [
-			//'<h3>{stopName}</h3>',
+            //TODO change bus-number class to something else
             '<div class="routes">',
                 '<tpl if="this.isBus(values)">',
                     '<span class="bus-number"><span class="number">{routeShortName}</span></span>',

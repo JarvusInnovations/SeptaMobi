@@ -288,8 +288,8 @@ Ext.define('SeptaMobi.controller.Stop', {
 
 			var marker = ll.marker(latLng, {
 				icon: ll.icon({
-					iconUrl: 'resources/images/bus-marker.png',
-					iconRetinaUrl: 'resources/images/bus-marker-2x.png',
+					iconUrl: 'resources/images/bus-marker-' + bus.get('Direction') + '.png',
+					iconRetinaUrl: 'resources/images/bus-marker-' + bus.get('Direction') + '2x.png',
 					iconSize: [28, 31],
 					iconAnchor: [14, 30]
 				})

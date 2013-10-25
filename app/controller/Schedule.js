@@ -85,6 +85,7 @@ Ext.define('SeptaMobi.controller.Schedule', {
 
 			routeStore.load({
 				callback: function(records, operation, success) {
+					routeStore.filter('routeType', 3);
 					navView.setMasked(false);
 				}
 			});

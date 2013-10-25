@@ -26,6 +26,7 @@ Ext.define('SeptaMobi.view.schedule.RoutesList', {
 			},
 			items: [{
 				text: 'Bus',
+				pressed: true,
 				routeType: 3 
 			}, {
 				text: 'Subway',

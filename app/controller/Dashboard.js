@@ -3,14 +3,16 @@ Ext.define('SeptaMobi.controller.Dashboard', {
 
 	config: {
 		refs: {
+			mainTabView: 'main',
+			dashboardView: 'dashboard'
 		},
 		stores: [
 			'Alerts'
 		],
 
 		control: {
-			'dashboard': {
-				activate: 'onDashboardActivate'
+			mainTabView: {
+				activeitemchange: 'onMainTabViewActiveItemChange'
 			},
 			'button[action=newRoute]': {
 				tap: 'onNewRouteButtonTap'
@@ -21,8 +23,10 @@ Ext.define('SeptaMobi.controller.Dashboard', {
 		}
 	},
 
-	onDashboardActivate: function() {
-		this.pushPath('dashboard');
+	onMainTabViewActiveItemChange: function(tabpanel, item) {
+		if(tabpanel.indexOf(item) == 0) {
+			this.pushPath('dashboard');
+		}
 	},
 
 	onNewRouteButtonTap: function() {

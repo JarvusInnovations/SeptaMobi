@@ -5,9 +5,10 @@ Suggestion: Bold the transportation vehicles number in Schedule
 Trip PLanner:
 Reenable clear icon , needs css
 
-Perks 
-	- not sortable
+extras
+	- perks not sortable
 	- selecting a perk should show it on the map
+	- when loading perks/tokens, whole area should be masked not just list, clicking map before it loads causes issues
 
 Assets are missing for perks, token locations, and other bus direction
 
@@ -20,6 +21,8 @@ Nice to have features:
 	- Calculate next train, bus, subway car based upon historical data (server side)
 	- Show route details (stops list + map) instead of route map from nearby stops
 	- Visually show alerts (detours) on route details screen
+	- better geocoder
+	- update to sencha 2.3
 
 Planned refactor:
 	- Merge schedule and stop controller

@@ -165,39 +165,33 @@ Ext.define('SeptaMobi.controller.Stop', {
 				message: 'Loading Near-By Stops&hellip;'
 			});
 
-			SeptaMobi.API.getNearByStops(39.9500, -75.1700, function() {
-				navView.setMasked(false);
-				if(callback) {
-					Ext.callback(callback, scope, nearByStopsStore);
-				}
-			});
-			// if (!me.geo) {
-			// 	me.geo = Ext.create('Ext.util.Geolocation', {
-			// 		autoUpdate: false,
-			// 		listeners: {
-			// 			locationupdate: function(geo) {
-			// 				SeptaMobi.API.getNearByStops(geo.getLatitude(), geo.getLongitude(), function() {
-			// 					navView.setMasked(false);
-			// 					if(callback) {
-			// 						Ext.callback(callback, scope, nearByStopsStore);
-			// 					}
-			// 				});
-			// 			},
-			// 			locationerror: function(geo, bTimeout, bPermissionDenied, bLocationUnavailable, message) {
-			// 				debugger
-			// 				if (bTimeout) {
-			// 					alert('Location timeout occurred.');
-			// 				} else {
-			// 					alert('Location error occurred.');
-			// 				}
-			// 				navView.setMasked(false);
-			// 			}
-			// 		}
-			// 	});
-			// }
+			if (!me.geo) {
+				me.geo = Ext.create('Ext.util.Geolocation', {
+					autoUpdate: false,
+					listeners: {
+						locationupdate: function(geo) {
+							SeptaMobi.API.getNearByStops(geo.getLatitude(), geo.getLongitude(), function() {
+								navView.setMasked(false);
+								if(callback) {
+									Ext.callback(callback, scope, nearByStopsStore);
+								}
+							});
+						},
+						locationerror: function(geo, bTimeout, bPermissionDenied, bLocationUnavailable, message) {
+							debugger
+							if (bTimeout) {
+								alert('Location timeout occurred.');
+							} else {
+								alert('Location error occurred.');
+							}
+							navView.setMasked(false);
+						}
+					}
+				});
+			}
 		}
 
-		// me.geo.updateLocation();
+		me.geo.updateLocation();
 	},
 
 	onNearbyStopListSelect: function(list, record) {

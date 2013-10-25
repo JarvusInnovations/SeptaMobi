@@ -26,7 +26,8 @@ Ext.define('SeptaMobi.controller.Stop', {
 				autoCreate: true,
 
 				xtype: 'stops-routemap'
-			}
+			},
+			scheduleRouteList: 'schedule-routeslist'
 		},
 		control: {
 			navView: {
@@ -134,6 +135,7 @@ Ext.define('SeptaMobi.controller.Stop', {
 
 	onStopsMainLeaveScreen: function(panel) {
 		panel.down('stops-nearbylist').deselectAll();
+		this.getScheduleRouteList().deselectAll();
 	},
 
 	updateLocation: function(callback, scope) {

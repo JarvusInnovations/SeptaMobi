@@ -52,8 +52,7 @@ Ext.define('SeptaMobi.controller.Schedule', {
 				toggle: 'onRoutesListSegmentedButtonToggle'
 			},
 			routesList: {
-				select: 'onRoutesListSelect',
-				leavescreen: 'onRoutesListLeaveScreen'
+				select: 'onRoutesListSelect'
 			},
 			routeDetails: {
 				leavescreen: 'onRouteDetailsLeaveScreen'
@@ -129,6 +128,8 @@ Ext.define('SeptaMobi.controller.Schedule', {
 			message: 'Loading Details&hellip;'
 		});
 
+		routeDirections.setRoute(record);
+
 		navView.push(routeDirections);
 
 		SeptaMobi.model.RouteDetails.load(record.getId(), {
@@ -172,6 +173,7 @@ Ext.define('SeptaMobi.controller.Schedule', {
 	},
 
 	onRoutesListLeaveScreen: function(list) {
+		debugger
 		list.deselectAll();
 	},
 
@@ -189,9 +191,9 @@ Ext.define('SeptaMobi.controller.Schedule', {
 			alertsStore = Ext.getStore('Alerts'),
 			routeList = me.getRoutesList(),
 			navView = me.getNavView(),
-			route = routeList.getSelection()[0],
-			routeDetails = me.getRouteDetails(),
 			routeDirections = me.getRouteDirections(),
+			route = routeDirections.getRoute(),
+			routeDetails = me.getRouteDetails(),
 			routeAlertIdentifier;
 
 		if(route.get('routeType') == 3) {

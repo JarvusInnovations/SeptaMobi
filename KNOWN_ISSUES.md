@@ -7,11 +7,13 @@ Suggestion: Bold the transportation vehicles number in Schedule
 Trip PLanner:
 Reenable clear icon , needs css
 
-Not all controllers support routing, all controllers need sub routes
+controllers needing sub routes
+	-Stops
+	-Trip Planner (w/ bookmark url support)
 
-Perks are not sortable
-
-Token locations are not implemented
+Perks 
+	- not sortable
+	- selecting a perk should show it on the map
 
 Assets are missing for perks, token locations, and other bus direction
 

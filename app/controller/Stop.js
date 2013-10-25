@@ -162,7 +162,6 @@ Ext.define('SeptaMobi.controller.Stop', {
 							});
 						},
 						locationerror: function(geo, bTimeout, bPermissionDenied, bLocationUnavailable, message) {
-							debugger
 							if (bTimeout) {
 								alert('Location timeout occurred.');
 							} else {

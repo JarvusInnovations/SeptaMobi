@@ -186,9 +186,39 @@ Ext.define('SeptaMobi.controller.Schedule', {
 	onRouteDirectionsSelect: function(list, record) {
 		var me = this,
 			stopsStore = Ext.getStore('Stops'),
+			alertsStore = Ext.getStore('Alerts'),
+			routeList = me.getRoutesList(),
 			navView = me.getNavView(),
+			route = routeList.getSelection()[0],
 			routeDetails = me.getRouteDetails(),
-			routeDirections = me.getRouteDirections();
+			routeDirections = me.getRouteDirections(),
+			routeAlertIdentifier;
+
+		if(route.get('routeType') == 3) {
+			routeAlertIdentifier = 'bus_route_';
+		}
+		else {
+			routeAlertIdentifier = 'rr_route_';
+		}
+		routeAlertIdentifier += route.get('routeShortName');
+
+		Ext.Ajax.request({
+			url: (window.SeptaMobi_API && SeptaMobi_API.alert) || (location.protocol == 'http:' ? './api/alert' : 'http://www3.septa.org/hackathon/Alerts/get_alert_data.php'),
+			method: 'GET',
+			params: {
+				req1: routeAlertIdentifier
+			},
+			callback: function(options, success, response) {
+				var r = Ext.decode(response.responseText, true);
+
+				if(r.length && r[0].advisory_message) {
+					routeDetails.setAlert(r[0].advisory_message);
+				}
+				else {
+					routeDetails.setAlert(false);
+				}
+			}
+		});
 
 		routeDetails.setEncodedPoints(routeDirections.getEncodedPoints());
 		navView.push(routeDetails);

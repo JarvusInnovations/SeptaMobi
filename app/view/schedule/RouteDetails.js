@@ -7,6 +7,7 @@ Ext.define('SeptaMobi.view.schedule.RouteDetails', {
 
 	config: {
 		// stops: null,
+		alert: null,
 		stopMarkers: [],
 		encodedPoints: [],
 		routePolyLine: null,
@@ -34,6 +35,10 @@ Ext.define('SeptaMobi.view.schedule.RouteDetails', {
 			mapOptions: {
 				zoom: 15
 			}
+		},{
+			xtype: 'component',
+			title: 'Alerts',
+			itemId: 'alertsCmp'
 		}]
 	},
 	
@@ -52,5 +57,15 @@ Ext.define('SeptaMobi.view.schedule.RouteDetails', {
 		while(marker = busMarkers.pop()) {
 			map.removeLayer(marker);
 		}
+	},
+
+	updateAlert: function(alert) {
+		var alertsCmp = this.down('#alertsCmp');
+
+		if(!alert) {
+			alert = 'No Alerts At This Time';
+		}
+
+		alertsCmp.setHtml(alert);
 	}
 });

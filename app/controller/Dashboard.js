@@ -25,6 +25,7 @@ Ext.define('SeptaMobi.controller.Dashboard', {
 
 	launch: function() {
 		var me = this;
+		//TODO move to external library
 		/*********************************************************************
 		*  #### Twitter Post Fetcher v10.0 ####
 		*  Coded by Jason Mayes 2013. A present to all the developers out there.

@@ -131,7 +131,7 @@ Ext.define('SeptaMobi.API', {
 					routesLength = routes.length;
 
 					for (j = 0; j < routesLength; j++) {
-						routes[j] = routeStore.getById(routes[j].id);
+						routes[j] = routeStore.getData().getByKey(routes[j].id); // data.getByKey searches filtered records, getById doesn't
 					}
 				}
 				

@@ -2,6 +2,7 @@ Ext.define('SeptaMobi.controller.Stop', {
 	extend: 'Ext.app.Controller',
 
 	config: {
+		busDirections: ['NorthBound', 'SouthBound', 'EastBound', 'WestBound'],
 		views: [
 			'stops.RouteList',
 			'stops.RouteMap'
@@ -260,7 +261,7 @@ Ext.define('SeptaMobi.controller.Stop', {
 			stopMarkers = [],
 			busMarkers = [],
 			i = 0,
-			stop, latLng, bounds, decodedPoints, polyLine, infoTemplate;
+			stop, latLng, bounds, decodedPoints, polyLine, infoTemplate, direction;
 
 		for (; i < encodedPointsLength; i++) {
 			decodedPoints = Jarvus.util.Polyline.decode(encodedPoints[i]);
@@ -284,12 +285,17 @@ Ext.define('SeptaMobi.controller.Stop', {
 		]);
 
 		buses.forEach(function(bus) {
+			direction = bus.get('Direction');
+			if(!Ext.Array.contains(me.config.busDirections, direction)) {
+				direction = 'unknown';
+			}
+
 			latLng = [bus.get('lat'), bus.get('lng')];
 
 			var marker = ll.marker(latLng, {
 				icon: ll.icon({
-					iconUrl: 'resources/images/bus-marker-' + bus.get('Direction') + '.png',
-					iconRetinaUrl: 'resources/images/bus-marker-' + bus.get('Direction') + '2x.png',
+					iconUrl: 'resources/images/bus-marker-' + direction + '.png',
+					iconRetinaUrl: 'resources/images/bus-marker-' + direction + '-2x.png',
 					iconSize: [28, 31],
 					iconAnchor: [14, 30]
 				})

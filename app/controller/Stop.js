@@ -28,9 +28,6 @@ Ext.define('SeptaMobi.controller.Stop', {
 			}
 		},
 		control: {
-			// mainTabView: {
-			// 	activeitemchange: 'onMainTabViewActiveItemChange'
-			// },
 			navView: {
 				activate: 'onStopsNavViewActivate',
 				show: 'onStopsShow'
@@ -55,20 +52,6 @@ Ext.define('SeptaMobi.controller.Stop', {
 			'stops/:id': 'showStopDetails'
 		}
 	},
-
-	// onMainTabViewActiveItemChange: function(tabpanel, item) {
-	// 	var me = this,
-	// 		mainTabView = me.getMainTabView();
-
-	// 	if(tabpanel.indexOf(item) == 2) {
-	// 		if(false) {
-				
-	// 		}
-	// 		else {
-	// 			me.pushPath('stops');
-	// 		}
-	// 	}
-	// },
 
 	showStops: function() {
 		var me = this,

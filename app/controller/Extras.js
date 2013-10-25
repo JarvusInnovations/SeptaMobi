@@ -243,8 +243,8 @@ Ext.define('SeptaMobi.controller.Extras', {
 							
 							var marker = ll.marker(latLng, {
 								icon: ll.icon({
-									iconUrl: 'resources/images/perk.png',
-									iconRetinaUrl: 'resources/images/perk-2x.png'
+									iconUrl: 'resources/images/perks.png',
+									iconRetinaUrl: 'resources/images/perks-2x.png'
 									// iconSize: [28, 31],
 									// iconAnchor: [14, 30]
 								})

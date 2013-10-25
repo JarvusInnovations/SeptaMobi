@@ -1,3 +1,4 @@
+//TODO good candidate for reusable template with route list
 Ext.define('SeptaMobi.view.stops.NearbyList', {
 	extend: 'Ext.dataview.List',
 	xtype: 'stops-nearbylist',
@@ -9,17 +10,12 @@ Ext.define('SeptaMobi.view.stops.NearbyList', {
             '<div>',
                 '<h3>{stopName}</h3>',
                 '<tpl for="routes">',
-                    '<div class="routes"><tpl if="this.isBus(values)">',
+                    '<div class="routes">',
                         '<span class="bus-number"><span class="number">{[values.get("routeShortName")]}</span></span>',
-                    '</tpl>',
-                    '<p>{[values.get("displayName")]}</p></div>',
+                        '<p>{[values.get("displayName")]}</p>',
+                    '</div>',
                 '</tpl>',
-            '</div>',
-            {
-                isBus: function(record) {
-                    return record.get('routeType') == 3;
-                }
-            }
+            '</div>'
         ],
         emptyText: 'There are no stops near by your current location.'
 	}

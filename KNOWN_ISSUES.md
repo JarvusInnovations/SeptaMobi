@@ -18,3 +18,8 @@ Trip planner carousel:
 Nice to have features:
 	- Show rail/subway stops on the map
 	- Calculate next train, bus, subway car based upon historical data (server side)
+	- Show route details (stops list + map) instead of route map from nearby stops
+	- Visually show alerts (detours) on route details screen
+
+Planned refactor:
+	- Merge schedule and stop controller

@@ -173,7 +173,6 @@ Ext.define('SeptaMobi.controller.Schedule', {
 	},
 
 	onRoutesListLeaveScreen: function(list) {
-		debugger
 		list.deselectAll();
 	},
 

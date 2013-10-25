@@ -499,6 +499,9 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 
 			bookmarkPanel.setButton(button);
 			bookmarkPanel.setBookmark(bookmark);
+
+			Ext.Viewport.add(bookmarkPanel); 
+			
 			bookmarkPanel.show();
 		}
 	}

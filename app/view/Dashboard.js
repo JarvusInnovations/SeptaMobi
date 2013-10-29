@@ -25,6 +25,7 @@ Ext.define('SeptaMobi.view.Dashboard', {
 				xtype: 'container',
 				html: 'Loading...',
 				itemId: 'tweetsCmp',
+				cls: 'tweets',
 				flex: 1,
 				title: 'Tweets',
 				scrollable: {

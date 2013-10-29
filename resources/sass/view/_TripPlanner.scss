@@ -140,7 +140,12 @@
     color: white;
     
     .x-carousel-item {
-        padding: 1em .5em;
+        padding: .5em 1em;
+        
+        .x-innerhtml {
+	        max-height: 75%;
+	        overflow-y: scroll;
+        }
     }
     
     .x-carousel-indicator {

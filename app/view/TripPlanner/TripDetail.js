@@ -106,21 +106,13 @@ Ext.define('SeptaMobi.view.TripPlanner.TripDetail', {
                     cls: 'directions-carousel-ct',
                     bottom: 16,
                     width: '100%',
-                    height: 96,
+                    height: '100%',
+                    maxHeight: 150,
                     layout: { type: 'hbox', align: 'middle' },
                     items: [{
-                        xtype: 'button',
-                        cls: 'directions-arrow prev',
-                        disabled: true,
-                        text: '<'
-                    },{
                         xtype: 'carousel',
                         height: '100%',
                         flex: 1
-                    },{
-                        xtype: 'button',
-                        cls: 'directions-arrow next',
-                        text: '<'
                     }]
                 }]
             }]

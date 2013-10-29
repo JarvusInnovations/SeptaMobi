@@ -90,7 +90,47 @@
 	}
 }
 
-
+.tweets {
+	color: transparent;
+	
+	.user {
+	
+		&:first-child {
+			padding-top: 1em;
+		}
+		
+		a {
+			color: #000;
+			font: -apple-system-short-headline;
+			font-weight: bold;
+			text-decoration: none;
+		}
+		
+		img {
+			float: left;
+			margin-right: 10px;
+		}
+		
+		span span {
+			display: none;	
+		}
+	}
+	
+	p {
+		color: #000;
+		font: -apple-system-short-subheadline;
+		margin-bottom: 0;
+		padding: 0 1em 0 58px;
+	}
+	
+	.timePosted {
+		@include hairline;
+		color: #777;
+		font: -apple-system-footnote;
+		font-style: italic;
+		padding-bottom: 1.2em;
+	}
+}
 
 
 

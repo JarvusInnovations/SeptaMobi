@@ -3,7 +3,7 @@ Ext.define('SeptaMobi.store.Alerts', {
 	requires: ['SeptaMobi.proxy.APIProxy', 'SeptaMobi.model.Alert'],
 
 	config: {
-		autoLoad: true,
+		autoLoad: false,
 		model: 'SeptaMobi.model.Alert',
 		proxy: {
 			type: 'ajax',

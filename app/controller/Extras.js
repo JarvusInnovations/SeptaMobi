@@ -19,6 +19,8 @@ Ext.define('SeptaMobi.controller.Extras', {
 			'Perk'
 		],
 		refs: {
+			mainTabView: 'main',
+			extrasMainPanel: 'extrasview #mainPanel',
 			perksView: {
 				selector: 'perksview',
 				xtype: 'perksview',
@@ -36,7 +38,15 @@ Ext.define('SeptaMobi.controller.Extras', {
 			perksMap: 'perksview leafletmap'
 		},
 		control: {
-
+			extrasNavView: {
+				activate: 'onExtrasNavViewActivate'
+			},
+			perksView: {
+				activate: 'onPerksViewActivate'
+			},
+			tokensView: {
+				activate: 'onTokensViewActivate'
+			},
 			'selectfield#perkSorter': {
 				change: 'sortPerks'
 			},
@@ -56,7 +66,24 @@ Ext.define('SeptaMobi.controller.Extras', {
 			'tokensview leafletmap': {
 				maprender: 'onTokensViewMapRender'
 			}
+		},
+		routes: {
+			'extras': 'showExtras',
+			'extras/perks': 'showPerks',
+			'extras/tokens': 'showTokens'
 		}
+	},
+
+	//controller methods
+
+	showExtras: function() {
+		var me = this,
+			mainTabView = me.getMainTabView(),
+			extrasNavView = me.getExtrasNavView(),
+			extrasMainPanel = me.getExtrasMainPanel();
+
+		mainTabView.setActiveItem(3);
+		extrasNavView.pop(extrasMainPanel);
 	},
 
 	showPerks: function(btn) {
@@ -64,7 +91,37 @@ Ext.define('SeptaMobi.controller.Extras', {
 			extrasView = me.getExtrasNavView(),
 			perksView = me.getPerksView();
 
-		extrasView.push(perksView);
+		if(!perksView.hasParent()) {
+			extrasView.push(perksView);
+		}
+		if(extrasView.getActiveItem() !== perksView) {
+			extrasView.pop(perksView);
+		}
+	},
+
+	showTokens: function() {
+		var me = this,
+			extrasView = me.getExtrasNavView(),
+			tokensView = me.getTokensView();
+
+		if(!tokensView.hasParent()) {
+			extrasView.push(tokensView);
+		}
+		if(extrasView.getActiveItem() !== tokensView) {
+			extrasView.pop(tokensView);
+		}
+	},
+
+	onExtrasNavViewActivate: function() {
+		this.pushPath('extras');
+	},
+
+	onPerksViewActivate: function() {
+		this.pushPath('extras/perks');
+	},
+
+	onTokensViewActivate: function() {
+		this.pushPath('extras/tokens');
 	},
 
 	onPerksViewRender: function(navView) {
@@ -186,8 +243,8 @@ Ext.define('SeptaMobi.controller.Extras', {
 							
 							var marker = ll.marker(latLng, {
 								icon: ll.icon({
-									iconUrl: 'resources/images/perk.png',
-									iconRetinaUrl: 'resources/images/perk-2x.png'
+									iconUrl: 'resources/images/perks.png',
+									iconRetinaUrl: 'resources/images/perks-2x.png'
 									// iconSize: [28, 31],
 									// iconAnchor: [14, 30]
 								})

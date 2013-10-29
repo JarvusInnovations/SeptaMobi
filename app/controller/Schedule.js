@@ -52,8 +52,7 @@ Ext.define('SeptaMobi.controller.Schedule', {
 				toggle: 'onRoutesListSegmentedButtonToggle'
 			},
 			routesList: {
-				select: 'onRoutesListSelect',
-				leavescreen: 'onRoutesListLeaveScreen'
+				select: 'onRoutesListSelect'
 			},
 			routeDetails: {
 				leavescreen: 'onRouteDetailsLeaveScreen'
@@ -85,6 +84,7 @@ Ext.define('SeptaMobi.controller.Schedule', {
 
 			routeStore.load({
 				callback: function(records, operation, success) {
+					routeStore.filter('routeType', 3);
 					navView.setMasked(false);
 				}
 			});
@@ -127,6 +127,8 @@ Ext.define('SeptaMobi.controller.Schedule', {
 			xtype: 'loadmask',
 			message: 'Loading Details&hellip;'
 		});
+
+		routeDirections.setRoute(record);
 
 		navView.push(routeDirections);
 
@@ -185,9 +187,39 @@ Ext.define('SeptaMobi.controller.Schedule', {
 	onRouteDirectionsSelect: function(list, record) {
 		var me = this,
 			stopsStore = Ext.getStore('Stops'),
+			alertsStore = Ext.getStore('Alerts'),
+			routeList = me.getRoutesList(),
 			navView = me.getNavView(),
+			routeDirections = me.getRouteDirections(),
+			route = routeDirections.getRoute(),
 			routeDetails = me.getRouteDetails(),
-			routeDirections = me.getRouteDirections();
+			routeAlertIdentifier;
+
+		if(route.get('routeType') == 3) {
+			routeAlertIdentifier = 'bus_route_';
+		}
+		else {
+			routeAlertIdentifier = 'rr_route_';
+		}
+		routeAlertIdentifier += route.get('routeShortName');
+
+		Ext.Ajax.request({
+			url: (window.SeptaMobi_API && SeptaMobi_API.alert) || (location.protocol == 'http:' ? './api/alert' : 'http://www3.septa.org/hackathon/Alerts/get_alert_data.php'),
+			method: 'GET',
+			params: {
+				req1: routeAlertIdentifier
+			},
+			callback: function(options, success, response) {
+				var r = Ext.decode(response.responseText, true);
+
+				if(r.length && r[0].advisory_message) {
+					routeDetails.setAlert(r[0].advisory_message);
+				}
+				else {
+					routeDetails.setAlert(false);
+				}
+			}
+		});
 
 		routeDetails.setEncodedPoints(routeDirections.getEncodedPoints());
 		navView.push(routeDetails);

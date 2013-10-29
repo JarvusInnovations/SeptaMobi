@@ -7,6 +7,7 @@ Ext.define('SeptaMobi.view.extras.NavView', {
 	config: {
 		items: [{
 			xtype: 'panel',
+			itemId: 'mainPanel',
 			title: 'Extras',
 			cls: 'extras',
 		

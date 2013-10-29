@@ -64,11 +64,14 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 			}
 		},
 		control: {
-			'tripplanner #fromField': {
+			tripPlannerView: {
+				activate: 'onTripPlannerViewActivate'
+			},
+			fromField: {
 				focus: 'onAddressFieldFocus',
 				keyup: 'onAddressFieldKeyUp'
 			},
-			'tripplanner #toField': {
+			toField: {
 				focus: 'onAddressFieldFocus',
 				keyup: 'onAddressFieldKeyUp'
 			},
@@ -104,7 +107,13 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 			}
 		},
 		routes: {
-			'tripplanner': 'showTripPlanner'
+			'tripplanner': 'showTripPlanner',
+			'tripplanner/trip/:params': {
+				action: 'showTrip',
+				conditions: {
+					':params': '[^/]+'
+				}
+			}
 		}
 	},
 
@@ -116,6 +125,40 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 
 		mainTabView.setActiveItem(2);
 		tripPlannerNavView.pop(tripPlannerForm);
+	},
+
+	showTrip: function(params) {
+		var me = this,
+			params = Ext.Object.fromQueryString(params),
+			fromText = params.fromName,
+			fromLat = params.fromLat,
+			fromLon = params.fromLon,
+			toText = params.toName,
+			toLat = params.toLat,
+			toLon = params.toLon,
+			fromField = me.getFromField(),
+			toField = me.getToField(),
+			tripPlannerDatetimeField = me.getTripPlannerDatetimeField(),
+			fromAddress, toAddress;
+
+		me.showTripPlanner();
+
+		fromAddress = Ext.create('SeptaMobi.model.Address', {text: fromText, lat: fromLat, lon: fromLon});
+		toAddress = Ext.create('SeptaMobi.model.Address', {text: toText, lat: toLat, lon: toLon});
+
+		me.setFromAddress(fromAddress);
+		me.setToAddress(toAddress);
+
+		fromField.setValue(fromText);
+		toField.setValue(toText);
+
+		tripPlannerDatetimeField.setValue(new Date());
+		
+		me.onRouteTap();
+	},
+
+	onTripPlannerViewActivate: function() {
+		this.pushPath('tripplanner');
 	},
 
 	onAddressFieldFocus: function(field) {
@@ -414,6 +457,8 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 			plan = outgoingItem.getTripPlan();
 			bookmark = Ext.create('SeptaMobi.model.Bookmark', plan);
 
+			this.pushPath(bookmark.toUrl());
+
 			if(bookmarkStore.hasBookmark(bookmark)) {
 				toggleBookmarkButton.addCls('bookmarked');
 			}
@@ -454,6 +499,9 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 
 			bookmarkPanel.setButton(button);
 			bookmarkPanel.setBookmark(bookmark);
+
+			Ext.Viewport.add(bookmarkPanel); 
+			
 			bookmarkPanel.show();
 		}
 	}

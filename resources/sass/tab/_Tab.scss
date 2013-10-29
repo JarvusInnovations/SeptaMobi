@@ -77,7 +77,6 @@ $tabs-bottom-icon-size: 22px;
 	.x-tab {
 		background: transparent;
 		border: 1px solid $base-color;
-		width: 50%;
 		
 		&:first-child{
 			@include border-radius(2px 0 0 2px);

@@ -55,8 +55,23 @@ Ext.define('SeptaMobi.model.Bookmark', {
 		},{
 			name: 'lineName',
 			convert: function() {
+				//TODO return something different if bookmarked stop or route
 				return '***';
 			}
 		}]
+	},
+	toUrl: function() {
+		var me = this,
+			urlData = {
+				fromName: me.get('fromName'),
+				fromLat: me.get('fromLat'),
+				fromLon: me.get('fromLon'),
+				toName: me.get('toName'),
+				toLat: me.get('toLat'),
+				toLon: me.get('toLon')
+			},
+			queryStringParams = Ext.Object.toQueryString(urlData);
+
+		return 'tripplanner/trip/' + queryStringParams;
 	}
 });

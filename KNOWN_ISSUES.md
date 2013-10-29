@@ -18,3 +18,7 @@ Assets are missing for perks, token locations, and other bus direction
 Trip planner carousel:
 	- Map center does not follow selected leg of trip
 	- Some directions are too tall for carousel
+
+Stops Schedule:
+	-First view should be bus
+	-After selecting a specific route and then press back the item is still selected and unclickable

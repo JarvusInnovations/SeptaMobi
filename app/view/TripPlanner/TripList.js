@@ -41,8 +41,10 @@ Ext.define('SeptaMobi.view.TripPlanner.TripList', {
                 '</div>',
                 '<div class="itinerary-details">',
                     '<span class="itinerary-detail duration">{[ Math.round(values.duration/1000/60) ]}&nbsp;min</span>, ',
-                    '<span class="itinerary-detail walk-distance">{[ (values.walkDistance*0.000621371).toFixed(1) ]}&nbsp;mi of walking</span>, ',
-                    '<span class="itinerary-detail transfers">{transfers}&nbsp;transfer<tpl if="transfers!=1">s</tpl></span>',
+                    '<span class="itinerary-detail walk-distance">{[ (values.walkDistance*0.000621371).toFixed(1) ]}&nbsp;mi of walking</span>',
+                    '<tpl if="transfers &gt; 0">',
+                    ', <span class="itinerary-detail transfers">{transfers}&nbsp;transfer<tpl if="transfers!=1">s</tpl></span>',
+                    '</tpl>',
                 '</div>'
             ]
         }]

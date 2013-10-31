@@ -31,3 +31,5 @@ Nice to have features:
 
 Planned refactor:
 	- Merge schedule and stop controller
+
+Smarty streets autocomplete suggestions are sometimes not able to geocode (example: city hall)

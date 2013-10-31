@@ -6,8 +6,15 @@ Ext.define('SeptaMobi.model.SystemLocation', {
 
 		fields:[{
 			name: 'id',
-			type: 'string',
-			mapping: 'perk_id'
+			convert: function(v,r) {
+				return r.get('perk_id') || r.get('location_id');
+			}
+		},{
+			name: 'perk_id',
+			type: 'string'
+		},{
+			name: 'location_id',
+			type: 'string'
 		},{
 			name: 'name',
 			type: 'string',

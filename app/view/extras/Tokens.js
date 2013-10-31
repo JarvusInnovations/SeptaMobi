@@ -3,7 +3,7 @@ Ext.define('SeptaMobi.view.extras.Tokens', {
 	xtype: 'tokensview',
 	requires: [
 		'Ext.field.Select',
-		'Jarvus.touch.ux.LeafletMap'
+		'SeptaMobi.view.extras.Map'
 	],
 
 	config: {
@@ -21,7 +21,7 @@ Ext.define('SeptaMobi.view.extras.Tokens', {
 			items: [{
 				xtype: 'list',
 				store: 'Tokens',
-
+				itemId: 'tokensList',
 				itemTpl: [
 					'<div class="token name">{name}</div>',
 					'<div class="token address">{address1}</div>',
@@ -30,15 +30,7 @@ Ext.define('SeptaMobi.view.extras.Tokens', {
 				flex: 1
 			}]
 		}, {
-			xtype: 'leafletmap',
-			title: 'Map',
-	        tileLayerOptions: { detectRetina: true},
-			useCurrentLocation: true,
-			autoMapCenter: false,
-			enableOwnPositionMarker: true,
-			mapOptions: {
-				zoom: 15
-			}
+			xtype: 'extrasmap'
 		}]
 	}
 	

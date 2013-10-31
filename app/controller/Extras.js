@@ -35,7 +35,13 @@ Ext.define('SeptaMobi.controller.Extras', {
 
 			extrasNavView: 'extrasview',
 
-			perksMap: 'perksview leafletmap'
+			perksMap: 'perksview leafletmap',
+
+			tokensMap: {
+				selector: 'extrasmap',
+				xtype: 'extrasmap',
+				autoCreate: true
+			}
 		},
 		control: {
 			extrasNavView: {
@@ -46,6 +52,9 @@ Ext.define('SeptaMobi.controller.Extras', {
 			},
 			tokensView: {
 				activate: 'onTokensViewActivate'
+			},
+			'tokensview #tokensList': {
+				select: 'onTokenListSelect'
 			},
 			'selectfield#perkSorter': {
 				change: 'sortPerks'
@@ -65,18 +74,23 @@ Ext.define('SeptaMobi.controller.Extras', {
 
 			'tokensview leafletmap': {
 				maprender: 'onTokensViewMapRender'
+			},
+			tokensMap: {
+				maprender: 'onTokensMapRender',
+				activate: 'onTokensMapActivate'
 			}
 		},
 		routes: {
 			'extras': 'showExtras',
 			'extras/perks': 'showPerks',
-			'extras/tokens': 'showTokens'
+			'extras/tokens': 'showTokens',
+			'extras/tokens/:id': 'showTokenLocation'
 		}
 	},
 
 	//controller methods
 
-	showExtras: function() {
+	showExtras: function(callback, scope) {
 		var me = this,
 			mainTabView = me.getMainTabView(),
 			extrasNavView = me.getExtrasNavView(),
@@ -84,6 +98,10 @@ Ext.define('SeptaMobi.controller.Extras', {
 
 		mainTabView.setActiveItem(3);
 		extrasNavView.pop(extrasMainPanel);
+
+		if(callback) {
+			Ext.callback(callback, scope);
+		}
 	},
 
 	showPerks: function(btn) {
@@ -91,24 +109,45 @@ Ext.define('SeptaMobi.controller.Extras', {
 			extrasView = me.getExtrasNavView(),
 			perksView = me.getPerksView();
 
-		if(!perksView.hasParent()) {
-			extrasView.push(perksView);
-		}
-		if(extrasView.getActiveItem() !== perksView) {
-			extrasView.pop(perksView);
-		}
+		me.showExtras(function() {
+			if(!perksView.hasParent()) {
+				extrasView.push(perksView);
+			}
+			if(extrasView.getActiveItem() !== perksView) {
+				extrasView.pop(perksView);
+			}
+		});
 	},
 
 	showTokens: function() {
+		var me = this;			
+
+		me.showExtras(function() {
+			me.loadTokens();
+		});
+	},
+	showTokenLocation: function(id) {
 		var me = this,
 			extrasView = me.getExtrasNavView(),
-			tokensView = me.getTokensView();
+			tokensView = me.getTokensView(),
+			tokensMap = me.getTokensMap();
 
-		if(!tokensView.hasParent()) {
-			extrasView.push(tokensView);
+		var loadTokenMapView = function() {
+			tokensMap.setSelectedId(id);
+				
+			if(extrasView.getActiveItem() !== tokensMap) {
+				extrasView.push(tokensMap);
+			}
 		}
-		if(extrasView.getActiveItem() !== tokensView) {
-			extrasView.pop(tokensView);
+		if(extrasView.getActiveItem() != tokensView) {
+			me.showExtras(function() {
+				me.loadTokens(function() {
+					loadTokenMapView();	
+				});
+			});
+		}
+		else {
+			loadTokenMapView();
 		}
 	},
 
@@ -124,6 +163,12 @@ Ext.define('SeptaMobi.controller.Extras', {
 		this.pushPath('extras/tokens');
 	},
 
+	onTokenListSelect: function(list, record) {
+		var tokenLocationId = record.get('id');
+
+		this.redirectTo('extras/tokens/' + tokenLocationId);
+	},
+
 	onPerksViewRender: function(navView) {
 		console.warn('On Perks View render');
 	},
@@ -133,38 +178,49 @@ Ext.define('SeptaMobi.controller.Extras', {
 	},
 
 	showTokenLocator: function(btn) {
+		this.loadTokens();
+	},
+
+	loadTokens: function(callback, scope) {
 		var me = this,
 			tokensStore = Ext.getStore('Tokens'),
 			navView = me.getExtrasNavView(),
 			tokensView = me.getTokensView();
 
-		tokensView.setMasked({
-			xtype: 'loadmask',
-			message: 'Loading Near By Token Stores&hellip;'
-		});
+		if(tokensStore.isLoaded()) {
+			Ext.callback(callback, scope);
+		}
+		else {
+			tokensView.setMasked({
+				xtype: 'loadmask',
+				message: 'Loading Near By Token Stores&hellip;'
+			});		
 
-		Ext.device.Geolocation.getCurrentPosition({
-			success: function(position) {
-				tokensStore.load({
-					params: {
-						lat: position.coords.latitude,
-						lon: position.coords.longitude
-					},
-					callback: function(perks) {
-						tokensView.setMasked(false);
-					},
-					failure: function() {
-						tokensView.setMasked(false);
-						alert('Location error occurred.');
-					}
-				});
-			},
-			failure: function() {
-				tokensView.setMasked(false);
-				alert('Location error occurred.');
-			}
-		});
-
+			Ext.device.Geolocation.getCurrentPosition({
+				success: function(position) {
+					tokensStore.load({
+						params: {
+							lat: position.coords.latitude,
+							lon: position.coords.longitude
+						},
+						callback: function(perks) {
+							tokensView.setMasked(false);
+							if(callback) {
+								Ext.callback(callback, scope);
+							}
+						},
+						failure: function() {
+							tokensView.setMasked(false);
+							alert('Location error occurred.');
+						}
+					});
+				},
+				failure: function() {
+					tokensView.setMasked(false);
+					alert('Location error occurred.');
+				}
+			});
+		}
 		navView.push(tokensView);
 	},
 
@@ -180,10 +236,31 @@ Ext.define('SeptaMobi.controller.Extras', {
 
 	onTokensViewMapRender: function(mapCmp) {
 		var me = this,
+			tokensStore = Ext.getStore('Tokens'),
+			tokensView = me.getTokensView();
+
+		me.applyTokensToMap(tokensStore.getRange(), mapCmp, tokensView);
+	},
+
+	onTokensMapRender: function(mapCmp) {
+		var me = this,
+			tokensStore = Ext.getStore('Tokens'),
+			tokenLocation;
+
+		tokenLocation = tokensStore.getById(mapCmp.getSelectedId());
+
+		me.applyTokensToMap([tokenLocation], mapCmp, mapCmp);
+	},
+
+	onTokensMapActivate: function(mapCmp) {
+		this.pushPath('extras/tokens/' + mapCmp.getSelectedId());
+	},
+
+	applyTokensToMap: function(tokenLocations, mapCmp, view) {
+		var me = this,
 			ll = window.L,
 			map = mapCmp.getMap(),
-			tokensStore = Ext.getStore('Tokens'),
-			tokensView = me.getTokensView(),
+			singleTokenLocation = tokenLocations.length == 1,
 			tokenMarkers = [];
 
 		tokenTemplate = Ext.create('Ext.XTemplate', [
@@ -191,7 +268,7 @@ Ext.define('SeptaMobi.controller.Extras', {
 			'{address}'
 		]);
 
-		tokensStore.getRange().forEach(function(token) {
+		tokenLocations.forEach(function(token) {
 			latLng = [token.get('lat'), token.get('lon')];
 
 			var marker = ll.marker(latLng, {
@@ -203,6 +280,10 @@ Ext.define('SeptaMobi.controller.Extras', {
 				})
 			}).addTo(map);
 
+			if(singleTokenLocation) {
+				map.panTo(latLng);
+			}
+
 			setTimeout(function() {
 				marker.bindPopup(tokenTemplate.apply(token.getData()));
 			}, 1000);
@@ -210,7 +291,7 @@ Ext.define('SeptaMobi.controller.Extras', {
 			tokenMarkers.push(marker);
 		});
 
-		tokensView.setMarkers(tokenMarkers);
+		view.setMarkers(tokenMarkers);
 	},
 
 	showPerksOnMap: function() {

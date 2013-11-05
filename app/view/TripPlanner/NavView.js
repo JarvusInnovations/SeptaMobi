@@ -39,8 +39,7 @@ Ext.define('SeptaMobi.view.TripPlanner.NavView', {
                         labelWidth: 70,
                         itemId: 'fromField',
                         placeHolder: 'Origin',
-                        //TODO reenable clearIcon, needs css
-                        clearIcon: false
+                        clearIcon: true
                     },{
                         xtype: 'button',
                         cls: 'field-button',
@@ -59,8 +58,7 @@ Ext.define('SeptaMobi.view.TripPlanner.NavView', {
                         itemId: 'toField',
                         labelWidth: 70,
                         placeHolder: 'Destination',
-                        //TODO reenable clearIcon, needs css
-                        clearIcon: false
+                        clearIcon: true
                     },{
                         xtype: 'button',
                         cls: 'field-button',

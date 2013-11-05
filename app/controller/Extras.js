@@ -280,12 +280,12 @@ Ext.define('SeptaMobi.controller.Extras', {
 				})
 			}).addTo(map);
 
-			if(singleTokenLocation) {
-				map.panTo(latLng);
-			}
-
 			setTimeout(function() {
 				marker.bindPopup(tokenTemplate.apply(token.getData()));
+
+				if(singleTokenLocation) {
+					map.panTo(latLng);
+				}
 			}, 1000);
 
 			tokenMarkers.push(marker);

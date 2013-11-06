@@ -20,7 +20,7 @@
 	.x-input-el {
 		background: none;
 		border: none;
-		padding: .2em 0;
+		padding: .2em 1em .2em 0;
 	}
 
 	.pinpoint {
@@ -179,3 +179,32 @@
         @include rotate(180deg);
     }
 }
+
+
+.x-field-input .x-clear-icon {
+	width: 18px;
+	background-color: #ccc;
+	right: 0;
+	height: 18px;
+	text-align: center;
+	border-radius: 20px;
+	font-weight: bold;
+	line-height: 5px;
+	top: 6px;
+	vertical-align: middle;
+	padding: 5px;
+}
+
+.x-field-clearable .x-clear-icon::after {
+	content: 'X';
+	color: white;
+	font-size: smaller;
+}
+
+
+
+
+
+
+
+

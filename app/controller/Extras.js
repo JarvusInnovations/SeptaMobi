@@ -134,7 +134,6 @@ Ext.define('SeptaMobi.controller.Extras', {
 			tokensMap = me.getTokensMap();
 
 		var loadTokenMapView = function() {
-			debugger
 			tokensMap.setSelectedId(id);
 				
 			if(extrasView.getActiveItem() !== tokensMap) {

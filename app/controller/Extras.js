@@ -1,7 +1,8 @@
 Ext.define('SeptaMobi.controller.Extras', {
 	extend: 'Ext.app.Controller',
 	requires: [
-		'Ext.device.Geolocation'
+		'Ext.device.Geolocation',
+		'SeptaMobi.view.extras.Map'
 	],
 
 	config: {
@@ -72,7 +73,7 @@ Ext.define('SeptaMobi.controller.Extras', {
 				maprender: 'onPerksViewMapRender'
 			},
 
-			'tokensview leafletmap': {
+			'tokensview map': {
 				maprender: 'onTokensViewMapRender'
 			},
 			tokensMap: {
@@ -133,6 +134,7 @@ Ext.define('SeptaMobi.controller.Extras', {
 			tokensMap = me.getTokensMap();
 
 		var loadTokenMapView = function() {
+			debugger
 			tokensMap.setSelectedId(id);
 				
 			if(extrasView.getActiveItem() !== tokensMap) {

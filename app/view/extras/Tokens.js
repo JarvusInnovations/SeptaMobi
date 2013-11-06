@@ -3,7 +3,7 @@ Ext.define('SeptaMobi.view.extras.Tokens', {
 	xtype: 'tokensview',
 	requires: [
 		'Ext.field.Select',
-		'SeptaMobi.view.extras.Map'
+		'SeptaMobi.view.Map'
 	],
 
 	config: {
@@ -30,7 +30,7 @@ Ext.define('SeptaMobi.view.extras.Tokens', {
 				flex: 1
 			}]
 		}, {
-			xtype: 'extrasmap'
+			xtype: 'map'
 		}]
 	}
 	

@@ -16,10 +16,10 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 		tripData: null,
 
 		views: [
-			'TripPlanner.NavView',
-			'TripPlanner.SelectAddress',
-			'TripPlanner.TripDetail',
-			'TripPlanner.TripList'
+			'tripplanner.NavView',
+			'tripplanner.SelectAddress',
+			'tripplanner.TripDetail',
+			'tripplanner.TripList'
 		],
 		stores: [
 			'AutocompleteAddress',
@@ -177,7 +177,7 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 		var me = this,
 			autocompleteAddressStore = Ext.getStore('AutocompleteAddress');
 
-		autocompleteAddressStore.getProxy().setExtraParam('prefix', field.getValue());
+		autocompleteAddressStore.getProxy().setExtraParam('input', field.getValue());
 		autocompleteAddressStore.load();
 	},
 
@@ -358,19 +358,18 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 				message: 'Geocoding Address&hellip;'
 			});
 
-			SeptaMobi.API.getGeocode(address, function(options, success, response) {
-				if (success && response.data && response.data.length > 0 && response.data[0].metadata.latitude &&
-					response.data[0].metadata.longitude) {
-					data = response.data[0];
+			SeptaMobi.API.getAutoCompleteDetail(address, function(options, success, response) {
+				if (success && response.data && response.data.result) {
+					data = response.data.result;
 
-					lat = data.metadata.latitude;
-					lon = data.metadata.longitude;
+					lat = data.geometry.location.lat;
+					lon = data.geometry.location.lng;
 
 					// Fix issue that was preventing models from getting updated
 					address.modified = true;
 					address.set('lon', lon);
 					address.set('lat', lat);
-					address.set('text', data.delivery_line_1 + ", " + data.last_line);
+					// address.set('text', data.delivery_line_1 + ", " + data.last_line);
 
 					me.onRouteTap();
 				} else {

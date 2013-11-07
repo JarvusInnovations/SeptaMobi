@@ -3,17 +3,29 @@ Ext.define('SeptaMobi.model.Address', {
 
 	config: {
 		fields:[{
+			name: 'id',
+			type: 'string'
+		},{
 			name: 'text',
-			type: 'string'
+			type: 'string',
+			mapping: 'description'
 		},{
-			name: 'street_line',
-			type: 'string'
+			name: 'terms',
 		},{
-			name: 'city',
+			name: 'reference',
 			type: 'string'
 		},{
 			name: 'state',
-			type: 'string'
+			type: 'string',
+			convert: function(v, r) {
+				var terms = r.get('terms'),
+					termsLength = terms ? terms.length : -1;
+
+				if(terms && termsLength > 1) {
+					return terms[terms.length - 2].value;
+				}
+				return null;
+			}
 		},{
 			name: 'lat',
 			type: 'double'

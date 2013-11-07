@@ -8,13 +8,6 @@ Ext.define('SeptaMobi.API', {
 	config: {
 		openTripPlanner: {
 			baseUrl: 'http://opentrips.codeforphilly.org/opentripplanner-api-webapp/ws/'
-		},
-		smartyStreets: {
-			authId: '828707b0-f9b3-4b92-860c-d0fa73e00b21',
-			authToken: 'H2Nyq%2BIJMvt9QwSDdZolSEQilBHI899RDTWZ4vkv95UN0Uek3jgX79%2FcfUQbIWhR4NU5mFwiijidds48xij6sg%3D%3D',
-			htmlAuthId: '5519210895803725602',
-			autocompleteUrl: 'https://autocomplete-api.smartystreets.com/suggest',
-			geoCodeUrl: 'https://api.smartystreets.com/street-address'
 		}
 	},
 
@@ -38,19 +31,16 @@ Ext.define('SeptaMobi.API', {
 	// 	});
 	// },
 
-	getGeocode: function(address, callback, scope) {
+	getAutoCompleteDetail: function(address, callback, scope) {
 		var me = this;
 		
 		Ext.Ajax.request({
-			url: (window.SeptaMobi_API && SeptaMobi_API.geocode) || (location.protocol == 'http:' ? './api/geocode' : 'https://api.smartystreets.com/street-address'),
+			url: (window.SeptaMobi_API && SeptaMobi_API.placeDetails) || (location.protocol == 'http:' ? './api/place-details' : 'https://maps.googleapis.com/maps/api/place/details/json'),
 			method: 'GET',
 			params: {
-				'auth-id': '828707b0-f9b3-4b92-860c-d0fa73e00b21',
-				'auth-token': 'H2Nyq+IJMvt9QwSDdZolSEQilBHI899RDTWZ4vkv95UN0Uek3jgX79/cfUQbIWhR4NU5mFwiijidds48xij6sg==',
-				street: address.get('street_line'),
-				city: address.get('city'),
-				state: address.get('state'),
-				candidates: 1
+				sensor: true,
+				key: 'AIzaSyD1uYQ7HZCNIpyuEW2eE8eANAel9LTym4g',
+				reference: address.get('reference')
 			},
 			callback: function(options, success, response) {
 				if ((response.getResponseHeader('content-type') || '').indexOf('application/json') == 0 && response.responseText) {

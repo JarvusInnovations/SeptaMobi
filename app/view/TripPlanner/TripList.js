@@ -1,5 +1,5 @@
 //TODO Show selected options on trip detail
-Ext.define('SeptaMobi.view.TripPlanner.TripList', {
+Ext.define('SeptaMobi.view.tripplanner.TripList', {
     extend: 'Ext.Container',
     xtype: 'triplist',
 

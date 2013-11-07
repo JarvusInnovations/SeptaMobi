@@ -1,4 +1,4 @@
-Ext.define('SeptaMobi.view.TripPlanner.SelectAddress', {
+Ext.define('SeptaMobi.view.tripplanner.SelectAddress', {
 	extend: 'Ext.Panel',
 	requires: [],
 

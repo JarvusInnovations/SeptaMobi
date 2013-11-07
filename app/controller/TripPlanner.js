@@ -173,13 +173,13 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 		selectAddressPanel.showBy(field);
 	},
 
-	onAddressFieldKeyUp: function(field) {
+	onAddressFieldKeyUp: Ext.Function.createBuffered(function(field) {
 		var me = this,
 			autocompleteAddressStore = Ext.getStore('AutocompleteAddress');
 
 		autocompleteAddressStore.getProxy().setExtraParam('input', field.getValue());
 		autocompleteAddressStore.load();
-	},
+	}, 750),
 
 	onUseCurrentTap: function(checkButton) {
 		var me = this,

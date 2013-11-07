@@ -3,7 +3,7 @@ Ext.define('SeptaMobi.view.perks.Main', {
 	xtype: 'perksview',
 	requires: [
 		'Ext.field.Select',
-		'Jarvus.touch.ux.LeafletMap'
+		'SeptaMobi.view.Map'
 	],
 
 	config: {
@@ -30,7 +30,7 @@ Ext.define('SeptaMobi.view.perks.Main', {
 			},{
 				xtype: 'list',
 				store: 'Perks',
-				// title: 'Septa Pass Perks',
+				itemId: 'perksList',
 				itemTpl: [
 					'<div class="perk loc-name">{loc_name}</div>',
 					'<div class="perk name">{name}</div>',
@@ -41,15 +41,7 @@ Ext.define('SeptaMobi.view.perks.Main', {
 				flex: 1
 			}]
 		}, {
-			xtype: 'leafletmap',
-			title: 'Map',
-	        tileLayerOptions: { detectRetina: true},
-			useCurrentLocation: true,
-			autoMapCenter: false,
-			enableOwnPositionMarker: true,
-			mapOptions: {
-				zoom: 15
-			}
+			xtype: 'map'
 		}]
 	}
 	

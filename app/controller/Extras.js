@@ -2,6 +2,7 @@ Ext.define('SeptaMobi.controller.Extras', {
 	extend: 'Ext.app.Controller',
 	requires: [
 		'Ext.device.Geolocation',
+		'SeptaMobi.view.perks.Map',
 		'SeptaMobi.view.extras.Map'
 	],
 
@@ -36,7 +37,11 @@ Ext.define('SeptaMobi.controller.Extras', {
 
 			extrasNavView: 'extrasview',
 
-			perksMap: 'perksview leafletmap',
+			perksMap: {
+				selector: 'perksmap',
+				xtype: 'perksmap',
+				autoCreate: true
+			},
 
 			tokensMap: {
 				selector: 'extrasmap',
@@ -50,6 +55,9 @@ Ext.define('SeptaMobi.controller.Extras', {
 			},
 			perksView: {
 				activate: 'onPerksViewActivate'
+			},
+			'perksview #perksList': {
+				select: 'onPerksListSelect'
 			},
 			tokensView: {
 				activate: 'onTokensViewActivate'
@@ -69,10 +77,13 @@ Ext.define('SeptaMobi.controller.Extras', {
 				tap: 'showTokenLocator'
 			},
 
-			perksMap: {
+			'perksview map': {
 				maprender: 'onPerksViewMapRender'
 			},
-
+			perksMap: {
+				maprender: 'onPerksMapRender',
+				activate: 'onPerksMapActivate'
+			},
 			'tokensview map': {
 				maprender: 'onTokensViewMapRender'
 			},
@@ -84,6 +95,8 @@ Ext.define('SeptaMobi.controller.Extras', {
 		routes: {
 			'extras': 'showExtras',
 			'extras/perks': 'showPerks',
+			'extras/perks/:id': 'showPerkLocation',
+			'extras/tokens/:id': 'showTokenLocation',
 			'extras/tokens': 'showTokens',
 			'extras/tokens/:id': 'showTokenLocation'
 		}
@@ -118,6 +131,30 @@ Ext.define('SeptaMobi.controller.Extras', {
 				extrasView.pop(perksView);
 			}
 		});
+	},
+	showPerkLocation: function(id) {
+		var me = this,
+			extrasView = me.getExtrasNavView(),
+			perksView = me.getPerksView(),
+			perksMap = me.getPerksMap();
+
+		var loadPerkMapView = function() {
+			perksMap.setSelectedId(id);
+
+			if(extrasView.getActiveItem() !== perksMap) {
+				extrasView.push(perksMap);
+			}
+		}
+		if(extrasView.getActiveItem() != perksView) {
+			me.showExtras(function() {
+				me.loadPerks(function() {
+					loadPerkMapView();
+				});
+			});
+		}
+		else {
+			loadPerkMapView();
+		}
 	},
 
 	showTokens: function() {
@@ -164,6 +201,11 @@ Ext.define('SeptaMobi.controller.Extras', {
 		this.pushPath('extras/tokens');
 	},
 
+	onPerksListSelect: function(list, record) {
+		var perkId = record.get('id');
+
+		this.redirectTo('extras/perks/' + perkId);
+	},
 	onTokenListSelect: function(list, record) {
 		var tokenLocationId = record.get('id');
 
@@ -231,6 +273,11 @@ Ext.define('SeptaMobi.controller.Extras', {
 			nearByPerksStore = Ext.getStore('NearByPerks');
 
 		if(!nearByPerksStore.isLoaded()) {
+			me.loadPerks(function() { 
+				me.showPerksOnMap();	
+			});
+		}
+		else {
 			me.showPerksOnMap();
 		}
 	},
@@ -241,6 +288,35 @@ Ext.define('SeptaMobi.controller.Extras', {
 			tokensView = me.getTokensView();
 
 		me.applyTokensToMap(tokensStore.getRange(), mapCmp, tokensView);
+	},
+
+	onPerksMapRender: function(mapCmp) {
+		var me = this,
+			nearByPerksStore = Ext.getStore('NearByPerks'),
+			selectedPerkId = mapCmp.getSelectedId(),
+			showPerk = function() {
+				nearByPerk = nearByPerksStore.getById(selectedPerkId);
+				if(!nearByPerk) {
+					//TODO Fix once we implement google geocoder
+					alert('Perk not found');
+					return;
+				}
+				me.applyPerksToMap([nearByPerk], mapCmp, mapCmp);
+			},
+			perk, nearByPerk;
+
+		if(!nearByPerksStore.isLoaded()) {
+			me.loadPerks(function() {
+				showPerk();
+			});
+		}
+		else {
+			showPerk();
+		}
+	},
+
+	onPerksMapActivate: function(mapCmp) {
+		this.pushPath('extras/perks/' + mapCmp.getSelectedId());
 	},
 
 	onTokensMapRender: function(mapCmp) {
@@ -295,22 +371,9 @@ Ext.define('SeptaMobi.controller.Extras', {
 		view.setMarkers(tokenMarkers);
 	},
 
-	showPerksOnMap: function() {
+	loadPerks: function(callback, scope) {
 		var me = this,
-			ll = window.L,
-			perksView = me.getPerksView(),
-			mapCmp = me.getPerksMap(),
-			map = mapCmp.getMap(),
-			perksStore = Ext.getStore('Perks'),
-			nearByPerksStore = Ext.getStore('NearByPerks'),
-			perkMarkers = [];
-
-		//TODO move template to view cfg?
-		perkTemplate = Ext.create('Ext.XTemplate', [
-			'{loc_name}<br/>',
-			'{name}<br/>', 
-			'{description}'
-		]);
+			nearByPerksStore = Ext.getStore('NearByPerks');
 
 		Ext.device.Geolocation.getCurrentPosition({
 			success: function(position) {				
@@ -320,29 +383,9 @@ Ext.define('SeptaMobi.controller.Extras', {
 						lon: position.coords.longitude
 					},
 					callback: function(perks) {
-						perks.forEach(function(perk) {
-							latLng = [perk.get('lat'), perk.get('lon')];
-							
-							var marker = ll.marker(latLng, {
-								icon: ll.icon({
-									iconUrl: 'resources/images/perks.png',
-									iconRetinaUrl: 'resources/images/perks-2x.png'
-									// iconSize: [28, 31],
-									// iconAnchor: [14, 30]
-								})
-							}).addTo(map);
-
-							setTimeout(function() {
-								var perkDetail = perksStore.getById(perk.get('id'));
-								if(perkDetail) {
-									marker.bindPopup(perkTemplate.apply(perkDetail.getData()));
-								}
-							}, 1000);
-
-							perkMarkers.push(marker);
-						});
-
-						perksView.setPerkMarkers(perkMarkers);
+						if(callback) {
+							Ext.callback(callback, scope);
+						}
 					},
 					failure: function() {
 						alert('Location error occurred.');
@@ -350,6 +393,60 @@ Ext.define('SeptaMobi.controller.Extras', {
 				});
 			}
 		});
+	},
+
+	showPerksOnMap: function() {
+		var me = this,
+			mapCmp = me.getPerksMap(),
+			nearByPerksStore = Ext.getStore('NearByPerks'),
+			perks = nearByPerksStore.getRange(),
+			perksView = me.getPerksView();
+
+		me.applyPerksToMap(perks, mapCmp, perksView);
+	},
+
+	applyPerksToMap: function(perks, mapCmp, view) {
+		var me = this,
+			ll = window.L,
+			map = mapCmp.getMap(),
+			perksStore = Ext.getStore('Perks'),
+			singlePerkLocation = perks.length == 1,
+			perkMarkers = [];
+
+		//TODO move template to view cfg?
+		perkTemplate = Ext.create('Ext.XTemplate', [
+			'{loc_name}<br/>',
+			'{name}<br/>', 
+			'{description}'
+		]);
+		
+		perks.forEach(function(perk) {
+			latLng = [perk.get('lat'), perk.get('lon')];
+			
+			var marker = ll.marker(latLng, {
+				icon: ll.icon({
+					iconUrl: 'resources/images/perks.png',
+					iconRetinaUrl: 'resources/images/perks-2x.png'
+					// iconSize: [28, 31],
+					// iconAnchor: [14, 30]
+				})
+			}).addTo(map);
+
+			setTimeout(function() {
+				var perkDetail = perksStore.getById(perk.get('id'));
+				if(perkDetail) {
+					marker.bindPopup(perkTemplate.apply(perkDetail.getData()));
+				}
+			}, 1000);
+
+			perkMarkers.push(marker);
+
+			if(singlePerkLocation) {
+				map.panTo(latLng);
+			}
+		});
+
+		view.setPerkMarkers(perkMarkers);
 	}
 
 });

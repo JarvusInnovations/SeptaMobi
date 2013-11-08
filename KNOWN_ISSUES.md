@@ -1,19 +1,18 @@
-- 1127 N 4th St (3rd Ward address) autocompletes but fails geocode
-
 Suggestion: Bold the transportation vehicles number in Schedule
 
 extras
 	- perks not sortable
 	- when loading perks/tokens, whole area should be masked not just list, clicking map before it loads causes issues
-	- When selecting a perk, only nearby perks are geocoded, need to geo code address via google api 
 
 Trip planner carousel:
 	- Map center does not follow selected leg of trip
-	- Some directions are too tall for carousel
-
+	- It would be nice if carousel size was dynamic, seems a bit large now
 
 Stops Schedule:
 	-After selecting a specific route and then press back the item is still selected and unclickable
+
+Schedule:
+	- Directions are still not being determined properly for all routes, see bus #1 for parx casino
 
 Nice to have features:
 	- Show rail/subway stops on the map

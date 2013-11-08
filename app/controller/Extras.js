@@ -29,11 +29,15 @@ Ext.define('SeptaMobi.controller.Extras', {
 				autoCreate: true
 			},
 
+			perksList: 'perksview #perksList',
+
 			tokensView: {
 				selector: 'tokensview',
 				xtype: 'tokensview',
 				autoCreate: true
 			},
+
+			tokensList: 'tokensview #tokensList',
 
 			extrasNavView: 'extrasview',
 
@@ -51,18 +55,21 @@ Ext.define('SeptaMobi.controller.Extras', {
 		},
 		control: {
 			extrasNavView: {
-				activate: 'onExtrasNavViewActivate'
+				activate: 'onExtrasNavViewActivate',
+				pop: 'onExtrasNavViewPop'
 			},
 			perksView: {
-				activate: 'onPerksViewActivate'
+				activate: 'onPerksViewActivate',
+				leavescreen: 'onPerksViewLeaveScreen'
 			},
-			'perksview #perksList': {
+			perksList: {
 				select: 'onPerksListSelect'
 			},
 			tokensView: {
-				activate: 'onTokensViewActivate'
+				activate: 'onTokensViewActivate',
+				leavescreen: 'onTokensViewLeaveScreen'
 			},
-			'tokensview #tokensList': {
+			tokensList: {
 				select: 'onTokenListSelect'
 			},
 			'selectfield#perkSorter': {
@@ -193,12 +200,29 @@ Ext.define('SeptaMobi.controller.Extras', {
 		this.pushPath('extras');
 	},
 
+	onExtrasNavViewPop: function(navView, view) {
+		var me = this,
+			extrasMainPanel = me.getExtrasMainPanel();
+
+		if(navView.getActiveItem() == extrasMainPanel) {
+			this.pushPath('extras');
+		}
+	},
+
 	onPerksViewActivate: function() {
 		this.pushPath('extras/perks');
 	},
 
+	onPerksViewLeaveScreen: function() {
+		this.getPerksList().deselectAll();
+	},
+
 	onTokensViewActivate: function() {
 		this.pushPath('extras/tokens');
+	},
+
+	onTokensViewLeaveScreen: function() {
+		this.getTokensList().deselectAll();
 	},
 
 	onPerksListSelect: function(list, record) {
@@ -292,18 +316,34 @@ Ext.define('SeptaMobi.controller.Extras', {
 
 	onPerksMapRender: function(mapCmp) {
 		var me = this,
+			perksStore = Ext.getStore('Perks'),
 			nearByPerksStore = Ext.getStore('NearByPerks'),
 			selectedPerkId = mapCmp.getSelectedId(),
 			showPerk = function() {
 				nearByPerk = nearByPerksStore.getById(selectedPerkId);
 				if(!nearByPerk) {
-					//TODO Fix once we implement google geocoder
-					alert('Perk not found');
-					return;
+					//loader
+					perk = perksStore.getById(selectedPerkId);
+
+					address = perk.get('fullAddress');
+
+					SeptaMobi.API.geoCodeAddress(address, function(location, options, success) {
+						if(success && location) {
+							perk = perksStore.getById(selectedPerkId);
+							perk.set('lat', location[0]);
+							perk.set('lon', location[1]);
+							me.applyPerksToMap([perk], mapCmp, mapCmp);
+						}
+						else {
+							Ext.Msg.alert('Error', 'Could not find location for perk (' + address + ').');
+						}
+					})
 				}
-				me.applyPerksToMap([nearByPerk], mapCmp, mapCmp);
+				else {
+					me.applyPerksToMap([nearByPerk], mapCmp, mapCmp);
+				}
 			},
-			perk, nearByPerk;
+			perk, nearByPerk, address;
 
 		if(!nearByPerksStore.isLoaded()) {
 			me.loadPerks(function() {
@@ -373,6 +413,8 @@ Ext.define('SeptaMobi.controller.Extras', {
 
 	loadPerks: function(callback, scope) {
 		var me = this,
+			extrasView = me.getExtrasNavView(),
+			perksView = me.getPerksView(),
 			nearByPerksStore = Ext.getStore('NearByPerks');
 
 		Ext.device.Geolocation.getCurrentPosition({
@@ -393,6 +435,8 @@ Ext.define('SeptaMobi.controller.Extras', {
 				});
 			}
 		});
+
+		extrasView.push(perksView);
 	},
 
 	showPerksOnMap: function() {
@@ -437,13 +481,13 @@ Ext.define('SeptaMobi.controller.Extras', {
 				if(perkDetail) {
 					marker.bindPopup(perkTemplate.apply(perkDetail.getData()));
 				}
+
+				if(singlePerkLocation) {
+					map.panTo(latLng);
+				}
 			}, 1000);
 
 			perkMarkers.push(marker);
-
-			if(singlePerkLocation) {
-				map.panTo(latLng);
-			}
 		});
 
 		view.setPerkMarkers(perkMarkers);

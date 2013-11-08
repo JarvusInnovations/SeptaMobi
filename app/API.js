@@ -130,5 +130,36 @@ Ext.define('SeptaMobi.API', {
 				Ext.callback(callback, scope, [options, success, response]);
 			}
 		});
+	},
+
+	geoCodeAddress: function(address, callback, scope) {
+		var location = false,
+			result, lat, lng;
+
+		Ext.Ajax.request({
+			url: (window.SeptaMobi_API && SeptaMobi_API.geocode) || (location.protocol == 'http:' ? './api/geocode' : 'https://maps.googleapis.com/maps/api/geocode/json'),
+			method: 'GET',
+			params: {
+				address: address,
+				sensor: true
+			},
+			callback: function(options, success, response) {
+				if ((response.getResponseHeader('content-type') || '').indexOf('application/json') == 0 && response.responseText) {
+					response.data = Ext.decode(response.responseText, true);
+				}
+				if(response.data.results && response.data.results.length > 0) {
+					result = response.data.results[0];
+
+					if(result.geometry && result.geometry.location) {
+						lat = result.geometry.location.lat;
+						lng = result.geometry.location.lng;
+
+						location = [lat, lng];
+					}
+				}
+
+				Ext.callback(callback, scope, [location, options, success, response]);
+			}
+		});
 	}
 });

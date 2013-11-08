@@ -41,6 +41,9 @@ Ext.define('SeptaMobi.model.Perk', {
 			name: 'city',
 			type: 'string'
 		},{
+			name: 'state',
+			type: 'string'
+		},{
 			name: 'zip',
 			type: 'string'
 		},{
@@ -49,6 +52,24 @@ Ext.define('SeptaMobi.model.Perk', {
 		},{
 			name: 'phone',
 			type: 'string'
-		}]
+		},{
+            name: 'lat',
+            type: 'string'
+        }, {
+            name: 'lon',
+            type: 'string'
+        }, {
+        	name: 'fullAddress',
+        	convert: function(v,r) {
+        		var fullAddress = '', 
+        			addressComponents = ['address1', 'address2', 'city', 'zip'];
+
+				Ext.Array.each(addressComponents, function(field) {
+				    fullAddress += fullAddress == '' ? r.get(field) : ', '+ r.get(field);
+				});
+
+				return fullAddress;
+        	}
+        }]
 	}
 });

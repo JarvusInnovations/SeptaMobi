@@ -24,8 +24,8 @@ Ext.define('SeptaMobi.view.perks.Main', {
 				label: 'Sort By:',
 				labelWidth: '70px',
 				options: [
-					{text: 'End Date', value: 'endDate_DSC'}
-					,{text: 'Locations Near Me', value: 'nearme'}
+					{text: 'Location Name', value: 'loc_Name'},
+					{text: 'End Date', value: 'endDate'}
 				]
 			},{
 				xtype: 'list',

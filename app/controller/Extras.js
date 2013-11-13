@@ -241,7 +241,8 @@ Ext.define('SeptaMobi.controller.Extras', {
 	},
 
 	sortPerks: function(selectfield, value, oldValue) {
-		console.warn('Sort Perks', value, oldValue, selectfield);
+		var perksStore = Ext.getStore('Perks');
+		perksStore.sort(value, "ASC");
 	},
 
 	showTokenLocator: function(btn) {

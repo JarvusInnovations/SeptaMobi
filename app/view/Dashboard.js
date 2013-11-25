@@ -1,6 +1,5 @@
 Ext.define('SeptaMobi.view.Dashboard', {
 	extend: 'Ext.Container',
-	requires: ['SeptaMobi.store.Alerts'],
 	xtype: 'dashboard',
 	
 	config: {

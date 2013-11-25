@@ -6,9 +6,6 @@ Ext.define('SeptaMobi.controller.Dashboard', {
 			mainTabView: 'main',
 			dashboardView: 'dashboard'
 		},
-		stores: [
-			'Alerts'
-		],
 
 		control: {
 			mainTabView: {

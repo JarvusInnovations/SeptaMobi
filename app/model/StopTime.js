@@ -6,14 +6,18 @@ Ext.define('SeptaMobi.model.StopTime', {
 
         fields: [{
             name: 'time',
-             dateFormat: 'timestamp',
-            type: 'date'
+            type: 'string',
+            mapping: 'departure_time_formatted'
         }, {
-            name: 'phase',
-            type: 'string'
+            name: 'fromNow',
+            type: 'string',
+            mapping: 'from_now'
+        }, {
+            name: 'gone',
+            type: 'boolean'
         }, {
             name: 'id',
-            mapping: 'id.id',
+            mapping: 'trip_id',
             type: 'int'
         }]
     }

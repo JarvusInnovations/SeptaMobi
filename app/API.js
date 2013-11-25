@@ -95,7 +95,7 @@ Ext.define('SeptaMobi.API', {
 	},
 
 	getNearByStops: function(lat, lon, callback, scope) {
-		var	routeStore = Ext.getStore('Routes'),
+		var	routeStore = Ext.getStore('LegacyRoutes'),
 			nearByStopsStore = Ext.getStore('NearByStops'),
 			i = 0,
 			records, stopsLength, routesLength, j, routes;
@@ -113,21 +113,26 @@ Ext.define('SeptaMobi.API', {
 					response.data = Ext.decode(response.responseText, true);
 				}
 
-				records = response.data.stops;
-				stopsLength = records.length;
+				if(response.data && response.data.stops) {
+					records = response.data.stops;
+					stopsLength = records.length;
 
-				for (; i < stopsLength; i++) {
-					routes = records[i].routes;
-					routesLength = routes.length;
+					for (; i < stopsLength; i++) {
+						routes = records[i].routes;
+						routesLength = routes.length;
 
-					for (j = 0; j < routesLength; j++) {
-						routes[j] = routeStore.getData().getByKey(routes[j].id); // data.getByKey searches filtered records, getById doesn't
+						for (j = 0; j < routesLength; j++) {
+							routes[j] = routeStore.getData().getByKey(routes[j].id); // data.getByKey searches filtered records, getById doesn't
+						}
 					}
-				}
-				
-				nearByStopsStore.setData(records);
 
-				Ext.callback(callback, scope, [options, success, response]);
+					nearByStopsStore.setData(records);
+
+					Ext.callback(callback, scope, [options, success, response]);
+				}
+				else {
+					//todo show error message
+				}
 			}
 		});
 	},

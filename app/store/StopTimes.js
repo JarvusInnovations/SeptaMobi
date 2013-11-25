@@ -9,19 +9,14 @@ Ext.define('SeptaMobi.store.StopTimes', {
 			pageParam: false,
 			limitParam: false,
 			startParam: false,
-			url: (window.SeptaMobi_API && SeptaMobi_API.stopTimes) || (location.protocol == 'http:' ? './api/stoptimes' : 'http://opentrips.codeforphilly.org/opentripplanner-api-webapp/ws/transit/stopTimesForStop'),
 			reader: {
 				type: 'json',
-				rootProperty: 'stopTimes'
+				rootProperty: 'data'
 			},
+			rootUrl: (window.SeptaMobi_API && SeptaMobi_API.stopTimes) || (location.protocol == 'http:' ? './api/stoptimes' : 'http://next-transit.com/routes/'),
 			extraParams: {
-				'agency': 'SEPTA'
+				'api_key': 't40P65kd'
 			}
-		},
-
-		filters: [{
-			property: "phase",
-			value: /departure/
-		}]
+		}
 	}
 });

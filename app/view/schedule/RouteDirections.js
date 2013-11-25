@@ -5,6 +5,7 @@ Ext.define('SeptaMobi.view.schedule.RouteDirections', {
 	config: {
 		route: null,
 		encodedPoints: [],
+		store: 'StopDirections',
 		title: 'Route Directions',
 		cls: 'list-style schedule',
 

@@ -6,12 +6,15 @@ Ext.define('SeptaMobi.view.schedule.RouteDetails', {
 	],
 
 	config: {
-		// stops: null,
 		alert: null,
 		stopMarkers: [],
-		encodedPoints: [],
+		// encodedPoints: [],
+		polylinePoints: [],
 		routePolyLine: null,
 		busMarkers: [],
+		routeId: null,
+		routeName: null,
+		directionId: null,
 
 		title: 'Route Details',
 		cls: 'schedule',

@@ -6,24 +6,24 @@ Ext.define('SeptaMobi.model.Stop', {
 
         fields: [{
             name: 'id',
-            mapping: 'id.id',
+            mapping: 'stop_id',
             type: 'int'
         }, {
             name: 'name',
+            mapping: 'stop_name',
             type: 'string'
         }, {
             name: 'lat',
+            mapping: 'stop_lat',
             type: 'float'
         }, {
             name: 'lon',
+            mapping: 'stop_lon',
             type: 'float'
         }, {
-            name: 'routes'
-        }, {
             name: 'direction',
-            type: 'string'
-        }],
-
-        belongsTo: 'Variant'
+            mapping: 'direction_id',
+            type: 'int'
+        }]
     }
 });

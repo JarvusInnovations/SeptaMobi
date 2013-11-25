@@ -9,7 +9,8 @@ Ext.define('SeptaMobi.controller.Stop', {
 		],
 		stores: [
 			'Buses',
-			'NearByStops'
+			'NearByStops',
+			'LegacyRoutes'
 		],
 		refs: {
 			mainTabView: 'main',
@@ -110,9 +111,8 @@ Ext.define('SeptaMobi.controller.Stop', {
 	},
 
 	onStopsShow: function(navView, scheduleIndex) {
-		var me = this;
-
-		var routeStore = Ext.getStore('Routes');
+		var me = this,
+			routeStore = Ext.getStore('LegacyRoutes');
 
 		if (!routeStore.isLoaded()) {
 			navView.setMasked({

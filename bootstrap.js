@@ -643,57 +643,67 @@ Ext.ClassManager.addNameAlternateMappings({
   "SeptaMobi.controller.Stop": [],
   "SeptaMobi.controller.TripPlanner": [],
   "SeptaMobi.model.Address": [],
-  "SeptaMobi.model.Alert": [],
   "SeptaMobi.model.Bookmark": [],
   "SeptaMobi.model.Bus": [],
   "SeptaMobi.model.Itinerary": [],
+  "SeptaMobi.model.LegacyRoute": [],
   "SeptaMobi.model.NearByPerk": [],
   "SeptaMobi.model.NearByStop": [],
   "SeptaMobi.model.Perk": [],
   "SeptaMobi.model.Route": [],
   "SeptaMobi.model.RouteDetails": [],
   "SeptaMobi.model.Stop": [],
+  "SeptaMobi.model.StopDirection": [],
   "SeptaMobi.model.StopTime": [],
   "SeptaMobi.model.SystemLocation": [],
   "SeptaMobi.model.Trip": [],
   "SeptaMobi.model.Variant": [],
   "SeptaMobi.proxy.APIProxy": [],
-  "SeptaMobi.store.Alerts": [],
   "SeptaMobi.store.AutocompleteAddress": [],
   "SeptaMobi.store.Bookmarks": [],
+  "SeptaMobi.store.BusRoutes": [],
   "SeptaMobi.store.Buses": [],
   "SeptaMobi.store.Itineraries": [],
+  "SeptaMobi.store.LegacyRoutes": [],
   "SeptaMobi.store.NearByPerks": [],
   "SeptaMobi.store.NearByStops": [],
   "SeptaMobi.store.Perks": [],
   "SeptaMobi.store.Routes": [],
+  "SeptaMobi.store.StopDirections": [],
   "SeptaMobi.store.StopTimes": [],
   "SeptaMobi.store.Stops": [],
+  "SeptaMobi.store.Subways": [],
   "SeptaMobi.store.Tokens": [],
+  "SeptaMobi.store.Trains": [],
+  "SeptaMobi.store.Trolleys": [],
   "SeptaMobi.strings.TripPlanner": [],
   "SeptaMobi.template.TripPoint": [],
   "SeptaMobi.view.BookmarkPanel": [],
   "SeptaMobi.view.Dashboard": [],
   "SeptaMobi.view.Main": [],
-  "SeptaMobi.view.TripPlanner.NavView": [],
-  "SeptaMobi.view.TripPlanner.SelectAddress": [],
-  "SeptaMobi.view.TripPlanner.TripDetail": [],
-  "SeptaMobi.view.TripPlanner.TripList": [],
+  "SeptaMobi.view.Map": [],
   "SeptaMobi.view.TripTplTemp": [],
+  "SeptaMobi.view.extras.Map": [],
   "SeptaMobi.view.extras.NavView": [],
   "SeptaMobi.view.extras.Tokens": [],
   "SeptaMobi.view.perks.Main": [],
+  "SeptaMobi.view.perks.Map": [],
   "SeptaMobi.view.schedule.NavView": [],
   "SeptaMobi.view.schedule.RouteDetails": [],
   "SeptaMobi.view.schedule.RouteDirections": [],
   "SeptaMobi.view.schedule.RouteVariants": [],
   "SeptaMobi.view.schedule.RoutesList": [],
   "SeptaMobi.view.schedule.StopTimes": [],
+  "SeptaMobi.view.schedule.SubwayList": [],
   "SeptaMobi.view.stops.Main": [],
   "SeptaMobi.view.stops.NavView": [],
   "SeptaMobi.view.stops.NearbyList": [],
   "SeptaMobi.view.stops.RouteList": [],
-  "SeptaMobi.view.stops.RouteMap": []
+  "SeptaMobi.view.stops.RouteMap": [],
+  "SeptaMobi.view.tripplanner.NavView": [],
+  "SeptaMobi.view.tripplanner.SelectAddress": [],
+  "SeptaMobi.view.tripplanner.TripDetail": [],
+  "SeptaMobi.view.tripplanner.TripList": []
 });
 Ext.ClassManager.addNameAliasMappings({
   "Ext.AbstractComponent": [],
@@ -1548,16 +1558,17 @@ Ext.ClassManager.addNameAliasMappings({
   "SeptaMobi.controller.Stop": [],
   "SeptaMobi.controller.TripPlanner": [],
   "SeptaMobi.model.Address": [],
-  "SeptaMobi.model.Alert": [],
   "SeptaMobi.model.Bookmark": [],
   "SeptaMobi.model.Bus": [],
   "SeptaMobi.model.Itinerary": [],
+  "SeptaMobi.model.LegacyRoute": [],
   "SeptaMobi.model.NearByPerk": [],
   "SeptaMobi.model.NearByStop": [],
   "SeptaMobi.model.Perk": [],
   "SeptaMobi.model.Route": [],
   "SeptaMobi.model.RouteDetails": [],
   "SeptaMobi.model.Stop": [],
+  "SeptaMobi.model.StopDirection": [],
   "SeptaMobi.model.StopTime": [],
   "SeptaMobi.model.SystemLocation": [],
   "SeptaMobi.model.Trip": [],
@@ -1565,18 +1576,23 @@ Ext.ClassManager.addNameAliasMappings({
   "SeptaMobi.proxy.APIProxy": [
     "proxy.api"
   ],
-  "SeptaMobi.store.Alerts": [],
   "SeptaMobi.store.AutocompleteAddress": [],
   "SeptaMobi.store.Bookmarks": [],
+  "SeptaMobi.store.BusRoutes": [],
   "SeptaMobi.store.Buses": [],
   "SeptaMobi.store.Itineraries": [],
+  "SeptaMobi.store.LegacyRoutes": [],
   "SeptaMobi.store.NearByPerks": [],
   "SeptaMobi.store.NearByStops": [],
   "SeptaMobi.store.Perks": [],
   "SeptaMobi.store.Routes": [],
+  "SeptaMobi.store.StopDirections": [],
   "SeptaMobi.store.StopTimes": [],
   "SeptaMobi.store.Stops": [],
+  "SeptaMobi.store.Subways": [],
   "SeptaMobi.store.Tokens": [],
+  "SeptaMobi.store.Trains": [],
+  "SeptaMobi.store.Trolleys": [],
   "SeptaMobi.strings.TripPlanner": [],
   "SeptaMobi.template.TripPoint": [],
   "SeptaMobi.view.BookmarkPanel": [
@@ -1588,20 +1604,14 @@ Ext.ClassManager.addNameAliasMappings({
   "SeptaMobi.view.Main": [
     "widget.main"
   ],
-  "SeptaMobi.view.TripPlanner.NavView": [
-    "widget.tripplanner"
-  ],
-  "SeptaMobi.view.TripPlanner.SelectAddress": [
-    "widget.selectaddresspanel"
-  ],
-  "SeptaMobi.view.TripPlanner.TripDetail": [
-    "widget.tripdetail"
-  ],
-  "SeptaMobi.view.TripPlanner.TripList": [
-    "widget.triplist"
+  "SeptaMobi.view.Map": [
+    "widget.map"
   ],
   "SeptaMobi.view.TripTplTemp": [
     "widget.triptpltemp"
+  ],
+  "SeptaMobi.view.extras.Map": [
+    "widget.extrasmap"
   ],
   "SeptaMobi.view.extras.NavView": [
     "widget.extrasview"
@@ -1611,6 +1621,9 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "SeptaMobi.view.perks.Main": [
     "widget.perksview"
+  ],
+  "SeptaMobi.view.perks.Map": [
+    "widget.perksmap"
   ],
   "SeptaMobi.view.schedule.NavView": [
     "widget.schedule-navview"
@@ -1630,6 +1643,9 @@ Ext.ClassManager.addNameAliasMappings({
   "SeptaMobi.view.schedule.StopTimes": [
     "widget.schedule-stoptimes"
   ],
+  "SeptaMobi.view.schedule.SubwayList": [
+    "widget.subwaylist"
+  ],
   "SeptaMobi.view.stops.Main": [
     "widget.stops-main"
   ],
@@ -1644,5 +1660,17 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "SeptaMobi.view.stops.RouteMap": [
     "widget.stops-routemap"
+  ],
+  "SeptaMobi.view.tripplanner.NavView": [
+    "widget.tripplanner"
+  ],
+  "SeptaMobi.view.tripplanner.SelectAddress": [
+    "widget.selectaddresspanel"
+  ],
+  "SeptaMobi.view.tripplanner.TripDetail": [
+    "widget.tripdetail"
+  ],
+  "SeptaMobi.view.tripplanner.TripList": [
+    "widget.triplist"
   ]
 });

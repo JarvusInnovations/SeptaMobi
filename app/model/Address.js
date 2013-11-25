@@ -10,7 +10,7 @@ Ext.define('SeptaMobi.model.Address', {
 			type: 'string',
 			mapping: 'description'
 		},{
-			name: 'terms',
+			name: 'terms'
 		},{
 			name: 'reference',
 			type: 'string'

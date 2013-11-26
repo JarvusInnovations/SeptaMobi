@@ -127,12 +127,11 @@ Ext.define('SeptaMobi.API', {
 					}
 
 					nearByStopsStore.setData(records);
-
-					Ext.callback(callback, scope, [options, success, response]);
 				}
 				else {
 					//todo show error message
 				}
+				Ext.callback(callback, scope, [options, success, response]);
 			}
 		});
 	},

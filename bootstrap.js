@@ -694,7 +694,6 @@ Ext.ClassManager.addNameAlternateMappings({
   "SeptaMobi.view.schedule.RouteVariants": [],
   "SeptaMobi.view.schedule.RoutesList": [],
   "SeptaMobi.view.schedule.StopTimes": [],
-  "SeptaMobi.view.schedule.SubwayList": [],
   "SeptaMobi.view.stops.Main": [],
   "SeptaMobi.view.stops.NavView": [],
   "SeptaMobi.view.stops.NearbyList": [],
@@ -1642,9 +1641,6 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "SeptaMobi.view.schedule.StopTimes": [
     "widget.schedule-stoptimes"
-  ],
-  "SeptaMobi.view.schedule.SubwayList": [
-    "widget.subwaylist"
   ],
   "SeptaMobi.view.stops.Main": [
     "widget.stops-main"

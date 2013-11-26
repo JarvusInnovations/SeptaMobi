@@ -41,6 +41,7 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 
 				xtype: 'selectaddresspanel'
 			},
+			selectAddressField: 'selectaddresspanel #selectAddressField',
 			tripList: {
 				selector: 'triplist',
 				autoCreate: true,
@@ -68,12 +69,13 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 				activate: 'onTripPlannerViewActivate'
 			},
 			fromField: {
-				focus: 'onAddressFieldFocus',
-				keyup: 'onAddressFieldKeyUp'
+				focus: 'onAddressFieldFocus'
 			},
 			toField: {
-				focus: 'onAddressFieldFocus',
-				keyup: 'onAddressFieldKeyUp'
+				focus: 'onAddressFieldFocus'
+			},
+			selectAddressField: {
+				keyup: 'onSelectAddressFieldKeyUp'
 			},
 			'tripplanner #fromUseCurrent': {
 				tap: 'onUseCurrentTap'
@@ -166,20 +168,27 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 			autocompleteAddressStore = Ext.getStore('AutocompleteAddress'),
 			selectAddressPanel = me.getSelectAddressPanel();
 
-		autocompleteAddressStore.getProxy().setExtraParam('prefix', field.getValue());
-		autocompleteAddressStore.load();
-
+		me.updateAutoCompleteAddress(field);
 		selectAddressPanel.setField(field);
-		selectAddressPanel.showBy(field);
+		selectAddressPanel.show();
 	},
 
-	onAddressFieldKeyUp: Ext.Function.createBuffered(function(field) {
+	onSelectAddressFieldKeyUp: Ext.Function.createBuffered(function(field) {
+		this.updateAutoCompleteAddress(field);
+	}, 750),
+
+	updateAutoCompleteAddress: function(field) {
 		var me = this,
 			autocompleteAddressStore = Ext.getStore('AutocompleteAddress');
 
-		autocompleteAddressStore.getProxy().setExtraParam('input', field.getValue());
-		autocompleteAddressStore.load();
-	}, 750),
+		if(field.getValue()) {
+			autocompleteAddressStore.getProxy().setExtraParam('input', field.getValue());
+			autocompleteAddressStore.load();
+		}
+		else {
+			autocompleteAddressStore.removeAll();
+		}
+	},
 
 	onUseCurrentTap: function(checkButton) {
 		var me = this,

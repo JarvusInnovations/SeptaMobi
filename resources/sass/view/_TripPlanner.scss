@@ -29,34 +29,23 @@
 	}
 }
 
-.x-panel.address-autocomplete-panel {
-    margin-top: -.6em;
-    padding: 0;
+.address-autocomplete-panel {
+    background: white;
+
+    .x-field-input {
+        background: #ccc;
+        padding: .4em;
+    }
     
-    .x-button {
-        background: none;
+    .x-input-el {
         border: none;
-        color: $base-color;
-        padding: .6em;
+        border-radius: .2em;
+        padding: .2em .4em;
     }
     
-    .x-dataview-emptytext {
-        color: $muted-color;
-        padding: 3.6em;
-        text-align: center;
-    }
-    
-    .autocomplete-option {
-        font-size: small;
-        padding: .8em;
-        
-        &::after {
-            content: none;
-        }
-    }
-    
-    & + .x-mask {
-        background: transparent;
+    .x-clear-icon {
+        margin-right: .6em;
+        margin-top: .2em;
     }
 }
 

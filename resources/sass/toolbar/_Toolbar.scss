@@ -6,6 +6,17 @@
 	@include background-image(linear-gradient($base-color, rgba($base-color, .85) ));
 	border: none;
 	color: #fff;
+	
+	.x-button {
+    	background: none;
+    	border: none;
+    	margin-left: .6em;
+
+    	&.x-button-pressing,
+    	&.x-button-pressed {
+        	opacity: .4;
+    	}
+	}
 }
 
 .x-title {

@@ -22,6 +22,7 @@ Ext.define('SeptaMobi.view.tripplanner.SelectAddress', {
                 xtype: 'titlebar',
                 docked: 'top',
                 title: 'Address',
+                placeHolder: 'Search for an Address&hellip;',
                 items: [
                     {
                         xtype: 'button',

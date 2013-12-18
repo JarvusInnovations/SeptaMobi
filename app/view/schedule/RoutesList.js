@@ -13,7 +13,7 @@ Ext.define('SeptaMobi.view.schedule.RoutesList', {
 		itemTpl: [
 			'<div>',				
 				'<tpl if="routeType == 3">',
-				'<span class="bus-number">{routeShortName}</span>',
+					'<span class="bus-number">{routeShortName}</span>',
 				'</tpl>',
 				'<span>{displayName}</span>',
 			'</div>'

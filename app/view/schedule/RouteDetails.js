@@ -16,19 +16,16 @@ Ext.define('SeptaMobi.view.schedule.RouteDetails', {
 		routeName: null,
 		directionId: null,
 
+		detailView: {
+			xtype: 'dataview',
+			itemId: 'detailView',
+			cls: 'list-style',
+			title: 'View'
+		},
+
 		title: 'Route Details',
 		cls: 'schedule',
 		items: [{
-			xtype: 'dataview',
-			title: 'Stops',
-			cls: 'list-style',
-			itemTpl: [
-				'<div>',
-					'<span>{name}</span>',
-				'</div>'
-			],
-			store: 'Stops'
-		}, {
 			xtype: 'leafletmap',
 			title: 'Map',
 	        tileLayerOptions: { detectRetina: true},
@@ -50,6 +47,22 @@ Ext.define('SeptaMobi.view.schedule.RouteDetails', {
 
 	// 	this.down('dataview').setData(data);
 	// },
+
+	applyDetailView: function(config) {
+		debugger
+		return Ext.factory(config, Ext.dataview.DataView, this.getDetailView());
+	},
+
+	updateDetailView: function(newDetailView, oldDetailView) {
+		debugger
+        if (oldDetailView) {
+            this.remove(oldDetailView, true);
+        }
+
+        if (newDetailView) {
+            this.insert(0, newDetailView);
+        }
+    },
 
 	removeBusMarkers: function() {
 		var mapCmp = this.down('leafletmap'),

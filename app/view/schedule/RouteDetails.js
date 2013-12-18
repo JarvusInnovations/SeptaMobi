@@ -49,12 +49,10 @@ Ext.define('SeptaMobi.view.schedule.RouteDetails', {
 	// },
 
 	applyDetailView: function(config) {
-		debugger
 		return Ext.factory(config, Ext.dataview.DataView, this.getDetailView());
 	},
 
 	updateDetailView: function(newDetailView, oldDetailView) {
-		debugger
         if (oldDetailView) {
             this.remove(oldDetailView, true);
         }

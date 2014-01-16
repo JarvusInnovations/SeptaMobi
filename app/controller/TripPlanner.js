@@ -41,6 +41,7 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 
 				xtype: 'selectaddresspanel'
 			},
+			selectAddressList: 'selectaddresspanel dataview',
 			selectAddressField: 'selectaddresspanel #selectAddressField',
 			tripList: {
 				selector: 'triplist',
@@ -69,10 +70,10 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 				activate: 'onTripPlannerViewActivate'
 			},
 			fromField: {
-				focus: 'onAddressFieldFocus'
+				tap: 'onAddressFieldTap'
 			},
 			toField: {
-				focus: 'onAddressFieldFocus'
+				tap: 'onAddressFieldTap'
 			},
 			selectAddressField: {
 				keyup: 'onSelectAddressFieldKeyUp'
@@ -88,6 +89,9 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 			},
 			'tripplanner button[action=route]': {
 				tap: 'onRouteTap'
+			},
+			selectAddressPanel: {
+				show: 'onSelectAddressPanelShow'
 			},
 			'selectaddresspanel button[action=cancel]': {
 				tap: 'onSelectAddressPanelCancelTap'
@@ -163,7 +167,7 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 		this.pushPath('tripplanner');
 	},
 
-	onAddressFieldFocus: function(field) {
+	onAddressFieldTap: function(field) {
 		var me = this,
 			autocompleteAddressStore = Ext.getStore('AutocompleteAddress'),
 			selectAddressPanel = me.getSelectAddressPanel();
@@ -389,6 +393,12 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 			return false;
 		}
 		return true;
+	},
+
+	onSelectAddressPanelShow: function(panel) {
+		this.getSelectAddressList().deselectAll();		
+		this.getSelectAddressField().setValue(panel.getField().getValue());
+		debugger
 	},
 
 	onSelectAddressPanelCancelTap: function() {

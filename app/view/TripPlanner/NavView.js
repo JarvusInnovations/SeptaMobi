@@ -3,7 +3,8 @@ Ext.define('SeptaMobi.view.tripplanner.NavView', {
     requires: [
         'Ext.form.Panel',
         'Ext.form.FieldSet',
-        'Jarvus.touch.ux.field.DateTimePicker'
+        'Jarvus.touch.ux.field.DateTimePicker',
+        'SeptaMobi.view.tripplanner.field.Component'
     ],
 
     xtype: 'tripplanner',
@@ -33,13 +34,12 @@ Ext.define('SeptaMobi.view.tripplanner.NavView', {
                     cls: 'field-button-ct',
                     layout: 'hbox',
                     items: [{
-                        xtype: 'textfield',
+                        xtype: 'componentfield',
                         flex: 1,
                         label: 'From:',
                         labelWidth: 70,
                         itemId: 'fromField',
-                        placeHolder: 'Origin',
-                        clearIcon: true
+                        placeHolder: 'Origin'
                     },{
                         xtype: 'button',
                         cls: 'field-button',
@@ -52,13 +52,12 @@ Ext.define('SeptaMobi.view.tripplanner.NavView', {
                     cls: 'field-button-ct',
                     layout: 'hbox',
                     items: [{
-                        xtype: 'textfield',
+                        xtype: 'componentfield',
                         flex: 1,
                         label: 'To:',
                         itemId: 'toField',
                         labelWidth: 70,
-                        placeHolder: 'Destination',
-                        clearIcon: true
+                        placeHolder: 'Destination'
                     },{
                         xtype: 'button',
                         cls: 'field-button',

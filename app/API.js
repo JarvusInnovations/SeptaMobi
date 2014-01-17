@@ -45,7 +45,7 @@ Ext.define('SeptaMobi.API', {
 					response.data = Ext.decode(response.responseText, true);
 				}
 
-				Ext.callback(callback, scope, [options, success && response.success, response]);
+				Ext.callback(callback, scope, [options, success, response]);
 			}
 		});
 	},

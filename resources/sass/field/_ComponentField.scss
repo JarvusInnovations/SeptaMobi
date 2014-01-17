@@ -1,0 +1,15 @@
+.component-field {
+    .x-clear-icon {
+        position: static;
+    }
+    
+    .placeholder {
+        .x-innerhtml {
+            color: #bbb;
+        }
+    }
+    
+    .field-value {
+        margin-top: .2em;
+    }
+}

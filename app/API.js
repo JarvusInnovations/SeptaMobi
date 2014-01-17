@@ -62,7 +62,7 @@ Ext.define('SeptaMobi.API', {
 				//TODO Add depart time
 			},
 			callback: function(options, success, response) {
-				if ((response.getResponseHeader('content-type') || '').indexOf('application/json') == 0 && response.responseText) {
+				if (response.responseText && (response.getResponseHeader('content-type') || '').indexOf('application/json') == 0) {
 					response.data = Ext.decode(response.responseText, true);
 				}
 
@@ -81,7 +81,7 @@ Ext.define('SeptaMobi.API', {
 				id: stopId
 			},
 			callback: function(options, success, response) {
-				if ((response.getResponseHeader('content-type') || '').indexOf('application/json') == 0 && response.responseText) {
+				if (response.responseText && (response.getResponseHeader('content-type') || '').indexOf('application/json') == 0) {
 					response.data = Ext.decode(response.responseText, true);
 				}
 
@@ -146,7 +146,7 @@ Ext.define('SeptaMobi.API', {
 				sensor: true
 			},
 			callback: function(options, success, response) {
-				if ((response.getResponseHeader('content-type') || '').indexOf('application/json') == 0 && response.responseText) {
+				if (response.responseText && (response.getResponseHeader('content-type') || '').indexOf('application/json') == 0) {
 					response.data = Ext.decode(response.responseText, true);
 				}
 				if (response.data.results && response.data.results.length > 0) {

@@ -29,6 +29,10 @@ Ext.define('SeptaMobi.view.Main', {
             iconCls: 'tab-stops',
             xtype: 'stops-navview'
         }, {
+            title: 'Schedule',
+            iconCls: 'tab-schedule',
+            xtype: 'schedule-navview'
+        }, {
             title: 'Trip Planner',
             iconCls: 'tab-trip-planner',
             xtype: 'tripplanner'

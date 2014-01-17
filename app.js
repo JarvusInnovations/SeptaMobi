@@ -33,6 +33,7 @@ Ext.application({
         'Bookmark',
         'Dashboard',
         'Extras',
+        'Schedule',
         'Stop',
         'TripPlanner'
     ],

@@ -2,7 +2,7 @@ Ext.define('SeptaMobi.view.stops.NavView', {
 	extend: 'Ext.navigation.View',
 	xtype: 'stops-navview',
 
-	requires: ['SeptaMobi.view.stops.Main'],
+	requires: ['SeptaMobi.view.stops.NearbyList'],
 	
 	config: {
 	// navigationBar: {
@@ -19,7 +19,7 @@ Ext.define('SeptaMobi.view.stops.NavView', {
   //           ]
   //       },
 		items: [{
-			xtype: 'stops-main',
+			xtype: 'stops-nearbylist',
 	        title: 'Stops'
 		}]
 	}

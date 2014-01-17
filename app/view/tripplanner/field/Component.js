@@ -220,7 +220,6 @@ Ext.define('SeptaMobi.view.tripplanner.field.Component', {
      * @private
      */
     updatePlaceHolder: function(newPlaceHolder) {
-        console.log('updatePlaceHolder', newPlaceHolder);
         var me = this,
             valueCmp = me.getValueCmp();
 

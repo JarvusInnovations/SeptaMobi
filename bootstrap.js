@@ -682,6 +682,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "SeptaMobi.view.Dashboard": [],
   "SeptaMobi.view.Main": [],
   "SeptaMobi.view.Map": [],
+  "SeptaMobi.view.RouteDirections": [],
   "SeptaMobi.view.TripTplTemp": [],
   "SeptaMobi.view.extras.Map": [],
   "SeptaMobi.view.extras.NavView": [],
@@ -691,10 +692,11 @@ Ext.ClassManager.addNameAlternateMappings({
   "SeptaMobi.view.schedule.NavView": [],
   "SeptaMobi.view.schedule.RouteDetails": [],
   "SeptaMobi.view.schedule.RouteDirections": [],
+  "SeptaMobi.view.schedule.RouteStopDetails": [],
+  "SeptaMobi.view.schedule.RouteTimeDetails": [],
   "SeptaMobi.view.schedule.RouteVariants": [],
   "SeptaMobi.view.schedule.RoutesList": [],
   "SeptaMobi.view.schedule.StopTimes": [],
-  "SeptaMobi.view.stops.Main": [],
   "SeptaMobi.view.stops.NavView": [],
   "SeptaMobi.view.stops.NearbyList": [],
   "SeptaMobi.view.stops.RouteList": [],
@@ -702,7 +704,8 @@ Ext.ClassManager.addNameAlternateMappings({
   "SeptaMobi.view.tripplanner.NavView": [],
   "SeptaMobi.view.tripplanner.SelectAddress": [],
   "SeptaMobi.view.tripplanner.TripDetail": [],
-  "SeptaMobi.view.tripplanner.TripList": []
+  "SeptaMobi.view.tripplanner.TripList": [],
+  "SeptaMobi.view.tripplanner.field.Component": []
 });
 Ext.ClassManager.addNameAliasMappings({
   "Ext.AbstractComponent": [],
@@ -1606,6 +1609,9 @@ Ext.ClassManager.addNameAliasMappings({
   "SeptaMobi.view.Map": [
     "widget.map"
   ],
+  "SeptaMobi.view.RouteDirections": [
+    "widget.routedirections"
+  ],
   "SeptaMobi.view.TripTplTemp": [
     "widget.triptpltemp"
   ],
@@ -1633,6 +1639,12 @@ Ext.ClassManager.addNameAliasMappings({
   "SeptaMobi.view.schedule.RouteDirections": [
     "widget.schedule-routedirections"
   ],
+  "SeptaMobi.view.schedule.RouteStopDetails": [
+    "widget.schedule-routestopdetails"
+  ],
+  "SeptaMobi.view.schedule.RouteTimeDetails": [
+    "widget.schedule-routetimedetails"
+  ],
   "SeptaMobi.view.schedule.RouteVariants": [
     "widget.schedule-routevariants"
   ],
@@ -1641,9 +1653,6 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "SeptaMobi.view.schedule.StopTimes": [
     "widget.schedule-stoptimes"
-  ],
-  "SeptaMobi.view.stops.Main": [
-    "widget.stops-main"
   ],
   "SeptaMobi.view.stops.NavView": [
     "widget.stops-navview"
@@ -1668,5 +1677,8 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "SeptaMobi.view.tripplanner.TripList": [
     "widget.triplist"
+  ],
+  "SeptaMobi.view.tripplanner.field.Component": [
+    "widget.componentfield"
   ]
 });

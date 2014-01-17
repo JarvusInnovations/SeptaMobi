@@ -26,13 +26,14 @@ $regionalrail: #5186a0;
 @import 'button/SegmentedButton',
 		'button/Button',
 		'dataview/Dataview',
+		'field/ComponentField',
+		'field/SelectField',
 		'messagebox/MessageBox',
+		'panel/Panel',
+		'picker/Picker',
 		'tab/Bar',
 		'tab/Tab',
-		'toolbar/Toolbar',
-		'picker/Picker',
-		'field/SelectField',
-		'panel/Panel';
+		'toolbar/Toolbar';
 
 @import 'view/TripTplTemp',
 		'view/Dashboard',

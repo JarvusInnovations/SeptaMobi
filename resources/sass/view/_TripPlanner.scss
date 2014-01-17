@@ -171,25 +171,23 @@
 
 
 .x-field-input .x-clear-icon {
-	width: 18px;
 	background-color: #ccc;
-	right: 0;
-	height: 18px;
-	text-align: center;
-	border-radius: 20px;
+	border-radius: 100%;
+    color: white;
+    font-size: 16px;
 	font-weight: bold;
-	line-height: 5px;
+	height: 18px;
+	line-height: 1;
+	text-align: center;
+	right: 0;
 	top: 6px;
 	vertical-align: middle;
-	padding: 5px;
+	width: 18px;
 }
 
 .x-field-clearable .x-clear-icon::after {
-	content: 'X';
-	color: white;
-	font-size: smaller;
+	content: '\00d7';
 }
-
 
 
 

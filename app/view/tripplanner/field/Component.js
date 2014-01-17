@@ -9,6 +9,7 @@ Ext.define('SeptaMobi.view.tripplanner.field.Component', {
          * @inheritdoc
          */
         baseCls: Ext.baseCSSPrefix + 'field',
+        cls: 'component-field',
 
         /**
          * The label of this field
@@ -76,10 +77,14 @@ Ext.define('SeptaMobi.view.tripplanner.field.Component', {
 
         component: {
             xtype: 'container',
-            layout: 'hbox',
+            layout: {
+                type: 'hbox',
+                align: 'middle'
+            },
             cls: 'x-field-input',
             items: [{
                 xtype: 'component',
+                cls: 'field-value',
                 itemId: 'valueCmp',
                 tpl: '{value}',
                 flex: 1
@@ -87,7 +92,7 @@ Ext.define('SeptaMobi.view.tripplanner.field.Component', {
                 xtype: 'component',
                 itemId: 'clearIcon',
                 cls: 'x-clear-icon',
-                html: 'x'
+                html: '&times;'
             }]
         },
     },

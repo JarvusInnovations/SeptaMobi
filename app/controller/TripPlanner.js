@@ -398,7 +398,6 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 	onSelectAddressPanelShow: function(panel) {
 		this.getSelectAddressList().deselectAll();		
 		this.getSelectAddressField().setValue(panel.getField().getValue());
-		debugger
 	},
 
 	onSelectAddressPanelCancelTap: function() {

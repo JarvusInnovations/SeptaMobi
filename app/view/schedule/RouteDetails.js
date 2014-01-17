@@ -38,7 +38,10 @@ Ext.define('SeptaMobi.view.schedule.RouteDetails', {
 		},{
 			xtype: 'component',
 			title: 'Alerts',
-			itemId: 'alertsCmp'
+			itemId: 'alertsCmp',
+			tab: {
+				itemId: 'alerts-tab'
+			}
 		}]
 	},
 	
@@ -74,12 +77,17 @@ Ext.define('SeptaMobi.view.schedule.RouteDetails', {
 	},
 
 	updateAlert: function(alert) {
-		var alertsCmp = this.down('#alertsCmp');
+		var alertsTabs = this.getTabBar().down('#alerts-tab'),
+			alertsCmp = this.down('#alertsCmp');
 
+		// debugger
 		if(!alert) {
-			alert = 'No Alerts At This Time';
+			alertsTabs.hide();
+			alertsCmp.setHtml('');
 		}
-
-		alertsCmp.setHtml(alert);
+		else {
+			alertsTabs.show();
+			alertsCmp.setHtml(alert);
+		}
 	}
 });

@@ -411,7 +411,7 @@
     @else if ($name == "quote") { @return "\""; }
     @else if ($name == "volume_mute") { @return "<"; }
     @else if ($name == "volume") { @return ">"; }
-    @else if ($name == "help") { @return "?"; }
+    @else if ($name == "question") { @return "?"; }
 
     // Backwards compat; icons that are not in the font
     @else if ($name == "arrow_left") { @return "["; }

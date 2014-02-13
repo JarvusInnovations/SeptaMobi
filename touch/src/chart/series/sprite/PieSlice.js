@@ -3,12 +3,12 @@
  *
  * Pie slice sprite.
  */
-Ext.define("Ext.chart.series.sprite.PieSlice", {
+Ext.define('Ext.chart.series.sprite.PieSlice', {
     alias: 'sprite.pieslice',
     mixins: {
-        markerHolder: "Ext.chart.MarkerHolder"
+        markerHolder: 'Ext.chart.MarkerHolder'
     },
-    extend: "Ext.draw.sprite.Sector",
+    extend: 'Ext.draw.sprite.Sector',
 
     inheritableStatics: {
         def: {
@@ -104,7 +104,8 @@ Ext.define("Ext.chart.series.sprite.PieSlice", {
             midRho = (startRho + endRho) * 0.5,
             surfaceMatrix = me.surfaceMatrix,
             labelCfg = me.labelCfg || (me.labelCfg = {}),
-            labelBox, x, y;
+            labelTpl = me.getBoundMarker('labels')[0].getTemplate(),
+            labelBox, x, y, changes;
 
         surfaceMatrix.appendMatrix(attr.matrix);
 
@@ -143,7 +144,11 @@ Ext.define("Ext.chart.series.sprite.PieSlice", {
         labelBox = me.getMarkerBBox('labels', me.attr.attributeId, true);
         if (labelBox) {
             if (attr.doCallout) {
-                me.putMarker('labels', {callout: 1 - +me.sliceContainsLabel(attr, labelBox)}, me.attr.attributeId);
+                if (labelTpl.attr.display === 'outside') {
+                    me.putMarker('labels', {callout: 1}, me.attr.attributeId);
+                } else {
+                    me.putMarker('labels', {callout: 1 - +me.sliceContainsLabel(attr, labelBox)}, me.attr.attributeId);
+                }
             } else {
                 me.putMarker('labels', {globalAlpha: +me.sliceContainsLabel(attr, labelBox)}, me.attr.attributeId);
             }

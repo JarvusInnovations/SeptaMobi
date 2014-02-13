@@ -2,6 +2,8 @@ Ext.define('SeptaMobi.strings.TripPlanner', {
     singleton: true,
 
     directions: {
+        //doesn't make sense, but is returned by new OTP api
+        depart:         "depart", 
         southeast:      "southeast",
         southwest:      "southwest",
         northeast:      "northeast",

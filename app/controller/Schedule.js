@@ -37,6 +37,9 @@ Ext.define('SeptaMobi.controller.Schedule', {
 			}
 		},
 		control: {
+			navView: {
+				activate: 'onNavViewActivate'
+			},
 			'schedule-routeslist segmentedbutton': {
 				toggle: 'onScheduleRoutesListSegmentedButtonToggle'
 			},
@@ -59,6 +62,10 @@ Ext.define('SeptaMobi.controller.Schedule', {
 				select: 'onScheduleRouteDetailsSelect'
 			}
 		}
+	},
+
+	onNavViewActivate: function() {
+		this.pushPath('schedule');
 	},
 
 	onScheduleRouteListActivate: function(list) {

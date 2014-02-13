@@ -99,11 +99,17 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 			'selectaddresspanel dataview': {
 				select: 'onSelectAddressPanelAddressSelect'
 			},
+			triplist: {
+				activate: 'onTripListActivate'
+			},
 			'triplist dataview': {
 				select: 'onTripSelect'
 			},
 			'tripdetail leafletmap': {
 				maprender: 'onTripDetailMapRender'
+			},
+			'tripdetail carousel': {
+				activeitemchange: 'onCarouselActiveItemChange'
 			},
 			'tripplanner': {
 				transitioncomplete: 'onTripPlannerNavTransitionComplete'
@@ -129,7 +135,7 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 			tripPlannerForm = me.getTripPlannerForm(),
 			tripPlannerNavView = me.getTripPlannerView();
 
-		mainTabView.setActiveItem(2);
+		mainTabView.setActiveItem(3);
 		tripPlannerNavView.pop(tripPlannerForm);
 	},
 
@@ -424,6 +430,10 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 		me.getSelectAddressPanel().hide();
 	},
 
+	onTripListActivate: function(tripList) {
+		tripList.down('dataview').deselectAll();
+	},
+
 	onTripSelect: function(list, record, eOpts) {
 		var me = this,
 			tripPlannerView = me.getTripPlannerView(),
@@ -449,20 +459,36 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 			legsLength = itenerary.legs.length,
 			i = 0,
 			lines = [],
+			lineSegments = [],
 			decodedPoints, bounds, multiPolyLine;
 
 		for (; i < legsLength; i++) {
 			decodedPoints = Jarvus.util.Polyline.decode(itenerary.legs[i].legGeometry.points);
 			lines.push(decodedPoints);
+			lineSegments.push(ll.polyline(decodedPoints));
 		}
 
 		multiPolyLine = ll.multiPolyline(lines).addTo(map);
 
 		tripDetail.setTripLine(multiPolyLine);
+		tripDetail.setTripLines(lineSegments);
 
 		Ext.defer(function() {
 			map.fitBounds(multiPolyLine.getBounds());
 		}, 1000, me);
+	},
+
+	onCarouselActiveItemChange: function(carousel, item) {
+		var me = this,
+			index = carousel.innerItems.indexOf(item) - 1,
+			mapCmp = me.getTripDetailMap(),
+			map = mapCmp.getMap(),
+			tripDetail = me.getTripDetail(),
+			tripLines = tripDetail.getTripLines();
+
+		if(map && index >= 0 && index < tripLines.length) {
+			map.fitBounds(tripLines[index].getBounds());
+		}
 	},
 
 	onTripPlannerNavTransitionComplete: function(incomingItem, outgoingItem) {

@@ -14,6 +14,7 @@ Ext.define('SeptaMobi.view.tripplanner.TripDetail', {
 		tripDetail: null,
 		itenerary: null,
 		tripLine: null,
+        tripLines: null,
 
         layout: {
             type: 'vbox'
@@ -80,6 +81,8 @@ Ext.define('SeptaMobi.view.tripplanner.TripDetail', {
                             '</div>',
                         '</li>',
                     '</ol>',
+                    '<br/>',
+                    '<br/>',
                     {
                         capitalize: function(string) {
                             return string.charAt(0).toUpperCase() + string.slice(1);
@@ -90,6 +93,7 @@ Ext.define('SeptaMobi.view.tripplanner.TripDetail', {
                 xtype: 'container',
                 layout: 'fit',
                 title: 'Map',
+                layout: 'vbox',
                 items: [{
                     xtype: 'leafletmap',
     
@@ -100,20 +104,13 @@ Ext.define('SeptaMobi.view.tripplanner.TripDetail', {
                     enableOwnPositionMarker: true,
                     mapOptions: {
                         zoom: 15
-                    }                    
-                },{
-                    xtype: 'container',
-                    cls: 'directions-carousel-ct',
-                    bottom: 16,
-                    width: '100%',
+                    },
+                    flex: 4
+                }, {
+                    xtype: 'carousel',
                     height: '100%',
-                    maxHeight: 150,
-                    layout: { type: 'hbox', align: 'middle' },
-                    items: [{
-                        xtype: 'carousel',
-                        height: '100%',
-                        flex: 1
-                    }]
+                    cls: 'itenerary-carousel',
+                    flex: 1
                 }]
             }]
         }]
@@ -145,7 +142,10 @@ Ext.define('SeptaMobi.view.tripplanner.TripDetail', {
                 iteneraryData.legs[i - 1].type = 'leg';
                 tplHtml = tpl.apply(iteneraryData.legs[i - 1]);
             }
-            carouselItems.push({html: tplHtml});
+            carouselItems.push(Ext.create('Ext.Container', {
+                html: tplHtml, 
+                scrollable: true
+            }));
         }
         carousel.setItems(carouselItems);
     },

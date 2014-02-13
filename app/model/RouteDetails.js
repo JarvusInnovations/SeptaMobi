@@ -8,6 +8,8 @@ Ext.define('SeptaMobi.model.RouteDetails', {
 			name: 'alerts'
 		}, {
 			name: 'shape'
+		}, {
+			name: 'times'
 		}],
 		
 		proxy: {

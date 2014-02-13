@@ -159,6 +159,7 @@ Ext.define('SeptaMobi.controller.Schedule', {
 
 	onRouteStopDetailsActivate: function(routeDetails) {
 		routeDetails.setActiveItem(routeDetails.items.getAt(0));
+		this.getRouteStopDetailsList().deselectAll();
 	},
 
 	onRouteDirectionsSelect: function(list, record) {

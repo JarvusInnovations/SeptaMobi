@@ -301,7 +301,7 @@ Ext.define('SeptaMobi.controller.Schedule', {
 			routeDetails = me.getRouteStopDetails(),
 			url;
 
-		url = stopTimesStoreProxy.config.rootUrl + '/' + routeDetails.getRouteId() + '/directions/' + routeDetails.getDirectionId() + '/stops/' + record.get('id') + '/trips';
+		url = stopTimesStoreProxy.config.rootUrl + '/' + routeDetails.getRouteId() + '/directions/' + routeDetails.getDirectionId() + '/stops/' + record.get('id') + '/all_trips';
 
 		stopTimesStoreProxy.setUrl(url);
 

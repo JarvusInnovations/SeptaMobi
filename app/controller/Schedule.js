@@ -11,6 +11,9 @@ Ext.define('SeptaMobi.controller.Schedule', {
 			'schedule.RouteStopDetails',
 			'schedule.StopTimes'
 		],
+		stores: [
+			'StopTimes'
+		],
 		refs: {
 			navView: 'schedule-navview',
 			scheduleRoutesList: 'schedule-routeslist',
@@ -204,7 +207,8 @@ Ext.define('SeptaMobi.controller.Schedule', {
 			route_id: routeId,
 			direction_id: directionId,
 			alert_id: routeAlertIdentifier,
-			api_key: 't40P65kd'
+			api_key: 't40P65kd',
+			stop_id: false
 		});
 
 		SeptaMobi.model.RouteDetails.load(routeId, {

@@ -3,7 +3,7 @@ Ext.define('SeptaMobi.view.RouteDirections', {
 	xtype: 'routedirections',
 
 	config: {
-		// route: null,
+		route: null,
 		// stop: null,
 		stopId: null,
 		routeId: null,

@@ -1,6 +1,6 @@
 <?php
 
-if($_GET['stop_id']) {
+if($_GET['stop_id'] != 'false') {
 	$times = file_get_contents( 'http://next-transit.com/routes/' . $_GET['route_id']  . '/directions/' . $_GET['direction_id'] . '/stops/' . $_GET['stop_id'] . '/all_trips?api_key=' . $_GET['api_key']);
 	$times_data = json_decode($times, true)['data'];
 	$stops_data = array();

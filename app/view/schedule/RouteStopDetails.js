@@ -1,8 +1,8 @@
 Ext.define('SeptaMobi.view.schedule.RouteStopDetails', {
-	extend: 'SeptaMobi.view.schedule.RouteDetails',
+	extend: 'SeptaMobi.view.RouteDetails',
 	xtype: 'schedule-routestopdetails',
 	requires: [
-	   'SeptaMobi.view.schedule.RouteDetails'
+	   'SeptaMobi.view.RouteDetails'
 	],
 	
 	config: {

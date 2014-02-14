@@ -243,7 +243,6 @@ Ext.define('SeptaMobi.controller.Schedule', {
 			busLength = buses.length,
 			polyLinePoints = routeDetails.getPolylinePoints(),
 			polyLinePointsLength = polyLinePoints ? polyLinePoints.length : 0,
-			stopMarkers = [],
 			busMarkers = [],
 			i = 0,
 			stop, latLng, bounds, decodedPoints, polyLine, infoTemplate;
@@ -255,8 +254,6 @@ Ext.define('SeptaMobi.controller.Schedule', {
 				bounds = polyLine.getBounds();
 			}
 		}
-
-		routeDetails.setStopMarkers(stopMarkers);
 
 		routeDetails.removeBusMarkers();
 

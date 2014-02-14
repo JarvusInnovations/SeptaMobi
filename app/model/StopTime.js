@@ -9,6 +9,10 @@ Ext.define('SeptaMobi.model.StopTime', {
             type: 'string',
             mapping: 'departure_time_formatted'
         }, {
+            name: 'dateTime',
+            type: 'date',
+            mapping: 'departure_datetime'
+        }, {
             name: 'fromNow',
             type: 'string',
             mapping: 'from_now'

@@ -10,9 +10,7 @@ Ext.define('SeptaMobi.controller.Stop', {
 			'stops.RouteList',
 			'stops.RouteMap',
 			'RouteDirections',
-			'schedule.RouteStopDetails',
-			'schedule.RouteTimeDetails',
-			'schedule.StopTimes'
+			'stops.RouteTimeDetails'
 		],
 		stores: [
 			'Buses',
@@ -23,7 +21,7 @@ Ext.define('SeptaMobi.controller.Stop', {
 			'Trolleys',
 			'Stops',
 			'StopDirections',
-			'StopTimes',
+			'RouteStopTimes',
 			'Subways'
 		],
 		models: [
@@ -47,12 +45,6 @@ Ext.define('SeptaMobi.controller.Stop', {
 			},
 			stopsNearbyList: 'stops-nearbylist',
 			stopRouteDetailsMap: 'stops-routemap',
-			// stopTimes: {
-			// 	selector: 'schedule-stoptimes',
-			// 	autoCreate: true,
-
-			// 	xtype: 'schedule-stoptimes'
-			// },
 			routeDirections: {
 				selector: 'routedirections#stop-routedirections',
 				autoCreate: true,
@@ -61,35 +53,29 @@ Ext.define('SeptaMobi.controller.Stop', {
 				itemId: 'stop-routedirections',
 			},			
 			routeTimeDetails: {
-				selector: 'schedule-routetimedetails',
+				selector: 'stops-routetimedetails',
 				autoCreate: true,
 
-				xtype: 'schedule-routetimedetails'
+				xtype: 'stops-routetimedetails'
 			},
-			// routeStopDetailsList: 'schedule-routestopdetails dataview',
-			// routeStopDetailsMap: 'schedule-routestopdetails leafletmap',
-			routeTimeDetailsList: 'schedule-routetimedetails dataview',
-			routeTimeDetailsMap: 'schedule-routetimedetails leafletmap'
+			routeTimeDetailsMap: 'stops-routetimedetails leafletmap'
 
 		},
 		control: {
 			navView: {
-				activate: 'onStopsNavViewActivate',
-				show: 'onStopsShow'
+				activate: 'onStopsNavViewActivate'
+			},
+			stopsNearbyList: {
+				activate: 'onStopsNearbyListActivate',
+				select: 'onNearbyStopListSelect'
 			},
 			stopsMainView: {
 				activate: 'onStopsMainViewActivate',
 				leavescreen: 'onStopsMainLeaveScreen'
 			},
-			stopsNearbyList: {
-				select: 'onNearbyStopListSelect'
-			},
 			stopRouteList: {
 				activate: 'onRouteListActivate',
 				select: 'onStopRoutesSelect'
-			},
-			routeMap: {
-				maprender: 'onRouteMapRender'
 			},
 			scheduleRouteDetails: {
 				leavescreen: 'onListLeaveScreen'
@@ -105,9 +91,6 @@ Ext.define('SeptaMobi.controller.Stop', {
 				activate: 'onRouteTimeDetailsActivate',
 				leavescreen: 'onScheduleRouteDetailsLeaveScreen'
 			},
-			routeTimeDetailsList: {
-				select: 'onScheduleRouteDetailsSelect'
-			},			
 			routeTimeDetailsMap: {
 				maprender: 'onRouteDetailsMapRender'
 			},
@@ -118,62 +101,73 @@ Ext.define('SeptaMobi.controller.Stop', {
 		routes: {
 			'stops': 'showStops',
 			'stops/:id': 'showStopDetails',
-			// 'stops/:stopId/route/:routeId': 'showDirections',
+			'stops/:stopId/route/:routeId': 'showDirections',
 			'stops/:stopId/route/:routeId/direction/:directionId': 'showTimes'
 		}
 	},
 
-	showStops: function() {
+	showStops: function(callback, scope) {
 		var me = this,
+			nearByStopsStore = Ext.getStore('NearByStops'),
 			mainTabView = me.getMainTabView(),
 			navView = me.getNavView(),
 			stopsMainView = me.getStopsMainView();
 
-		mainTabView.setActiveItem(1);
-		navView.pop(stopsMainView);
-	},
+		me.pushPath('stops');
 
-	showStopDetails: function(id) {
-		var me = this,
-			nearByStopsStore = Ext.getStore('NearByStops'),
-			i = 0,
-			stop;
+		mainTabView.setActiveItem(navView);
+		navView.pop(stopsMainView);
 
 		if (!nearByStopsStore.isLoaded()) {
 			me.updateLocation(function() {
-				me.showStops(id)
-			});
-		}
-
-		stop = nearByStopsStore.getById(id);
-
-		if (!stop) {
-			SeptaMobi.API.routesForStop(id, function(records) {
-				me.loadRoutes(id, records);
-			});
-		} else {
-			me.loadRoutes(id, stop.get('routes'));
+				if(callback) {
+					Ext.callback(callback, scope);
+				}
+			}, me);
+		} else if(callback) {
+			Ext.callback(callback, scope);
 		}
 	},
 
-	showStopDetails: function(stopId) {
+	onStopsNearbyListActivate: function(list) {
+		var me = this,
+			mainTabView = me.getMainTabView(),
+			navView = me.getNavView();
+
+		if(navView.getActiveItem() == mainTabView) {
+			me.pushPath('stops');
+		}
+		list.deselectAll();
+	},
+
+	showStopDetails: function(stopId, callback, scope) {
 		var me = this,
 			stopRouteList = me.getStopRouteList(),
 			navView = me.getNavView(),
 			//TODO need to load from Stop Store if user 
-			stop = Ext.getStore('NearByStops').getById(stopId),
+			nearByStopsStore = Ext.getStore('NearByStops'),
+			stop = nearByStopsStore.getById(stopId),
 			routes;
 
+		me.pushPath('stops/' + stopId);
+
+		if(!nearByStopsStore.isLoaded()) {
+			me.showStops(function() {
+				me.showStopDetails(stopId, callback, scope);
+			}, me);
+			return;
+		}
+
 		if (!stop) {
+			//Stop is no longer nearby, give up
 			me.redirectTo('stops');
 			return;
 		} else {
 			routes = stop.get('routes')
 		}
 		if (routes.length == 1) {
-			me.showDirections(stop, routes[0]);
+			me.showDirections(stop.get('id'), routes[0].get('id'), callback, scope);
 		} else {
-			// me.pushPath('stops/' + stopId);
 			stopRouteList.setStopId(stopId);
 			//TODO why is this not showing just the routes that I'm explicitly setting here
 			stopRouteList.setData(Ext.Array.map(routes, function(r) {
@@ -183,17 +177,20 @@ Ext.define('SeptaMobi.controller.Stop', {
 				//TODO should this occur in the API method?
 				return Ext.create('SeptaMobi.model.Route', r).getData();
 			}));
+			if(callback){
+				Ext.callback(callback, scope);	
+			}
 			navView.push(stopRouteList);
 		}
 	},
 
-	onStopsShow: function(navView, scheduleIndex) {
-		this.updateLocation();
-	},
+	// onStopsShow: function(navView, scheduleIndex) {
+	// 	this.updateLocation();
+	// },
 
 	onStopsMainViewActivate: function(list) {
 		this.getStopsNearbyList().deselectAll();
-		// this.pushPath('stops');
+		this.pushPath('stops');
 	},
 	onStopsNavViewActivate: function() {
 		// this.pushPath('stops');
@@ -279,30 +276,40 @@ Ext.define('SeptaMobi.controller.Stop', {
 	},
 
 	onStopRoutesSelect: function(list, record) {
-		var stopsNearbyList = this.getStopsNearbyList();
+		var stopRouteList = this.getStopRouteList(),
+			stopId = stopRouteList.getStopId();
 
-		this.showDirections(stopsNearbyList.getSelection()[0], record);
+		this.redirectTo('stops/' + stopId + '/route/' + record.get('id'));
 	},
 
-	showDirections: function(stop, route) {
+	showDirections: function(stopId, routeId, callback, scope) {
 		var me = this,
 			navView = me.getNavView(),
 			routeDirections = me.getRouteDirections(),
+			nearByStopsStore = Ext.getStore('NearByStops'),
 			stopDirectionsStore = Ext.getStore('StopDirections'),
 			stopDirectionsStoreProxy = stopDirectionsStore.getProxy(),
 			url;
 
-		me.pushPath('stops/' + stop.get('id') + '/route/' + route.get('id'));
+		me.pushPath('stops/' + stopId + '/route/' + routeId);
+
+		if(!nearByStopsStore.isLoaded()) {
+			me.showStopDetails(stopId, function() {
+				me.showDirections(stopId, routeId, callback, scope);
+			}, me);
+			return;
+		}
 
 		routeDirections.setMasked({
 			xtype: 'loadmask',
 			message: 'Loading Details&hellip;'
 		});
 
-		routeDirections.setRoute(route);
+		routeDirections.setStopId(stopId);
+		routeDirections.setRouteId(routeId);
 
 		navView.push(routeDirections);
-		url = stopDirectionsStoreProxy.config.rootUrl + '/' + route.get('id') + '/directions/0/stops';
+		url = stopDirectionsStoreProxy.config.rootUrl + '/' + routeId + '/directions/0/stops';
 
 		stopDirectionsStoreProxy.setUrl(url);
 
@@ -310,8 +317,95 @@ Ext.define('SeptaMobi.controller.Stop', {
 		stopDirectionsStore.load({
 			callback: function() {
 				routeDirections.setMasked(false);
+				if(callback){
+					Ext.callback(callback, scope);	
+				}
 			}
 		});
+	},
+
+	onScheduleRouteDirectionsSelect: function(list, record) {
+		var me = this,
+			routeDirections = me.getRouteDirections(),
+			route = routeDirections.getRouteId(),
+			stop = routeDirections.getStopId();
+		
+		me.redirectTo('stops/' + stop + '/route/' + route + '/direction/' + record.get('direction'));
+	},
+
+	showTimes: function(stopId, routeId, directionId) {
+		var me = this,
+			navView = me.getNavView(),
+			nearByStopsStore = Ext.getStore('NearByStops'),
+			routeDetails = me.getRouteTimeDetails(),
+			routeTimeDetails = me.getRouteTimeDetails(),
+			stopTimesStore = Ext.getStore('RouteStopTimes'),
+			routeDetailsModel = SeptaMobi.model.RouteDetails,
+			routeDetailsProxy = SeptaMobi.model.RouteDetails.getProxy(),
+			i = 0,
+			routeAlertIdentifier, stop, routes, route;
+
+		if(!nearByStopsStore.isLoaded()) {
+			me.showDirections(stopId, routeId, function() {
+				me.showTimes(stopId, routeId, directionId);
+			}, me);
+			return;
+		}
+
+		stop = nearByStopsStore.getById(stopId);
+		routes = stop.get('routes');
+
+		for(; i < routes.length; i++) {
+			if(routes[i].get('id') == routeId) {
+				route = routes[i];
+				break;
+			}
+		}
+		if(!route) {
+			me.redirectTo('stops');
+			return;
+		}
+
+		routeDetails.setMasked({
+			xtype: 'loadmask',
+			message: 'Loading Route&hellip;'
+		});
+
+		//TODO need route object here
+		if (route.get('routeType') == 3) {
+			routeAlertIdentifier = 'bus_route_';
+		} else {
+			routeAlertIdentifier = 'rr_route_';
+		}
+
+		routeDetailsProxy.setExtraParams({
+			route_id: routeId,
+			direction_id: directionId,
+			alert_id: routeAlertIdentifier,
+			api_key: 't40P65kd',
+			stop_id: stopId
+		});
+
+		SeptaMobi.model.RouteDetails.load(routeId, {
+			callback: function(record) {
+				if(record) {
+					stopTimesStore.setData(record.get('times'));
+
+					alerts = record.get('alerts');
+
+					if (alerts.length && alerts[0].advisory_message) {
+						routeDetails.setAlert(alerts[0].advisory_message);
+					} else {
+						routeDetails.setAlert(false);
+					}
+					routeDetails.setPolylinePoints(record.get('shape'));
+				}
+				//TODO display error if no record?
+				routeDetails.setMasked(false);
+			}
+		});
+
+		navView.push(routeDetails);
 	},
 
 	loadTimesForStopAndRouteAndDirection: function(stopId, routeId, directionId) {
@@ -320,72 +414,6 @@ Ext.define('SeptaMobi.controller.Stop', {
 
 	/* The following code is very similar to the schedule route map, should consider refactoring shared
 		logic in next release */
-	onRouteMapRender: function(routeMap) {
-		var me = this,
-			ll = window.L,
-			mapCmp = me.getRouteMap(),
-			map = mapCmp.getMap(),
-			busStore = Ext.getStore('Buses'),
-			buses = busStore.getRange(),
-			busLength = buses.length,
-			encodedPoints = routeMap.getEncodedPoints(),
-			encodedPointsLength = encodedPoints.length,
-			stopMarkers = [],
-			busMarkers = [],
-			i = 0,
-			stop, latLng, bounds, decodedPoints, polyLine, infoTemplate, direction;
-
-		for (; i < encodedPointsLength; i++) {
-			decodedPoints = Jarvus.util.Polyline.decode(encodedPoints[i]);
-			polyLine = ll.polyline(decodedPoints).addTo(map);
-			//TODO figure out a better way to get bounds
-			if (i == 0) {
-				bounds = polyLine.getBounds();
-			}
-		}
-
-		// polyLine = ll.polyline(decodedPoints).addTo(map);		
-
-		routeMap.setStopMarkers(stopMarkers);
-
-		routeMap.removeBusMarkers();
-
-		//TODO move template to view cfg?
-		infoTemplate = Ext.create('Ext.XTemplate', [
-			'bus {label}', '<br> to {[values.destination||"<em>unknown destination</em>"]}', '<br>reported {[values.Offset ? (values.Offset+" minutes ago") : "just now"]}'
-		]);
-
-		buses.forEach(function(bus) {
-			direction = bus.get('Direction');
-			if (!Ext.Array.contains(me.config.busDirections, direction)) {
-				direction = 'unknown';
-			}
-
-			latLng = [bus.get('lat'), bus.get('lng')];
-
-			var marker = ll.marker(latLng, {
-				icon: ll.icon({
-					iconUrl: 'resources/images/bus-marker-' + direction + '.png',
-					iconRetinaUrl: 'resources/images/bus-marker-' + direction + '-2x.png',
-					iconSize: [28, 31],
-					iconAnchor: [14, 30]
-				})
-			}).addTo(map);
-
-			setTimeout(function() {
-				marker.bindPopup(infoTemplate.apply(bus.getData()));
-			}, 1000);
-
-			busMarkers.push(marker);
-		});
-
-		routeMap.setBusMarkers(busMarkers);
-
-		Ext.defer(function() {
-			map.fitBounds(bounds);
-		}, 1000, this);
-	},
-
 	onRouteDetailsMapRender: function(mapCmp) {
 		var me = this,
 			ll = window.L,

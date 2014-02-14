@@ -65,7 +65,7 @@ Ext.define('SeptaMobi.controller.Schedule', {
 	},
 
 	onNavViewActivate: function() {
-		this.pushPath('schedule');
+		// this.pushPath('schedule');
 	},
 
 	onScheduleRouteListActivate: function(list) {
@@ -75,7 +75,7 @@ Ext.define('SeptaMobi.controller.Schedule', {
 	onScheduleShow: function(navView, scheduleIndex) {
 		var busRouteStore = Ext.getStore('BusRoutes');
 
-		this.pushPath('schedule');
+		// this.pushPath('schedule');
 
 		if (!busRouteStore.isLoaded()) {
 			navView.setMasked({
@@ -204,8 +204,7 @@ Ext.define('SeptaMobi.controller.Schedule', {
 			route_id: routeId,
 			direction_id: directionId,
 			alert_id: routeAlertIdentifier,
-			api_key: 't40P65kd',
-			stop_id: stopId
+			api_key: 't40P65kd'
 		});
 
 		SeptaMobi.model.RouteDetails.load(routeId, {

@@ -148,9 +148,27 @@ Ext.define('SeptaMobi.controller.Dashboard', {
 
 
 	onMainTabViewActiveItemChange: function(tabpanel, item) {
-		if (tabpanel.indexOf(item) == 0) {
-			this.pushPath('dashboard');
+		var path;
+
+		switch (tabpanel.indexOf(item)) {
+			case 0:
+				path = 'dashboard';
+				break;
+			case 2:
+				path = 'stops';
+				break;
+			case 3:
+				path = 'schedule';
+				break;
+			case 4:
+				path = 'tripplanner';
+				break;
+			case 5:
+				path = 'extras';
+				break;
 		}
+
+		this.pushPath(path);
 	},
 
 	onNewRouteButtonTap: function() {

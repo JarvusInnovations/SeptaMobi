@@ -25,7 +25,7 @@ Ext.define('SeptaMobi.view.Main', {
             iconCls: 'tab-dashboard',
             xtype: 'dashboard'
         }, {
-            title: 'Stops',
+            title: 'Nearby',
             iconCls: 'tab-stops',
             xtype: 'stops-navview'
         }, {

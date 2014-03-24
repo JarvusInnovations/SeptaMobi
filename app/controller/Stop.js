@@ -184,16 +184,17 @@ Ext.define('SeptaMobi.controller.Stop', {
 		}
 	},
 
-	// onStopsShow: function(navView, scheduleIndex) {
-	// 	this.updateLocation();
-	// },
+	onStopsShow: function(navView, scheduleIndex) {
+		this.updateLocation();
+	},
 
 	onStopsMainViewActivate: function(list) {
 		this.getStopsNearbyList().deselectAll();
 		this.pushPath('stops');
 	},
 	onStopsNavViewActivate: function() {
-		// this.pushPath('stops');
+		this.pushPath('stops');
+		this.updateLocation();
 	},
 
 	onListLeaveScreen: function(list) {
@@ -248,26 +249,6 @@ Ext.define('SeptaMobi.controller.Stop', {
 
 	onNearbyStopListSelect: function(list, record) {
 		this.redirectTo('stops/' + record.get('id'));
-		// var routes = record.get('routes');
-
-		// this.loadRoutes(record.get('id'), routes);
-
-		// var me = this,
-		// 	navView = me.getNavView(),
-		// 	routeStore = Ext.getStore('Routes'),
-		// 	routeList = me.getRouteList(),
-		// 	routes = record.get('routes'),
-		// 	routeLength = routes.length,
-		// 	i = 0;
-
-		// if (routeLength == 1) {
-		// 	me.onStopRoutesSelect(routeList, routes[0]);
-		// } else {
-		// 	routeList.setData(Ext.Array.map(routes, function(r) {
-		// 		return r.getData()
-		// 	}));
-		// 	navView.push(routeList);
-		// }
 	},
 
 	onRouteListActivate: function(list) {

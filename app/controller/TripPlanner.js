@@ -96,7 +96,7 @@ Ext.define('SeptaMobi.controller.TripPlanner', {
 			'selectaddresspanel button[action=cancel]': {
 				tap: 'onSelectAddressPanelCancelTap'
 			},
-			'selectaddresspanel dataview': {
+			selectAddressList: {
 				select: 'onSelectAddressPanelAddressSelect'
 			},
 			triplist: {

@@ -117,7 +117,7 @@ Ext.define('SeptaMobi.controller.Extras', {
 			extrasNavView = me.getExtrasNavView(),
 			extrasMainPanel = me.getExtrasMainPanel();
 
-		mainTabView.setActiveItem(3);
+		mainTabView.setActiveItem(4);
 		extrasNavView.pop(extrasMainPanel);
 
 		if(callback) {

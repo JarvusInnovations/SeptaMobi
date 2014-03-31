@@ -15,6 +15,7 @@ Ext.define('SeptaMobi.controller.Schedule', {
 			'StopTimes'
 		],
 		refs: {
+            mainTabView: 'main',
 			navView: 'schedule-navview',
 			scheduleRoutesList: 'schedule-routeslist',
 			routeDirections: {
@@ -37,7 +38,8 @@ Ext.define('SeptaMobi.controller.Schedule', {
 				autoCreate: true,
 
 				xtype: 'schedule-stoptimes'
-			}
+			},
+            toggleBookmarkButton: 'schedule-navview button[action=toggleBookmark]'
 		},
 		control: {
 			navView: {
@@ -64,14 +66,31 @@ Ext.define('SeptaMobi.controller.Schedule', {
 			routeStopDetailsList: {
 				select: 'onScheduleRouteDetailsSelect'
 			}
+		},
+        routes: {
+            'schedule': 'showSchedule'
 		}
+	},
+
+	showSchedule: function() {
+        console.log('showSchedule');
+		var me = this,
+			mainTabView = me.getMainTabView(),
+			scheduleRoutesList = me.getScheduleRoutesList(),
+			navView = me.getNavView();
+
+		mainTabView.setActiveItem(2);
+		navView.pop(scheduleRoutesList);
+        
+        this.getToggleBookmarkButton().hide();
 	},
 
 	onNavViewActivate: function() {
 		// this.pushPath('schedule');
 	},
-
-	onScheduleRouteListActivate: function(list) {
+    
+    onScheduleRouteListActivate: function(list) {
+        this.pushPath('schedule');
 		list.deselectAll();
 	},
 
@@ -102,7 +121,7 @@ Ext.define('SeptaMobi.controller.Schedule', {
 			trolleyStore = Ext.getStore('Trolleys'),
 			subwayStore = Ext.getStore('Subways'),
 			trainStore = Ext.getStore('Trains'),
-			selectedStore, routeSlug;
+			selectedStore, routeSlug;        
 
 		if (isPressed) {
 			routeSlug = button.config.routeSlug;
@@ -184,6 +203,8 @@ Ext.define('SeptaMobi.controller.Schedule', {
 			routeDetailsModel = SeptaMobi.model.RouteDetails,
 			routeDetailsProxy = SeptaMobi.model.RouteDetails.getProxy(),
 			routeAlertIdentifier, alerts, routeDetails, stopId;
+
+        me.getToggleBookmarkButton().show();
 
 		if (route.get('routeType') == 3) {
 			routeAlertIdentifier = 'bus_route_';

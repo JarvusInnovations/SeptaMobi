@@ -22,11 +22,12 @@ Ext.define('SeptaMobi.view.tripplanner.NavView', {
                     cls: 'bookmarks'
                 }
             ]
-        },
+        },        
         items: [{
             xtype: 'formpanel',
             title: 'Trip Planner',
             cls: 'trip-planner',
+            scrollable: false,
             items: [{
                 xtype: 'fieldset',
                 items: [{
